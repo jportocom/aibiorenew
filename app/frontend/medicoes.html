@@ -143,8 +143,9 @@
 
     document.addEventListener('DOMContentLoaded', () => {
         if (!isLoggedIn()) { location.href = '/dev/aibiorenew/app/frontend/area-pessoal.html'; return; }
-        // Preencher data de hoje por defeito
-        document.getElementById('novo-data').value = new Date().toISOString().split('T')[0];
+        // Preencher data de hoje por defeito (data local, não UTC)
+        const h = new Date();
+        document.getElementById('novo-data').value = `${h.getFullYear()}-${String(h.getMonth()+1).padStart(2,'0')}-${String(h.getDate()).padStart(2,'0')}`;
         carregarMedicoes();
     });
 

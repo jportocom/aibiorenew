@@ -10,21 +10,24 @@
         *{box-sizing:border-box;margin:0;padding:0;}
         body{font-family:'Inter',system-ui,sans-serif;background:var(--fundo);color:var(--texto);padding-top:70px;}
         html,body{overflow-x:hidden;}
-        .wrap{max-width:860px;margin:0 auto;padding:2rem 1.5rem 4rem;}
+        .wrap{max-width:900px;margin:0 auto;padding:2rem 1.5rem 4rem;}
         .sec-title{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--verde);margin:2rem 0 1rem;}
         .card{background:var(--branco);border:1px solid var(--borda);border-radius:14px;padding:1.5rem;margin-bottom:1rem;}
-        /* Balanço do dia */
+        /* Balanço */
         .bal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1rem;}
         .bal-item{background:var(--verde-muted);border:1px solid var(--verde-border);border-radius:10px;padding:1rem 1.25rem;}
         .bal-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--texto-3);}
         .bal-val{font-size:1.5rem;font-weight:700;color:var(--verde);margin:.25rem 0;line-height:1;}
         .bal-sub{font-size:.8rem;color:var(--texto-2);}
         .badge-status{display:inline-flex;align-items:center;gap:.4rem;padding:.45rem 1rem;border-radius:20px;font-size:.88rem;font-weight:600;margin-top:1rem;}
-        .badge-ok{background:#dcfce7;color:#166534;border:1px solid #bbf7d0;}
-        .badge-eq{background:#fefce8;color:#854d0e;border:1px solid #fef08a;}
+        .badge-ok {background:#dcfce7;color:#166534;border:1px solid #bbf7d0;}
+        .badge-eq {background:#fefce8;color:#854d0e;border:1px solid #fef08a;}
         .badge-nok{background:#fee2e2;color:#991b1b;border:1px solid #fecaca;}
         .msg-aval{margin-top:.75rem;font-size:.95rem;color:var(--texto-2);line-height:1.6;}
-        /* Planeador */
+        /* Botão editar jornada */
+        .btn-editar-jornada{display:inline-flex;align-items:center;gap:.5rem;margin-top:1rem;padding:.55rem 1.1rem;background:var(--fundo);border:1px solid var(--borda);border-radius:8px;font-size:.88rem;font-weight:600;color:var(--texto-2);cursor:pointer;font-family:inherit;transition:all .2s;}
+        .btn-editar-jornada:hover{border-color:var(--verde);color:var(--verde);}
+        /* Planeador — selector actividade */
         .ativ-selector{display:flex;gap:.75rem;flex-wrap:wrap;margin:1rem 0;}
         .ativ-btn{flex:1;min-width:130px;padding:.85rem 1rem;border:2px solid var(--borda);border-radius:12px;background:var(--branco);cursor:pointer;font-family:inherit;transition:all .2s;text-align:center;}
         .ativ-btn .icon{font-size:1.4rem;display:block;margin-bottom:.3rem;}
@@ -32,28 +35,75 @@
         .ativ-btn .desc{font-size:.75rem;color:var(--texto-3);margin-top:.15rem;}
         .ativ-btn.selected{border-color:var(--verde);background:var(--verde-muted);}
         .ativ-btn.selected .name{color:var(--verde);}
-        /* Resultado */
-        .result-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem;margin-top:1.25rem;}
-        .result-card{border-radius:12px;padding:1.25rem;text-align:center;}
-        .result-card.r-kcal{background:#f0f9f3;border:1px solid #c3e0cd;}
-        .result-card.r-walk{background:#eff6ff;border:1px solid #bfdbfe;}
-        .result-card.r-dist{background:#fdf4ff;border:1px solid #e9d5ff;}
+        /* Cards de resultado (planeador + jornada) */
+        .result-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:.85rem;margin-top:1.25rem;}
+        .result-card{border-radius:12px;padding:1rem .9rem .9rem;text-align:center;}
+        .result-card.r-kcal  {background:#f0f9f3;border:1px solid #c3e0cd;}
+        .result-card.r-walk  {background:#eff6ff;border:1px solid #bfdbfe;}
+        .result-card.r-dist  {background:#fdf4ff;border:1px solid #e9d5ff;}
+        .result-card.r-steps {background:#f0fdfa;border:1px solid #99f6e4;}
         .result-card.r-deficit{background:#fff7ed;border:1px solid #fed7aa;}
-        .r-icon{font-size:1.6rem;margin-bottom:.4rem;}
-        .r-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--texto-3);}
-        .r-val{font-size:1.8rem;font-weight:700;margin:.25rem 0;line-height:1;}
-        .r-kcal .r-val{color:#1a6b35;}
-        .r-walk .r-val{color:#1d4ed8;}
-        .r-dist .r-val{color:#7e22ce;}
+        /* Jornada hoje — cores de refeições */
+        .result-card.r-pa    {background:#fffbeb;border:1px solid #fde68a;}
+        .result-card.r-almoco{background:#f0fdf4;border:1px solid #bbf7d0;}
+        .result-card.r-jantar{background:#eef2ff;border:1px solid #c7d2fe;}
+        .result-card.r-saldo {background:#f8fafc;border:1px solid #cbd5e1;}
+        .result-card.r-saldo.deficit{background:#f0f9f3;border:1px solid #c3e0cd;}
+        .result-card.r-saldo.excesso{background:#fee2e2;border:1px solid #fecaca;}
+        .r-icon{font-size:1.4rem;margin-bottom:.3rem;}
+        .r-label{font-size:.67rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--texto-3);}
+        .r-val{font-size:1.6rem;font-weight:700;margin:.2rem 0;line-height:1;}
+        .r-kcal   .r-val{color:#1a6b35;}
+        .r-kcal.warn .r-val{color:#dc2626;}
+        .r-walk   .r-val{color:#1d4ed8;}
+        .r-dist   .r-val{color:#7e22ce;}
+        .r-steps  .r-val{color:#0d9488;}
         .r-deficit .r-val{color:#c2410c;}
-        .r-sub{font-size:.8rem;color:var(--texto-3);}
-        .plan-note{margin-top:1.25rem;padding:.9rem 1.1rem;background:var(--verde-muted);border:1px solid var(--verde-border);border-radius:10px;font-size:.88rem;color:var(--texto-2);line-height:1.7;}
-        .plan-meals{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-top:1rem;}
-        .meal-pill{background:var(--branco);border:1px solid var(--borda);border-radius:10px;padding:.75rem;text-align:center;}
-        .meal-pill .meal-icon{font-size:1.2rem;}
-        .meal-pill .meal-name{font-size:.72rem;color:var(--texto-3);margin:.2rem 0;}
-        .meal-pill .meal-kcal{font-size:1rem;font-weight:700;color:var(--texto);}
-        @media(max-width:600px){.plan-meals{grid-template-columns:1fr 1fr;}}.plan-meals .meal-pill:last-child{grid-column:auto;}
+        .r-pa    .r-val{color:#b45309;}
+        .r-almoco .r-val{color:#166534;}
+        .r-jantar .r-val{color:#3730a3;}
+        .r-sub{font-size:.75rem;color:var(--texto-3);margin-bottom:.45rem;}
+        /* Barras de progresso */
+        .prog-wrap{height:6px;background:#e5e7eb;border-radius:3px;overflow:hidden;margin-top:.45rem;}
+        .prog-fill{height:100%;border-radius:3px;transition:width .35s ease;}
+        .prog-fill.green {background:#1a6b35;}
+        .prog-fill.red   {background:#dc2626;}
+        .prog-fill.amber {background:#d97706;}
+        .prog-fill.blue  {background:#1d4ed8;}
+        .prog-fill.purple{background:#7e22ce;}
+        .prog-fill.teal  {background:#0d9488;}
+        .prog-fill.orange{background:#c2410c;}
+        .prog-fill.yellow{background:#ca8a04;}
+        .prog-pct{font-size:.65rem;color:var(--texto-3);margin-top:.25rem;}
+        /* Campos editáveis */
+        .walk-edit{display:flex;align-items:center;gap:.4rem;justify-content:center;margin:.12rem 0 .08rem;}
+        .walk-edit button{width:26px;height:26px;border-radius:6px;border:1px solid #bfdbfe;background:#eff6ff;color:#1d4ed8;font-size:1rem;font-weight:700;cursor:pointer;line-height:1;font-family:inherit;flex-shrink:0;}
+        .walk-edit button:hover{background:#dbeafe;}
+        .walk-edit input[type=number]{width:62px;text-align:center;font-size:1.4rem;font-weight:700;color:#1d4ed8;border:none;background:transparent;font-family:inherit;-moz-appearance:textfield;}
+        .walk-edit input[type=number]::-webkit-outer-spin-button,
+        .walk-edit input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;}
+        /* cores dos inputs de refeição */
+        .inp-pa   {color:#b45309 !important;}
+        .inp-al   {color:#166534 !important;}
+        .inp-ja   {color:#3730a3 !important;}
+        .inp-cam  {color:#1d4ed8 !important;}
+        .btn-pa   {border-color:#fde68a !important;background:#fffbeb !important;color:#b45309 !important;}
+        .btn-al   {border-color:#bbf7d0 !important;background:#f0fdf4 !important;color:#166534 !important;}
+        .btn-ja   {border-color:#c7d2fe !important;background:#eef2ff !important;color:#3730a3 !important;}
+        /* Alerta TMB */
+        .warn-tmb{display:none;margin-top:.9rem;padding:.65rem 1rem;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;color:#dc2626;font-size:.83rem;font-weight:600;line-height:1.55;}
+        /* Refeições e nota */
+        .plan-meals{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-top:.9rem;}
+        .meal-pill{background:var(--branco);border:1px solid var(--borda);border-radius:10px;padding:.7rem;text-align:center;}
+        .meal-pill .meal-icon{font-size:1rem;}
+        .meal-pill .meal-name{font-size:.72rem;color:var(--texto-3);margin:.15rem 0;}
+        .meal-pill .meal-kcal{font-size:.95rem;font-weight:700;color:var(--texto);}
+        .plan-note{margin-top:1.1rem;padding:.85rem 1rem;background:var(--verde-muted);border:1px solid var(--verde-border);border-radius:10px;font-size:.87rem;color:var(--texto-2);line-height:1.7;}
+        /* Botão guardar */
+        .btn-guardar{padding:.72rem 1.6rem;background:var(--verde);color:#fff;border:none;border-radius:10px;font-size:.93rem;font-weight:600;cursor:pointer;font-family:inherit;transition:background .2s;}
+        .btn-guardar:hover{background:var(--verde-hover);}
+        .btn-guardar:disabled{opacity:.6;cursor:not-allowed;}
+        @media(max-width:600px){.plan-meals{grid-template-columns:1fr 1fr;}.result-grid{grid-template-columns:repeat(2,1fr);}}
     </style>
 </head>
 <body>
@@ -72,8 +122,8 @@
             <ul class="nav-sub">
                 <li><a href="dashboard.html">Dashboard</a></li>
                 <li><a href="perfil.html">O Meu Perfil</a></li>
-                <li><a href="medicoes.html">Medições</a></li>
-                <li><a href="gestao-app.html">Gestão de App</a></li>
+                <li><a href="medicoes.html">Medi&#231;&#245;es</a></li>
+                <li><a href="gestao-app.html">Gest&#227;o de App</a></li>
                 <li><a href="fecho-dia.html" class="ativo">Fecho do Dia</a></li>
             </ul>
         </li>
@@ -90,197 +140,451 @@
         <a href="dashboard.html" style="font-size:.85rem;color:var(--texto-3);text-decoration:none;">&#8592; Dashboard</a>
     </div>
 
-    <!-- Balanço do dia -->
-    <p class="sec-title">Balanço de Hoje</p>
+    <!-- ═══ BALANÇO DE HOJE ═══ -->
+    <p class="sec-title">Balan&#231;o de Hoje</p>
     <div class="card" id="balanco-area">
         <div style="color:var(--texto-3);font-size:.9rem;">A carregar...</div>
     </div>
 
-    <!-- Planeador de amanhã -->
-    <p class="sec-title">Planeamento para Amanhã</p>
-    <div class="card" id="planeador-area">
-        <p style="font-size:.92rem;color:var(--texto-2);margin-bottom:.75rem;">Seleccione o tipo de actividade previsto para amanhã e o sistema calcula o plano alimentar e de exercício:</p>
+    <!-- Botão para abrir edição da jornada -->
+    <button class="btn-editar-jornada" id="btn-toggle-jornada" onclick="toggleJornada()">
+        &#9998; Editar Jornada de Hoje
+    </button>
+
+    <!-- ═══ EDITAR JORNADA DE HOJE ═══ -->
+    <div id="jornada-panel" style="display:none;margin-top:1.5rem;">
+        <p class="sec-title" style="margin-top:0;">Jornada de Hoje — Editar</p>
+        <div class="card">
+            <p style="font-size:.88rem;color:var(--texto-3);margin-bottom:.25rem;">Ajuste os valores reais do dia. As barras mostram o cumprimento em relação ao plano.</p>
+
+            <div class="result-grid" id="jornada-cards"></div>
+
+            <!-- Resumo ao vivo -->
+            <div id="jornada-resumo" style="margin-top:1rem;padding:.8rem 1rem;border-radius:10px;border:1px solid var(--borda);background:var(--fundo);font-size:.88rem;line-height:1.8;color:var(--texto-2);"></div>
+
+            <!-- Botão guardar jornada -->
+            <div style="margin-top:1.1rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+                <button class="btn-guardar" id="btn-guardar-jornada" onclick="guardarJornada()">
+                    &#128190; Guardar Jornada
+                </button>
+                <span id="msg-guardar-jornada" style="font-size:.88rem;"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ PLANEAMENTO PARA AMANHÃ ═══ -->
+    <p class="sec-title">Planeamento para Amanh&#227;</p>
+    <div class="card">
+        <p style="font-size:.92rem;color:var(--texto-2);margin-bottom:.75rem;">Seleccione o tipo de actividade previsto para amanh&#227;:</p>
         <div class="ativ-selector">
             <button class="ativ-btn" id="btn-sed" onclick="seleccionarAtiv('sedentario')">
                 <span class="icon">&#128188;</span>
-                <span class="name">Sedentário</span>
-                <span class="desc">Trabalho de escritório, pouco movimento</span>
+                <span class="name">Sedent&#225;rio</span>
+                <span class="desc">Trabalho de escrit&#243;rio, pouco movimento</span>
             </button>
             <button class="ativ-btn" id="btn-mod" onclick="seleccionarAtiv('moderado')">
                 <span class="icon">&#128694;</span>
                 <span class="name">Moderado</span>
-                <span class="desc">Algum exercício ou trabalho activo</span>
+                <span class="desc">Algum exerc&#237;cio ou trabalho activo</span>
             </button>
             <button class="ativ-btn" id="btn-ativ" onclick="seleccionarAtiv('ativo')">
                 <span class="icon">&#127939;</span>
                 <span class="name">Activo</span>
-                <span class="desc">Exercício intenso ou trabalho físico</span>
+                <span class="desc">Exerc&#237;cio intenso ou trabalho f&#237;sico</span>
             </button>
         </div>
+
         <div id="resultado-plan" style="display:none;">
+            <div class="warn-tmb" id="warn-tmb">
+                &#9888; Ingest&#227;o abaixo do TMB &#8212; risco de redu&#231;&#227;o do metabolismo basal. Aumente a caminhada ou aceite um d&#233;fice menor.
+            </div>
             <div class="result-grid" id="result-cards"></div>
             <div class="plan-meals" id="plan-meals"></div>
-            <div class="plan-note" id="plan-note"></div>
+            <div class="plan-note"  id="plan-note"></div>
+
+            <div style="margin-top:1.25rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+                <button class="btn-guardar" id="btn-guardar-amanha" onclick="guardarPlanoAmanha()">
+                    &#128190; Guardar Plano para Amanh&#227;
+                </button>
+                <span id="msg-guardar-amanha" style="font-size:.9rem;"></span>
+            </div>
         </div>
     </div>
 </div>
 
 <script src="js/api.js"></script>
 <script>
-    function toggleNav(){document.getElementById('navMenu').classList.toggle('aberto');}
-    function toggleDropdown(a){a.closest('.nav-dropdown').classList.toggle('dropdown-aberto');}
-    function logout(){clearToken();location.href='/dev/aibiorenew/app/frontend/area-pessoal.html';}
-    document.addEventListener('click',e=>{if(!e.target.closest('.nav-dropdown'))document.querySelectorAll('.nav-dropdown').forEach(d=>d.classList.remove('dropdown-aberto'));});
+/* ── nav ── */
+function toggleNav(){document.getElementById('navMenu').classList.toggle('aberto');}
+function toggleDropdown(a){a.closest('.nav-dropdown').classList.toggle('dropdown-aberto');}
+function logout(){clearToken();location.href='/dev/aibiorenew/app/frontend/area-pessoal.html';}
+document.addEventListener('click',e=>{if(!e.target.closest('.nav-dropdown'))document.querySelectorAll('.nav-dropdown').forEach(d=>d.classList.remove('dropdown-aberto'));});
 
-    const FATORES = { sedentario: 1.2, moderado: 1.55, ativo: 1.9 };
-    const META_DEFICIT = 770; // kcal para perder ~100g de gordura
-    const CAL_MIN_KM  = 4.5; // kcal/min por 70kg
-    let tmb = 0, pesoKg = 70;
+/* ── constantes ── */
+const FATORES       = { sedentario:1.2, moderado:1.55, ativo:1.9 };
+const META_DEFICIT  = 770;   // kcal → ~100g gordura
+const MIN_DEFICIT   = 385;   // kcal → ~50g (mínimo aceitável)
+const WALK_KCAL_MIN = 5;     // kcal/min de caminhada
+const TARGET_WALK   = 154;   // min alvo (770/5)
+const STEPS_PER_MIN = 110;   // passos/min
+const KM_PER_H      = 5;     // velocidade de caminhada
 
-    document.addEventListener('DOMContentLoaded', async () => {
-        if (!isLoggedIn()) { location.href = '/dev/aibiorenew/app/frontend/area-pessoal.html'; return; }
+/* ── estado global ── */
+let tmb = 0, dataHoje = '', tipoAtivAtual = null, walkMinAtual = TARGET_WALK;
+let planState = {};
+/* estado jornada */
+let jPa = 0, jAl = 0, jJa = 0, jCamKm = 0;
 
-        // Data de hoje
-        const hoje = new Date();
-        const d = hoje.toLocaleDateString('pt-PT', {weekday:'long',day:'numeric',month:'long',year:'numeric'});
-        document.getElementById('data-hoje').textContent = d.charAt(0).toUpperCase() + d.slice(1);
+/* ── init ── */
+document.addEventListener('DOMContentLoaded', async () => {
+    if (!isLoggedIn()) { location.href = '/dev/aibiorenew/app/frontend/area-pessoal.html'; return; }
 
-        // Carregar dados em paralelo
-        const [aval, metricas, perfil] = await Promise.all([
-            apiCall('/plano/avaliacao'),
-            apiCall('/calc'),
-            apiCall('/user/profile')
-        ]);
+    const h = new Date();
+    dataHoje = `${h.getFullYear()}-${String(h.getMonth()+1).padStart(2,'0')}-${String(h.getDate()).padStart(2,'0')}`;
+    const d = h.toLocaleDateString('pt-PT', {weekday:'long',day:'numeric',month:'long',year:'numeric'});
+    document.getElementById('data-hoje').textContent = d.charAt(0).toUpperCase() + d.slice(1);
 
-        tmb    = metricas?.tmb   || 0;
-        pesoKg = perfil?.peso    || 70;
+    const [aval, metricas] = await Promise.all([apiCall('/plano/avaliacao'), apiCall('/calc')]);
+    tmb = metricas?.tmb || 0;
+    renderizarBalanco(aval, metricas);
+});
 
-        renderizarBalanco(aval, metricas);
+/* ── balanço ── */
+function renderizarBalanco(aval, metricas) {
+    const area = document.getElementById('balanco-area');
+    if (!aval || aval.erro || !metricas || metricas.erro) {
+        area.innerHTML = '<p style="color:#dc2626;font-size:.9rem;">N&#227;o foi poss&#237;vel carregar o balan&#231;o. Verifique o seu perfil.</p>';
+        return;
+    }
+    const calIn  = parseFloat(aval.calorias_ingeridas) || 0;
+    const calOut = parseFloat(aval.calorias_gastas)    || 0;
+    const saldo  = aval.saldo_calorico || 0;
+    const estado = aval.estado || 'equilibrio';
+    const bc = estado==='deficit'?'badge-ok': estado==='excesso'?'badge-nok':'badge-eq';
+    const bt = estado==='deficit'?'&#10003; Objectivo cumprido &#8212; D&#233;fice cal&#243;rico':
+               estado==='excesso'?'&#10007; Excesso cal&#243;rico':'~ Em equil&#237;brio';
+    const sc = saldo>0?'#dc2626': saldo<0?'#1a6b35':'var(--texto)';
+    area.innerHTML = `
+        <div class="bal-grid">
+            <div class="bal-item"><div class="bal-label">Ingerido</div><div class="bal-val">${calIn}</div><div class="bal-sub">kcal</div></div>
+            <div class="bal-item"><div class="bal-label">Exerc&#237;cio</div><div class="bal-val">${calOut}</div><div class="bal-sub">kcal gastas</div></div>
+            <div class="bal-item"><div class="bal-label">TMB</div><div class="bal-val">${metricas.tmb}</div><div class="bal-sub">kcal</div></div>
+            <div class="bal-item"><div class="bal-label">Saldo</div><div class="bal-val" style="color:${sc};">${saldo>0?'+':''}${saldo}</div><div class="bal-sub">kcal vs TMB</div></div>
+        </div>
+        <div><span class="badge-status ${bc}">${bt}</span></div>
+        <p class="msg-aval">${aval.mensagem||''} ${aval.perda_estimada_g>0?'&#8212; Perda estimada: <strong>'+aval.perda_estimada_g+'g</strong>':''}</p>`;
+}
+
+/* ══════════════════════════════════════════
+   EDITAR JORNADA DE HOJE
+══════════════════════════════════════════ */
+async function toggleJornada() {
+    const panel = document.getElementById('jornada-panel');
+    const btn   = document.getElementById('btn-toggle-jornada');
+    if (panel.style.display === 'none') {
+        panel.style.display = 'block';
+        btn.innerHTML = '&#8593; Fechar edição da jornada';
+        await carregarJornada();
+    } else {
+        panel.style.display = 'none';
+        btn.innerHTML = '&#9998; Editar Jornada de Hoje';
+    }
+}
+
+async function carregarJornada() {
+    const dados = await apiCall('/plano/jornada-hoje?data=' + dataHoje);
+    jPa    = dados?.pa     || 0;
+    jAl    = dados?.almoco || 0;
+    jJa    = dados?.jantar || 0;
+    // caminhada_min → km
+    jCamKm = dados?.caminhada_min ? Math.round(dados.caminhada_min / 12 * 10) / 10 : 0;
+    renderJornada();
+}
+
+function ajustarJornada(campo, delta) {
+    if (campo === 'pa')  { jPa    = Math.max(0, Math.round((jPa    + delta) * 10) / 10); document.getElementById('j-pa').value  = jPa; }
+    if (campo === 'al')  { jAl    = Math.max(0, Math.round((jAl    + delta) * 10) / 10); document.getElementById('j-al').value  = jAl; }
+    if (campo === 'ja')  { jJa    = Math.max(0, Math.round((jJa    + delta) * 10) / 10); document.getElementById('j-ja').value  = jJa; }
+    if (campo === 'cam') { jCamKm = Math.max(0, Math.round((jCamKm + delta) * 10) / 10); document.getElementById('j-cam').value = jCamKm; }
+    renderJornada();
+}
+
+function syncJornada(campo, val) {
+    const v = Math.max(0, parseFloat(val) || 0);
+    if (campo === 'pa')  jPa    = v;
+    if (campo === 'al')  jAl    = v;
+    if (campo === 'ja')  jJa    = v;
+    if (campo === 'cam') jCamKm = v;
+    renderJornada();
+}
+
+function renderJornada() {
+    const totalIng  = jPa + jAl + jJa;
+    const camMin    = Math.round(jCamKm * 12);         // km ÷ 5 km/h × 60
+    const camKcal   = Math.round(jCamKm * 60);         // 5 kcal/min × 12 min/km
+    const passos    = Math.round(jCamKm * 1333 / 100) * 100;
+    const saldo     = Math.round(totalIng - tmb - camKcal);
+    const deficit   = -saldo;
+    const perdaG    = deficit > 0 ? Math.round(deficit / 7.7) : 0;
+    const excesso   = saldo > 0;
+
+    // targets para as barras
+    const tPa  = tmb ? tmb * 0.45 : 1;
+    const tAl  = tmb ? tmb * 0.35 : 1;
+    const tJa  = tmb ? Math.min(400, tmb * 0.20) : 1;
+    const tKm  = TARGET_WALK / 60 * KM_PER_H;        // 12.83 km
+    const tSt  = TARGET_WALK * STEPS_PER_MIN;          // 16,940
+
+    const pPa  = Math.min(100, Math.round(jPa    / tPa * 100));
+    const pAl  = Math.min(100, Math.round(jAl    / tAl * 100));
+    const pJa  = Math.min(100, Math.round(jJa    / tJa * 100));
+    const pCam = Math.min(100, Math.round(jCamKm / tKm * 100));
+    const pSt  = Math.min(100, Math.round(passos  / tSt * 100));
+    const pDef = Math.min(150, deficit > 0 ? Math.round(deficit / META_DEFICIT * 100) : 0);
+
+    const saldoTxt   = excesso ? `+${saldo} kcal (excesso)` : `${saldo} kcal (d&#233;fice)`;
+    const saldoClass = excesso ? 'excesso' : (deficit > 0 ? 'deficit' : '');
+    const saldoColor = excesso ? '#dc2626' : (deficit > 0 ? '#1a6b35' : 'var(--texto)');
+
+    document.getElementById('jornada-cards').innerHTML = `
+        <!-- Pequeno-almoço -->
+        <div class="result-card r-pa">
+            <div class="r-icon">&#9728;</div>
+            <div class="r-label">Peq. Almo&#231;o</div>
+            <div class="walk-edit">
+                <button class="btn-pa" onclick="ajustarJornada('pa',-10)">&#8722;</button>
+                <input type="number" id="j-pa" class="inp-pa" value="${jPa}" min="0" max="3000"
+                       oninput="syncJornada('pa',this.value)" onchange="syncJornada('pa',this.value)">
+                <button class="btn-pa" onclick="ajustarJornada('pa',+10)">+</button>
+            </div>
+            <div class="r-sub">kcal ingeridas</div>
+            <div class="prog-wrap"><div class="prog-fill amber" style="width:${pPa}%"></div></div>
+            <div class="prog-pct">${pPa}% do plano (${Math.round(tPa)} kcal)</div>
+        </div>
+        <!-- Almoço -->
+        <div class="result-card r-almoco">
+            <div class="r-icon">&#9749;</div>
+            <div class="r-label">Almo&#231;o</div>
+            <div class="walk-edit">
+                <button class="btn-al" onclick="ajustarJornada('al',-10)">&#8722;</button>
+                <input type="number" id="j-al" class="inp-al" value="${jAl}" min="0" max="3000"
+                       oninput="syncJornada('al',this.value)" onchange="syncJornada('al',this.value)">
+                <button class="btn-al" onclick="ajustarJornada('al',+10)">+</button>
+            </div>
+            <div class="r-sub">kcal ingeridas</div>
+            <div class="prog-wrap"><div class="prog-fill green" style="width:${pAl}%"></div></div>
+            <div class="prog-pct">${pAl}% do plano (${Math.round(tAl)} kcal)</div>
+        </div>
+        <!-- Jantar -->
+        <div class="result-card r-jantar">
+            <div class="r-icon">&#127763;</div>
+            <div class="r-label">Jantar</div>
+            <div class="walk-edit">
+                <button class="btn-ja" onclick="ajustarJornada('ja',-10)">&#8722;</button>
+                <input type="number" id="j-ja" class="inp-ja" value="${jJa}" min="0" max="3000"
+                       oninput="syncJornada('ja',this.value)" onchange="syncJornada('ja',this.value)">
+                <button class="btn-ja" onclick="ajustarJornada('ja',+10)">+</button>
+            </div>
+            <div class="r-sub">kcal ingeridas</div>
+            <div class="prog-wrap"><div class="prog-fill blue" style="width:${pJa}%"></div></div>
+            <div class="prog-pct">${pJa}% do plano (${Math.round(tJa)} kcal)</div>
+        </div>
+        <!-- Caminhada km -->
+        <div class="result-card r-walk">
+            <div class="r-icon">&#127939;</div>
+            <div class="r-label">Caminhada</div>
+            <div class="walk-edit">
+                <button onclick="ajustarJornada('cam',-.5)">&#8722;</button>
+                <input type="number" id="j-cam" value="${jCamKm}" min="0" max="100" step="0.1"
+                       oninput="syncJornada('cam',this.value)" onchange="syncJornada('cam',this.value)">
+                <button onclick="ajustarJornada('cam',+.5)">+</button>
+            </div>
+            <div class="r-sub">km realiz. (~${camMin} min)</div>
+            <div class="prog-wrap"><div class="prog-fill blue" style="width:${pCam}%"></div></div>
+            <div class="prog-pct">${pCam}% do objectivo (${tKm.toFixed(1)} km)</div>
+        </div>
+        <!-- Passos derivados -->
+        <div class="result-card r-steps">
+            <div class="r-icon">&#128099;</div>
+            <div class="r-label">Passos</div>
+            <div class="r-val">${passos.toLocaleString('pt-PT')}</div>
+            <div class="r-sub">estimados</div>
+            <div class="prog-wrap"><div class="prog-fill teal" style="width:${pSt}%"></div></div>
+            <div class="prog-pct">${pSt}% do objectivo</div>
+        </div>
+        <!-- Saldo -->
+        <div class="result-card r-saldo ${saldoClass}">
+            <div class="r-icon">${excesso ? '&#128200;' : '&#128201;'}</div>
+            <div class="r-label">Saldo</div>
+            <div class="r-val" style="color:${saldoColor};font-size:1.3rem;">${saldoTxt}</div>
+            <div class="r-sub">${deficit>0?'Perda: ~'+perdaG+'g': excesso?'Ganho estimado':''}</div>
+            <div class="prog-wrap"><div class="prog-fill ${excesso?'red':'orange'}" style="width:${pDef}%"></div></div>
+            <div class="prog-pct">${deficit>0?pDef+'% do objectivo ('+META_DEFICIT+' kcal)':''}</div>
+        </div>`;
+
+    document.getElementById('jornada-resumo').innerHTML = `
+        <strong>Resumo do dia:</strong>
+        Ingerido: <strong>${totalIng} kcal</strong> (PA ${jPa} + Almo&#231;o ${jAl} + Jantar ${jJa})
+        &nbsp;&#8212;&nbsp; Caminhada: <strong>${jCamKm} km</strong> (${camMin} min, ${camKcal} kcal queimadas)
+        &nbsp;&#8212;&nbsp; Saldo: <strong style="color:${saldoColor};">${saldoTxt}</strong>
+        ${deficit>0?'&nbsp;&#8212;&nbsp; Perda estimada: <strong>~'+perdaG+'g</strong>':''}`;
+}
+
+async function guardarJornada() {
+    const btn = document.getElementById('btn-guardar-jornada');
+    const msg = document.getElementById('msg-guardar-jornada');
+    btn.disabled = true; btn.textContent = 'A guardar...';
+    msg.innerHTML = '';
+
+    const camMin = Math.round(jCamKm * 12);
+    const res = await apiCall('/plano/jornada-hoje', 'POST', {
+        data: dataHoje, pa: jPa, almoco: jAl, jantar: jJa, caminhada_min: camMin
     });
 
-    function renderizarBalanco(aval, metricas) {
-        const area = document.getElementById('balanco-area');
-        if (!aval || aval.erro || !metricas || metricas.erro) {
-            area.innerHTML = '<p style="color:#dc2626;font-size:.9rem;">Não foi possível carregar o balanço. Verifique o seu perfil.</p>';
-            return;
-        }
-
-        const calIn  = parseFloat(aval.calorias_ingeridas) || 0;
-        const calOut = parseFloat(aval.calorias_gastas)    || 0;
-        const saldo  = aval.saldo_calorico || 0;
-        const estado = aval.estado || 'equilibrio';
-
-        const badgeClass = estado === 'deficit' ? 'badge-ok' : (estado === 'excesso' ? 'badge-nok' : 'badge-eq');
-        const badgeText  = estado === 'deficit' ? '✓ Objectivo cumprido — Défice calórico' :
-                           estado === 'excesso' ? '✗ Excesso calórico' : '~ Em equilíbrio';
-        const saldoCor   = saldo > 0 ? '#dc2626' : (saldo < 0 ? '#1a6b35' : 'var(--texto)');
-
-        area.innerHTML = `
-            <div class="bal-grid">
-                <div class="bal-item"><div class="bal-label">Ingerido</div><div class="bal-val">${calIn}</div><div class="bal-sub">kcal</div></div>
-                <div class="bal-item"><div class="bal-label">Exercício</div><div class="bal-val">${calOut}</div><div class="bal-sub">kcal gastas</div></div>
-                <div class="bal-item"><div class="bal-label">TMB</div><div class="bal-val">${metricas.tmb}</div><div class="bal-sub">kcal</div></div>
-                <div class="bal-item"><div class="bal-label">Saldo</div><div class="bal-val" style="color:${saldoCor};">${saldo > 0 ? '+' : ''}${saldo}</div><div class="bal-sub">kcal vs TMB</div></div>
-            </div>
-            <div><span class="badge-status ${badgeClass}">${badgeText}</span></div>
-            <p class="msg-aval">${aval.mensagem || ''} ${aval.perda_estimada_g > 0 ? '— Perda estimada: <strong>' + aval.perda_estimada_g + 'g</strong>' : ''}</p>
-        `;
+    btn.disabled = false; btn.innerHTML = '&#128190; Guardar Jornada';
+    if (res?.sucesso) {
+        msg.innerHTML = '<span style="color:var(--verde);font-weight:600;">&#10003; Jornada gravada!</span>';
+        // Refrescar balanço
+        const [aval, metricas] = await Promise.all([apiCall('/plano/avaliacao'), apiCall('/calc')]);
+        renderizarBalanco(aval, metricas);
+    } else {
+        msg.innerHTML = `<span style="color:#dc2626;">${res?.erro||'Erro ao guardar.'}</span>`;
     }
+}
 
-    function seleccionarAtiv(tipo) {
-        // Highlight do botão seleccionado
-        ['sed','mod','ativ'].forEach(k => document.getElementById('btn-'+k).classList.remove('selected'));
-        const mapa = {sedentario:'sed', moderado:'mod', ativo:'ativ'};
-        document.getElementById('btn-'+mapa[tipo]).classList.add('selected');
+/* ══════════════════════════════════════════
+   PLANEADOR DIA SEGUINTE
+══════════════════════════════════════════ */
+function seleccionarAtiv(tipo) {
+    tipoAtivAtual = tipo; walkMinAtual = TARGET_WALK;
+    ['sed','mod','ativ'].forEach(k=>document.getElementById('btn-'+k).classList.remove('selected'));
+    document.getElementById('btn-'+{sedentario:'sed',moderado:'mod',ativo:'ativ'}[tipo]).classList.add('selected');
+    document.getElementById('resultado-plan').style.display = 'block';
+    renderPlano();
+}
 
-        calcularPlanAmanha(tipo);
-        document.getElementById('resultado-plan').style.display = 'block';
+function ajustarCaminhada(delta) {
+    walkMinAtual = Math.max(0, walkMinAtual + delta);
+    document.getElementById('walk-input').value = walkMinAtual;
+    renderPlano();
+}
+
+function setCaminhada(val) {
+    walkMinAtual = Math.max(0, parseInt(val) || 0);
+    renderPlano();
+}
+
+function renderPlano() {
+    const fator    = FATORES[tipoAtivAtual];
+    const tdee     = Math.round(tmb * fator);
+    const walkKcal = walkMinAtual * WALK_KCAL_MIN;
+
+    const maxFood  = walkKcal >= MIN_DEFICIT ? tmb : Math.max(0, tmb + walkKcal - MIN_DEFICIT);
+    const belowTMB = maxFood < tmb;
+    const deficit  = Math.round((tmb - maxFood) + walkKcal);
+    const lossG    = Math.round(deficit / 7.7);
+    const distKm   = Math.round(walkMinAtual / 60 * KM_PER_H * 10) / 10;
+    const steps    = Math.round(walkMinAtual * STEPS_PER_MIN / 100) * 100;
+
+    const pa = Math.round(maxFood * 0.45);
+    const al = Math.round(maxFood * 0.35);
+    const ja = Math.min(Math.round(400 * maxFood / (tmb||1)), Math.round(maxFood * 0.20));
+    planState = { pa, al, ja, deficit, walkKcal, maxFood };
+
+    const pKcal  = Math.min(100, Math.round(maxFood / (tmb||1) * 100));
+    const pWalk  = Math.min(150, Math.round(walkMinAtual / TARGET_WALK * 100));
+    const pDist  = Math.min(150, Math.round(distKm / (TARGET_WALK/60*KM_PER_H) * 100));
+    const pSteps = Math.min(150, Math.round(steps / (TARGET_WALK*STEPS_PER_MIN) * 100));
+    const pDef   = Math.min(150, Math.round(deficit / META_DEFICIT * 100));
+
+    document.getElementById('result-cards').innerHTML = `
+        <div class="result-card r-kcal${belowTMB?' warn':''}">
+            <div class="r-icon">&#127869;</div>
+            <div class="r-label">M&#225;x. a ingerir</div>
+            <div class="r-val" style="color:${belowTMB?'#dc2626':'#1a6b35'}">${maxFood}</div>
+            <div class="r-sub">kcal</div>
+            <div class="prog-wrap"><div class="prog-fill ${belowTMB?'red':'green'}" style="width:${Math.min(100,pKcal)}%"></div></div>
+            <div class="prog-pct">${pKcal}% do TMB (${tmb} kcal)</div>
+        </div>
+        <div class="result-card r-walk">
+            <div class="r-icon">&#127939;</div>
+            <div class="r-label">Caminhada</div>
+            <div class="walk-edit">
+                <button onclick="ajustarCaminhada(-5)">&#8722;</button>
+                <input type="number" id="walk-input" value="${walkMinAtual}" min="0" max="600"
+                       oninput="setCaminhada(this.value)" onchange="setCaminhada(this.value)">
+                <button onclick="ajustarCaminhada(+5)">+</button>
+            </div>
+            <div class="r-sub">minutos</div>
+            <div class="prog-wrap"><div class="prog-fill blue" style="width:${Math.min(100,pWalk)}%"></div></div>
+            <div class="prog-pct">${pWalk}% do objectivo (${TARGET_WALK} min)</div>
+        </div>
+        <div class="result-card r-dist">
+            <div class="r-icon">&#128205;</div>
+            <div class="r-label">Dist&#226;ncia aprox.</div>
+            <div class="r-val">${distKm}</div>
+            <div class="r-sub">km a ~5 km/h</div>
+            <div class="prog-wrap"><div class="prog-fill purple" style="width:${Math.min(100,pDist)}%"></div></div>
+            <div class="prog-pct">${pDist}% do objectivo</div>
+        </div>
+        <div class="result-card r-steps">
+            <div class="r-icon">&#128099;</div>
+            <div class="r-label">Passos</div>
+            <div class="r-val">${steps.toLocaleString('pt-PT')}</div>
+            <div class="r-sub">passos estimados</div>
+            <div class="prog-wrap"><div class="prog-fill teal" style="width:${Math.min(100,pSteps)}%"></div></div>
+            <div class="prog-pct">${pSteps}% do objectivo</div>
+        </div>
+        <div class="result-card r-deficit">
+            <div class="r-icon">&#128200;</div>
+            <div class="r-label">D&#233;fice previsto</div>
+            <div class="r-val">${deficit}</div>
+            <div class="r-sub">kcal (~${lossG}g perda)</div>
+            <div class="prog-wrap"><div class="prog-fill orange" style="width:${Math.min(100,pDef)}%"></div></div>
+            <div class="prog-pct">${pDef}% do objectivo (${META_DEFICIT} kcal)</div>
+        </div>`;
+
+    document.getElementById('warn-tmb').style.display = belowTMB ? 'block' : 'none';
+
+    document.getElementById('plan-meals').innerHTML = `
+        <div class="meal-pill"><div class="meal-icon">&#9728;</div><div class="meal-name">Peq.-almo&#231;o</div><div class="meal-kcal">${pa} kcal</div></div>
+        <div class="meal-pill"><div class="meal-icon">&#9749;</div><div class="meal-name">Almo&#231;o</div><div class="meal-kcal">${al} kcal</div></div>
+        <div class="meal-pill"><div class="meal-icon">&#127763;</div><div class="meal-name">Jantar (at&#233; 19h)</div><div class="meal-kcal">${ja} kcal</div></div>`;
+
+    const nomeAtiv = {sedentario:'sedent&#225;rio',moderado:'moderado',ativo:'activo'}[tipoAtivAtual];
+    document.getElementById('plan-note').innerHTML = `
+        <strong>Resumo para amanh&#227;:</strong> Ingerir ${maxFood} kcal distribu&#237;das pelas 3 refei&#231;&#245;es.
+        Com actividade ${nomeAtiv} (TDEE ${tdee} kcal), s&#227;o necess&#225;rios
+        <strong>${walkMinAtual} min de caminhada</strong> (${distKm} km &#8776; ${steps.toLocaleString('pt-PT')} passos)
+        para um d&#233;fice de ${deficit} kcal e perder ~${lossG}g.
+        <br>Hora do jantar recomendada: <strong>19h00</strong>.`;
+}
+
+async function guardarPlanoAmanha() {
+    const btn = document.getElementById('btn-guardar-amanha');
+    const msg = document.getElementById('msg-guardar-amanha');
+    btn.disabled = true; btn.textContent = 'A guardar...';
+    msg.innerHTML = '';
+
+    const d = new Date();
+    d.setDate(d.getDate() + 1);
+    const dataAmanha = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+
+    const res = await apiCall('/plano/amanha', 'POST', {
+        data: dataAmanha, tmb,
+        pa: planState.pa, al: planState.al, ja: planState.ja,
+        caminhada_min: walkMinAtual,
+        walkKcal:      walkMinAtual * WALK_KCAL_MIN,
+        deficit:       planState.deficit
+    });
+
+    btn.disabled = false; btn.innerHTML = '&#128190; Guardar Plano para Amanh&#227;';
+    if (res?.sucesso) {
+        msg.innerHTML = `<span style="color:var(--verde);font-weight:600;">&#10003; Plano gravado para ${dataAmanha.split('-').reverse().join('/')}</span>`;
+    } else {
+        msg.innerHTML = `<span style="color:#dc2626;">${res?.erro||'Erro ao guardar.'}</span>`;
     }
-
-    function calcularPlanAmanha(tipoAtiv) {
-        const fator   = FATORES[tipoAtiv];
-        const tdee    = Math.round(tmb * fator);
-        const fatorPeso = pesoKg / 70;
-
-        // Distribuição de refeições (igual ao planService.js)
-        const pa = Math.round(tmb * 0.45);
-        const al = Math.round(tmb * 0.35);
-        const ja = Math.min(400, Math.round(tmb * 0.20));
-        const totalRefeicoes = pa + al + ja;
-
-        // Défice natural da actividade (TDEE - o que se come baseado em TMB)
-        const deficeAtiv = tdee - totalRefeicoes;
-
-        // Caminhada extra necessária para atingir meta de 770 kcal de défice
-        const caminhadaKcal = Math.max(0, META_DEFICIT - deficeAtiv);
-        const caminhadaMin  = Math.round(caminhadaKcal / (CAL_MIN_KM * fatorPeso));
-
-        // Velocidade média ~5km/h → km = min/60 * 5
-        const distKm = Math.round(caminhadaMin / 60 * 5 * 10) / 10;
-
-        // Máximo kcal a ingerir se quiser atingir défice sem caminhada extra
-        const maxKcalSemCaminhada = tdee - META_DEFICIT;
-
-        const cards = document.getElementById('result-cards');
-        const meals = document.getElementById('plan-meals');
-        const note  = document.getElementById('plan-note');
-
-        cards.innerHTML = `
-            <div class="result-card r-kcal">
-                <div class="r-icon">&#127869;</div>
-                <div class="r-label">Máx. a ingerir</div>
-                <div class="r-val">${totalRefeicoes}</div>
-                <div class="r-sub">kcal (baseado no TMB)</div>
-            </div>
-            <div class="result-card r-walk">
-                <div class="r-icon">&#127939;</div>
-                <div class="r-label">Caminhada</div>
-                <div class="r-val">${caminhadaMin}</div>
-                <div class="r-sub">minutos necessários</div>
-            </div>
-            <div class="result-card r-dist">
-                <div class="r-icon">&#128205;</div>
-                <div class="r-label">Distância aprox.</div>
-                <div class="r-val">${distKm}</div>
-                <div class="r-sub">km a ~5 km/h</div>
-            </div>
-            <div class="result-card r-deficit">
-                <div class="r-icon">&#128200;</div>
-                <div class="r-label">Défice previsto</div>
-                <div class="r-val">${META_DEFICIT}</div>
-                <div class="r-sub">kcal (~100g perda)</div>
-            </div>
-        `;
-
-        meals.innerHTML = `
-            <div class="meal-pill">
-                <div class="meal-icon">&#9728;</div>
-                <div class="meal-name">Pequeno-almoço</div>
-                <div class="meal-kcal">${pa} kcal</div>
-            </div>
-            <div class="meal-pill">
-                <div class="meal-icon">&#9749;</div>
-                <div class="meal-name">Almoço</div>
-                <div class="meal-kcal">${al} kcal</div>
-            </div>
-            <div class="meal-pill">
-                <div class="meal-icon">&#127763;</div>
-                <div class="meal-name">Jantar (até 19h)</div>
-                <div class="meal-kcal">${ja} kcal</div>
-            </div>
-        `;
-
-        const nomeAtiv = {sedentario:'sedentário',moderado:'moderado',ativo:'activo'}[tipoAtiv];
-        const tdeeTexto = deficeAtiv >= META_DEFICIT
-            ? `Com actividade ${nomeAtiv} (TDEE ${tdee} kcal), o défice natural já cobre o objectivo — a caminhada é opcional mas recomendada.`
-            : `Com actividade ${nomeAtiv} (TDEE ${tdee} kcal), o défice natural é de ${deficeAtiv} kcal. São necessários <strong>${caminhadaMin} min de caminhada</strong> (${distKm} km) para atingir os ${META_DEFICIT} kcal de défice e perder ~100g.`;
-
-        note.innerHTML = `
-            <strong>Resumo para amanhã:</strong> Ingerir ${totalRefeicoes} kcal distribuídas pelas 3 refeições.
-            ${tdeeTexto}
-            <br>Hora do jantar recomendada: <strong>19h00</strong>.
-        `;
-    }
+}
 </script>
 </body>
 </html>
