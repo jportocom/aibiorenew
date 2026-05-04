@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bio AI Renew — Área Pessoal</title>
+    <link rel="stylesheet" href="/assets/style.css">
+    <style>
+        body { padding-top: 70px; }
+        .loading-wrap {
+            min-height: calc(100vh - 70px);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .loading-text { color: var(--texto-3, #6b8a76); font-size: 0.95rem; }
+        @media (max-width: 640px) { body { padding-top: 62px; } }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/dev/aibiorenew/" class="nav-logo">
+            <span class="label">Bio AI</span>
+            <span class="brand">Renew</span>
+        </a>
+        <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="/dev/aibiorenew/app/frontend/menuhtml/quem-somos.html">Quem Somos</a></li>
+            <li><a href="/dev/aibiorenew/app/frontend/menuhtml/missao.html">Missão</a></li>
+            <li><a href="/dev/aibiorenew/app/frontend/menuhtml/metodo.html">Método</a></li>
+            <li><a href="/dev/aibiorenew/app/frontend/menuhtml/clientes.html">Clientes</a></li>
+            <li><a href="/dev/aibiorenew/app/frontend/menuhtml/estudos.html">Ciência</a></li>
+            <li><a href="/dev/aibiorenew/app/frontend/menuhtml/contactos.html">Contactos</a></li>
+            <li class="nav-dropdown">
+                <a href="#" onclick="toggleDropdown(this);return false;">Perfil</a>
+                <ul class="nav-sub">
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="perfil.html">O Meu Perfil</a></li>
+                    <li><a href="medicoes.html">Medições</a></li>
+                    <li><a href="gestao-app.html">Gestão de App</a></li>
+                    <li><a href="fecho-dia.html">Fecho do Dia</a></li>
+                </ul>
+            </li>
+            <li><a href="area-pessoal.html" class="nav-btn" id="nav-auth-btn">Entrar</a></li>
+        </ul>
+    </nav>
+
+    <div class="loading-wrap">
+        <p class="loading-text">A verificar sessão…</p>
+    </div>
+
+    <script>
+    function toggleNav(){document.getElementById('navMenu').classList.toggle('aberto');}
+    function toggleDropdown(a){a.closest('.nav-dropdown').classList.toggle('dropdown-aberto');}
+    document.addEventListener('click',e=>{if(!e.target.closest('.nav-dropdown'))document.querySelectorAll('.nav-dropdown').forEach(d=>d.classList.remove('dropdown-aberto'));});
+    (function(){
+        if (localStorage.getItem('mp_token')) {
+            location.replace('dashboard.html');
+        } else {
+            location.replace('area-pessoal.html');
+        }
+    })();
+    </script>
+</body>
+</html>
