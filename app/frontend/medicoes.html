@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medições — Bio AI Renew</title>
+    <link rel="stylesheet" href="/assets/style.css">
+    <style>
+        :root{--verde:#1a6b35;--verde-hover:#22883f;--verde-light:#e6f4eb;--verde-border:#c3e0cd;--verde-muted:#f0f9f3;--branco:#fff;--fundo:#f9fbfa;--texto:#0d1f12;--texto-2:#3d5c48;--texto-3:#6b8a76;--borda:#e2ede7;}
+        *{box-sizing:border-box;margin:0;padding:0;}
+        body{font-family:'Inter',system-ui,sans-serif;background:var(--fundo);color:var(--texto);padding-top:70px;}
+        html,body{overflow-x:hidden;}
+        .wrap{max-width:860px;margin:0 auto;padding:2rem 1.5rem 4rem;}
+        .page-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2rem;}
+        .page-header h1{font-size:1.4rem;}
+        .page-header p{font-size:.9rem;color:var(--texto-3);margin-top:.2rem;}
+        /* Formulário de inserção */
+        .add-card{background:var(--branco);border:1px solid var(--borda);border-radius:14px;padding:1.5rem;margin-bottom:2rem;}
+        .add-card h2{font-size:.95rem;font-weight:700;color:var(--texto-2);margin-bottom:1rem;text-transform:uppercase;letter-spacing:.06em;}
+        .add-row{display:flex;gap:.75rem;flex-wrap:wrap;align-items:flex-end;}
+        .add-field{display:flex;flex-direction:column;gap:.3rem;}
+        .add-field label{font-size:.8rem;font-weight:600;color:var(--texto-2);}
+        .add-field input{padding:.55rem .8rem;border:1px solid var(--borda);border-radius:8px;font-size:.92rem;background:var(--fundo);color:var(--texto);font-family:inherit;width:160px;}
+        .add-field input:focus{outline:none;border-color:var(--verde);}
+        .btn-add{padding:.6rem 1.25rem;background:var(--verde);color:#fff;border:none;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer;font-family:inherit;transition:background .2s;white-space:nowrap;}
+        .btn-add:hover{background:var(--verde-hover);}
+        #msg-add{font-size:.85rem;margin-top:.75rem;}
+        /* Tabela */
+        .table-card{background:var(--branco);border:1px solid var(--borda);border-radius:14px;overflow:hidden;}
+        .table-head{display:grid;grid-template-columns:1fr 110px 130px;gap:0;background:var(--verde-muted);border-bottom:1px solid var(--borda);padding:.65rem 1.25rem;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--texto-3);}
+        .table-row{display:grid;grid-template-columns:1fr 110px 130px;gap:0;padding:.75rem 1.25rem;border-bottom:1px solid var(--borda);align-items:center;}
+        .table-row:last-child{border-bottom:none;}
+        .table-row:hover{background:var(--verde-muted);}
+        .row-data{font-size:.92rem;color:var(--texto-2);}
+        .row-peso{font-size:1.05rem;font-weight:700;color:var(--verde);}
+        .row-acoes{display:flex;gap:.4rem;}
+        .btn-edit,.btn-del{padding:.3rem .7rem;border-radius:6px;font-size:.78rem;font-weight:600;cursor:pointer;font-family:inherit;border:1px solid;transition:all .15s;}
+        .btn-edit{border-color:var(--verde-border);color:var(--verde);background:transparent;}
+        .btn-edit:hover{background:var(--verde);color:#fff;}
+        .btn-del{border-color:#fca5a5;color:#dc2626;background:transparent;}
+        .btn-del:hover{background:#dc2626;color:#fff;}
+        .empty{padding:2rem;text-align:center;color:var(--texto-3);font-size:.9rem;}
+        /* Modal de edição */
+        .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;display:flex;align-items:center;justify-content:center;}
+        .modal-inner{background:#fff;border-radius:14px;padding:2rem;width:100%;max-width:360px;}
+        .modal-inner h2{font-size:1.05rem;margin-bottom:1.25rem;}
+        .mfield{display:flex;flex-direction:column;gap:.3rem;margin-bottom:.9rem;}
+        .mfield label{font-size:.82rem;font-weight:600;color:var(--texto-2);}
+        .mfield input{padding:.55rem .8rem;border:1px solid var(--borda);border-radius:8px;font-size:.92rem;background:var(--fundo);color:var(--texto);font-family:inherit;}
+        .mfield input:focus{outline:none;border-color:var(--verde);}
+        .modal-btns{display:flex;gap:.75rem;margin-top:1.25rem;}
+        .mbtn-save{flex:1;padding:.65rem;background:var(--verde);color:#fff;border:none;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer;font-family:inherit;}
+        .mbtn-save:hover{background:var(--verde-hover);}
+        .mbtn-cancel{padding:.65rem 1rem;background:var(--fundo);border:1px solid var(--borda);color:var(--texto-2);border-radius:8px;font-size:.9rem;cursor:pointer;font-family:inherit;}
+        .msg-erro{padding:.5rem .75rem;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;color:#dc2626;font-size:.85rem;margin-bottom:.75rem;}
+        .delta-up{color:#dc2626;font-size:.75rem;margin-left:.25rem;}
+        .delta-down{color:var(--verde);font-size:.75rem;margin-left:.25rem;}
+    </style>
+</head>
+<body>
+<nav class="nav">
+    <a href="/dev/aibiorenew/" class="nav-logo"><span class="label">Bio AI</span><span class="brand">Renew</span></a>
+    <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu"><span></span><span></span><span></span></button>
+    <ul class="nav-menu" id="navMenu">
+        <li><a href="/dev/aibiorenew/app/frontend/menuhtml/quem-somos.html">Quem Somos</a></li>
+        <li><a href="/dev/aibiorenew/app/frontend/menuhtml/missao.html">Missão</a></li>
+        <li><a href="/dev/aibiorenew/app/frontend/menuhtml/metodo.html">Método</a></li>
+        <li><a href="/dev/aibiorenew/app/frontend/menuhtml/clientes.html">Clientes</a></li>
+        <li><a href="/dev/aibiorenew/app/frontend/menuhtml/estudos.html">Ciência</a></li>
+        <li><a href="/dev/aibiorenew/app/frontend/menuhtml/contactos.html">Contactos</a></li>
+        <li class="nav-dropdown">
+            <a href="#" onclick="toggleDropdown(this);return false;">Perfil</a>
+            <ul class="nav-sub">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="perfil.html">O Meu Perfil</a></li>
+                <li><a href="medicoes.html" class="ativo">Medições</a></li>
+                <li><a href="gestao-app.html">Gestão de App</a></li>
+                <li><a href="fecho-dia.html">Fecho do Dia</a></li>
+            </ul>
+        </li>
+        <li><a href="#" class="nav-btn" onclick="logout();return false;">Sair</a></li>
+    </ul>
+</nav>
+
+<div class="wrap">
+    <div class="page-header">
+        <div>
+            <h1>Medições de Peso</h1>
+            <p>Histórico e gestão de todas as suas pesagens</p>
+        </div>
+        <a href="dashboard.html" style="font-size:.85rem;color:var(--texto-3);text-decoration:none;">&#8592; Dashboard</a>
+    </div>
+
+    <!-- Inserir nova medição -->
+    <div class="add-card">
+        <h2>Nova Medição</h2>
+        <div class="add-row">
+            <div class="add-field">
+                <label for="novo-data">Data</label>
+                <input type="date" id="novo-data">
+            </div>
+            <div class="add-field">
+                <label for="novo-peso">Peso (kg)</label>
+                <input type="number" id="novo-peso" placeholder="ex: 87.5" step="0.1" min="20" max="300">
+            </div>
+            <button class="btn-add" onclick="inserirMedicao()">+ Inserir</button>
+        </div>
+        <div id="msg-add"></div>
+    </div>
+
+    <!-- Lista de medições -->
+    <div class="table-card">
+        <div class="table-head">
+            <span>Data</span>
+            <span>Peso</span>
+            <span>Acções</span>
+        </div>
+        <div id="lista-medicoes"><div class="empty">A carregar...</div></div>
+    </div>
+</div>
+
+<!-- Modal de edição -->
+<div id="modal-edicao" class="modal-bg" style="display:none;" onclick="fecharModal()">
+    <div class="modal-inner" onclick="event.stopPropagation()">
+        <h2>&#9998; Editar Medição</h2>
+        <div id="msg-modal"></div>
+        <div class="mfield"><label>Data</label><input type="date" id="edit-data"></div>
+        <div class="mfield"><label>Peso (kg)</label><input type="number" id="edit-peso" step="0.1" min="20" max="300"></div>
+        <input type="hidden" id="edit-id">
+        <div class="modal-btns">
+            <button class="mbtn-cancel" onclick="fecharModal()">Cancelar</button>
+            <button class="mbtn-save" onclick="guardarEdicao()">Guardar</button>
+        </div>
+    </div>
+</div>
+
+<script src="js/api.js"></script>
+<script>
+    function toggleNav(){document.getElementById('navMenu').classList.toggle('aberto');}
+    function toggleDropdown(a){a.closest('.nav-dropdown').classList.toggle('dropdown-aberto');}
+    function logout(){clearToken();location.href='/dev/aibiorenew/app/frontend/area-pessoal.html';}
+    document.addEventListener('click',e=>{if(!e.target.closest('.nav-dropdown'))document.querySelectorAll('.nav-dropdown').forEach(d=>d.classList.remove('dropdown-aberto'));});
+
+    document.addEventListener('DOMContentLoaded', () => {
+        if (!isLoggedIn()) { location.href = '/dev/aibiorenew/app/frontend/area-pessoal.html'; return; }
+        // Preencher data de hoje por defeito
+        document.getElementById('novo-data').value = new Date().toISOString().split('T')[0];
+        carregarMedicoes();
+    });
+
+    let medicoes = [];
+
+    async function carregarMedicoes() {
+        const lista = document.getElementById('lista-medicoes');
+        medicoes = await apiCall('/peso') || [];
+        if (!medicoes.length || medicoes.erro) {
+            lista.innerHTML = '<div class="empty">Sem medições registadas. Adicione a primeira acima.</div>';
+            return;
+        }
+        // Ordenar do mais recente para o mais antigo
+        const sorted = [...medicoes].reverse();
+        lista.innerHTML = sorted.map((m, i) => {
+            const next = sorted[i + 1];
+            let delta = '';
+            if (next) {
+                const diff = parseFloat(m.peso) - parseFloat(next.peso);
+                if (diff > 0.01)       delta = `<span class="delta-up">+${diff.toFixed(1)}</span>`;
+                else if (diff < -0.01) delta = `<span class="delta-down">${diff.toFixed(1)}</span>`;
+            }
+            const d = (m.data||'').split('T')[0];
+            const [a,mm,dd] = d.split('-');
+            return `<div class="table-row">
+                <span class="row-data">${dd}/${mm}/${a}</span>
+                <span class="row-peso">${parseFloat(m.peso).toFixed(1)} kg${delta}</span>
+                <span class="row-acoes">
+                    <button class="btn-edit" onclick="abrirEdicao(${m.id},'${d}',${m.peso})">Editar</button>
+                    <button class="btn-del" onclick="eliminarMedicao(${m.id})">Eliminar</button>
+                </span>
+            </div>`;
+        }).join('');
+    }
+
+    async function inserirMedicao() {
+        const peso = parseFloat(document.getElementById('novo-peso').value);
+        const data = document.getElementById('novo-data').value;
+        const msg  = document.getElementById('msg-add');
+        if (!peso || peso < 20 || peso > 300) { msg.innerHTML='<span style="color:#dc2626;">Peso inválido (20–300 kg).</span>'; return; }
+        if (!data) { msg.innerHTML='<span style="color:#dc2626;">Seleccione a data.</span>'; return; }
+        const res = await apiCall('/peso', 'POST', { peso, data });
+        if (res?.id) {
+            msg.innerHTML = '<span style="color:var(--verde);">Medição inserida com sucesso.</span>';
+            document.getElementById('novo-peso').value = '';
+            await carregarMedicoes();
+        } else {
+            msg.innerHTML = `<span style="color:#dc2626;">${res?.erro || 'Erro ao inserir.'}</span>`;
+        }
+    }
+
+    function abrirEdicao(id, data, peso) {
+        document.getElementById('edit-id').value   = id;
+        document.getElementById('edit-data').value  = data;
+        document.getElementById('edit-peso').value  = parseFloat(peso).toFixed(1);
+        document.getElementById('msg-modal').innerHTML = '';
+        document.getElementById('modal-edicao').style.display = 'flex';
+    }
+
+    function fecharModal() { document.getElementById('modal-edicao').style.display = 'none'; }
+
+    async function guardarEdicao() {
+        const id   = document.getElementById('edit-id').value;
+        const peso = parseFloat(document.getElementById('edit-peso').value);
+        const data = document.getElementById('edit-data').value;
+        const msg  = document.getElementById('msg-modal');
+        if (!peso || peso < 20 || peso > 300) { msg.innerHTML='<div class="msg-erro">Peso inválido.</div>'; return; }
+        const res = await apiCall('/peso/' + id, 'PUT', { peso, data });
+        if (res?.id) {
+            fecharModal();
+            await carregarMedicoes();
+        } else {
+            msg.innerHTML = `<div class="msg-erro">${res?.erro || 'Erro ao guardar.'}</div>`;
+        }
+    }
+
+    async function eliminarMedicao(id) {
+        if (!confirm('Eliminar esta medição?')) return;
+        const res = await apiCall('/peso/' + id, 'DELETE');
+        if (res?.sucesso) {
+            await carregarMedicoes();
+        } else {
+            alert(res?.erro || 'Erro ao eliminar.');
+        }
+    }
+</script>
+</body>
+</html>

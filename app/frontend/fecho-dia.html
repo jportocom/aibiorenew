@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fecho do Dia — Bio AI Renew</title>
+    <link rel="stylesheet" href="/assets/style.css">
+    <style>
+        :root{--verde:#1a6b35;--verde-hover:#22883f;--verde-light:#e6f4eb;--verde-border:#c3e0cd;--verde-muted:#f0f9f3;--branco:#fff;--fundo:#f9fbfa;--texto:#0d1f12;--texto-2:#3d5c48;--texto-3:#6b8a76;--borda:#e2ede7;}
+        *{box-sizing:border-box;margin:0;padding:0;}
+        body{font-family:'Inter',system-ui,sans-serif;background:var(--fundo);color:var(--texto);padding-top:70px;}
+        html,body{overflow-x:hidden;}
+        .wrap{max-width:860px;margin:0 auto;padding:2rem 1.5rem 4rem;}
+        .sec-title{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--verde);margin:2rem 0 1rem;}
+        .card{background:var(--branco);border:1px solid var(--borda);border-radius:14px;padding:1.5rem;margin-bottom:1rem;}
+        /* Balanço do dia */
+        .bal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1rem;}
+        .bal-item{background:var(--verde-muted);border:1px solid var(--verde-border);border-radius:10px;padding:1rem 1.25rem;}
+        .bal-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--texto-3);}
+        .bal-val{font-size:1.5rem;font-weight:700;color:var(--verde);margin:.25rem 0;line-height:1;}
+        .bal-sub{font-size:.8rem;color:var(--texto-2);}
+        .badge-status{display:inline-flex;align-items:center;gap:.4rem;padding:.45rem 1rem;border-radius:20px;font-size:.88rem;font-weight:600;margin-top:1rem;}
+        .badge-ok{background:#dcfce7;color:#166534;border:1px solid #bbf7d0;}
+        .badge-eq{background:#fefce8;color:#854d0e;border:1px solid #fef08a;}
+        .badge-nok{background:#fee2e2;color:#991b1b;border:1px solid #fecaca;}
+        .msg-aval{margin-top:.75rem;font-size:.95rem;color:var(--texto-2);line-height:1.6;}
+        /* Planeador */
+        .ativ-selector{display:flex;gap:.75rem;flex-wrap:wrap;margin:1rem 0;}
+        .ativ-btn{flex:1;min-width:130px;padding:.85rem 1rem;border:2px solid var(--borda);border-radius:12px;background:var(--branco);cursor:pointer;font-family:inherit;transition:all .2s;text-align:center;}
+        .ativ-btn .icon{font-size:1.4rem;display:block;margin-bottom:.3rem;}
+        .ativ-btn .name{font-size:.88rem;font-weight:600;color:var(--texto-2);}
+        .ativ-btn .desc{font-size:.75rem;color:var(--texto-3);margin-top:.15rem;}
+        .ativ-btn.selected{border-color:var(--verde);background:var(--verde-muted);}
+        .ativ-btn.selected .name{color:var(--verde);}
+        /* Resultado */
+        .result-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem;margin-top:1.25rem;}
+        .result-card{border-radius:12px;padding:1.25rem;text-align:center;}
+        .result-card.r-kcal{background:#f0f9f3;border:1px solid #c3e0cd;}
+        .result-card.r-walk{background:#eff6ff;border:1px solid #bfdbfe;}
+        .result-card.r-dist{background:#fdf4ff;border:1px solid #e9d5ff;}
+        .result-card.r-deficit{background:#fff7ed;border:1px solid #fed7aa;}
+        .r-icon{font-size:1.6rem;margin-bottom:.4rem;}
+        .r-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--texto-3);}
+        .r-val{font-size:1.8rem;font-weight:700;margin:.25rem 0;line-height:1;}
+        .r-kcal .r-val{color:#1a6b35;}
+        .r-walk .r-val{color:#1d4ed8;}
+        .r-dist .r-val{color:#7e22ce;}
+        .r-deficit .r-val{color:#c2410c;}
+        .r-sub{font-size:.8rem;color:var(--texto-3);}
+        .plan-note{margin-top:1.25rem;padding:.9rem 1.1rem;background:var(--verde-muted);border:1px solid var(--verde-border);border-radius:10px;font-size:.88rem;color:var(--texto-2);line-height:1.7;}
+        .plan-meals{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-top:1rem;}
+        .meal-pill{background:var(--branco);border:1px solid var(--borda);border-radius:10px;padding:.75rem;text-align:center;}
+        .meal-pill .meal-icon{font-size:1.2rem;}
+        .meal-pill .meal-name{font-size:.72rem;color:var(--texto-3);margin:.2rem 0;}
+        .meal-pill .meal-kcal{font-size:1rem;font-weight:700;color:var(--texto);}
+        @media(max-width:600px){.plan-meals{grid-template-columns:1fr 1fr;}}.plan-meals .meal-pill:last-child{grid-column:auto;}
+    </style>
+</head>
+<body>
+<nav class="nav">
+    <a href="/dev/aibiorenew/" class="nav-logo"><span class="label">Bio AI</span><span class="brand">Renew</span></a>
+    <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu"><span></span><span></span><span></span></button>
+    <ul class="nav-menu" id="navMenu">
+        <li><a href="/dev/aibiorenew/app/frontend/menuhtml/quem-somos.html">Quem Somos</a></li>
+        <li><a href="/dev/aibiorenew/app/frontend/menuhtml/missao.html">Missão</a></li>
+        <li><a href="/dev/aibiorenew/app/frontend/menuhtml/metodo.html">Método</a></li>
+        <li><a href="/dev/aibiorenew/app/frontend/menuhtml/clientes.html">Clientes</a></li>
+        <li><a href="/dev/aibiorenew/app/frontend/menuhtml/estudos.html">Ciência</a></li>
+        <li><a href="/dev/aibiorenew/app/frontend/menuhtml/contactos.html">Contactos</a></li>
+        <li class="nav-dropdown">
+            <a href="#" onclick="toggleDropdown(this);return false;">Perfil</a>
+            <ul class="nav-sub">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="perfil.html">O Meu Perfil</a></li>
+                <li><a href="medicoes.html">Medições</a></li>
+                <li><a href="gestao-app.html">Gestão de App</a></li>
+                <li><a href="fecho-dia.html" class="ativo">Fecho do Dia</a></li>
+            </ul>
+        </li>
+        <li><a href="#" class="nav-btn" onclick="logout();return false;">Sair</a></li>
+    </ul>
+</nav>
+
+<div class="wrap">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2rem;">
+        <div>
+            <h1 style="font-size:1.4rem;">Fecho do Dia</h1>
+            <p style="font-size:.9rem;color:var(--texto-3);margin-top:.2rem;" id="data-hoje">Hoje</p>
+        </div>
+        <a href="dashboard.html" style="font-size:.85rem;color:var(--texto-3);text-decoration:none;">&#8592; Dashboard</a>
+    </div>
+
+    <!-- Balanço do dia -->
+    <p class="sec-title">Balanço de Hoje</p>
+    <div class="card" id="balanco-area">
+        <div style="color:var(--texto-3);font-size:.9rem;">A carregar...</div>
+    </div>
+
+    <!-- Planeador de amanhã -->
+    <p class="sec-title">Planeamento para Amanhã</p>
+    <div class="card" id="planeador-area">
+        <p style="font-size:.92rem;color:var(--texto-2);margin-bottom:.75rem;">Seleccione o tipo de actividade previsto para amanhã e o sistema calcula o plano alimentar e de exercício:</p>
+        <div class="ativ-selector">
+            <button class="ativ-btn" id="btn-sed" onclick="seleccionarAtiv('sedentario')">
+                <span class="icon">&#128188;</span>
+                <span class="name">Sedentário</span>
+                <span class="desc">Trabalho de escritório, pouco movimento</span>
+            </button>
+            <button class="ativ-btn" id="btn-mod" onclick="seleccionarAtiv('moderado')">
+                <span class="icon">&#128694;</span>
+                <span class="name">Moderado</span>
+                <span class="desc">Algum exercício ou trabalho activo</span>
+            </button>
+            <button class="ativ-btn" id="btn-ativ" onclick="seleccionarAtiv('ativo')">
+                <span class="icon">&#127939;</span>
+                <span class="name">Activo</span>
+                <span class="desc">Exercício intenso ou trabalho físico</span>
+            </button>
+        </div>
+        <div id="resultado-plan" style="display:none;">
+            <div class="result-grid" id="result-cards"></div>
+            <div class="plan-meals" id="plan-meals"></div>
+            <div class="plan-note" id="plan-note"></div>
+        </div>
+    </div>
+</div>
+
+<script src="js/api.js"></script>
+<script>
+    function toggleNav(){document.getElementById('navMenu').classList.toggle('aberto');}
+    function toggleDropdown(a){a.closest('.nav-dropdown').classList.toggle('dropdown-aberto');}
+    function logout(){clearToken();location.href='/dev/aibiorenew/app/frontend/area-pessoal.html';}
+    document.addEventListener('click',e=>{if(!e.target.closest('.nav-dropdown'))document.querySelectorAll('.nav-dropdown').forEach(d=>d.classList.remove('dropdown-aberto'));});
+
+    const FATORES = { sedentario: 1.2, moderado: 1.55, ativo: 1.9 };
+    const META_DEFICIT = 770; // kcal para perder ~100g de gordura
+    const CAL_MIN_KM  = 4.5; // kcal/min por 70kg
+    let tmb = 0, pesoKg = 70;
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        if (!isLoggedIn()) { location.href = '/dev/aibiorenew/app/frontend/area-pessoal.html'; return; }
+
+        // Data de hoje
+        const hoje = new Date();
+        const d = hoje.toLocaleDateString('pt-PT', {weekday:'long',day:'numeric',month:'long',year:'numeric'});
+        document.getElementById('data-hoje').textContent = d.charAt(0).toUpperCase() + d.slice(1);
+
+        // Carregar dados em paralelo
+        const [aval, metricas, perfil] = await Promise.all([
+            apiCall('/plano/avaliacao'),
+            apiCall('/calc'),
+            apiCall('/user/profile')
+        ]);
+
+        tmb    = metricas?.tmb   || 0;
+        pesoKg = perfil?.peso    || 70;
+
+        renderizarBalanco(aval, metricas);
+    });
+
+    function renderizarBalanco(aval, metricas) {
+        const area = document.getElementById('balanco-area');
+        if (!aval || aval.erro || !metricas || metricas.erro) {
+            area.innerHTML = '<p style="color:#dc2626;font-size:.9rem;">Não foi possível carregar o balanço. Verifique o seu perfil.</p>';
+            return;
+        }
+
+        const calIn  = parseFloat(aval.calorias_ingeridas) || 0;
+        const calOut = parseFloat(aval.calorias_gastas)    || 0;
+        const saldo  = aval.saldo_calorico || 0;
+        const estado = aval.estado || 'equilibrio';
+
+        const badgeClass = estado === 'deficit' ? 'badge-ok' : (estado === 'excesso' ? 'badge-nok' : 'badge-eq');
+        const badgeText  = estado === 'deficit' ? '✓ Objectivo cumprido — Défice calórico' :
+                           estado === 'excesso' ? '✗ Excesso calórico' : '~ Em equilíbrio';
+        const saldoCor   = saldo > 0 ? '#dc2626' : (saldo < 0 ? '#1a6b35' : 'var(--texto)');
+
+        area.innerHTML = `
+            <div class="bal-grid">
+                <div class="bal-item"><div class="bal-label">Ingerido</div><div class="bal-val">${calIn}</div><div class="bal-sub">kcal</div></div>
+                <div class="bal-item"><div class="bal-label">Exercício</div><div class="bal-val">${calOut}</div><div class="bal-sub">kcal gastas</div></div>
+                <div class="bal-item"><div class="bal-label">TMB</div><div class="bal-val">${metricas.tmb}</div><div class="bal-sub">kcal</div></div>
+                <div class="bal-item"><div class="bal-label">Saldo</div><div class="bal-val" style="color:${saldoCor};">${saldo > 0 ? '+' : ''}${saldo}</div><div class="bal-sub">kcal vs TMB</div></div>
+            </div>
+            <div><span class="badge-status ${badgeClass}">${badgeText}</span></div>
+            <p class="msg-aval">${aval.mensagem || ''} ${aval.perda_estimada_g > 0 ? '— Perda estimada: <strong>' + aval.perda_estimada_g + 'g</strong>' : ''}</p>
+        `;
+    }
+
+    function seleccionarAtiv(tipo) {
+        // Highlight do botão seleccionado
+        ['sed','mod','ativ'].forEach(k => document.getElementById('btn-'+k).classList.remove('selected'));
+        const mapa = {sedentario:'sed', moderado:'mod', ativo:'ativ'};
+        document.getElementById('btn-'+mapa[tipo]).classList.add('selected');
+
+        calcularPlanAmanha(tipo);
+        document.getElementById('resultado-plan').style.display = 'block';
+    }
+
+    function calcularPlanAmanha(tipoAtiv) {
+        const fator   = FATORES[tipoAtiv];
+        const tdee    = Math.round(tmb * fator);
+        const fatorPeso = pesoKg / 70;
+
+        // Distribuição de refeições (igual ao planService.js)
+        const pa = Math.round(tmb * 0.45);
+        const al = Math.round(tmb * 0.35);
+        const ja = Math.min(400, Math.round(tmb * 0.20));
+        const totalRefeicoes = pa + al + ja;
+
+        // Défice natural da actividade (TDEE - o que se come baseado em TMB)
+        const deficeAtiv = tdee - totalRefeicoes;
+
+        // Caminhada extra necessária para atingir meta de 770 kcal de défice
+        const caminhadaKcal = Math.max(0, META_DEFICIT - deficeAtiv);
+        const caminhadaMin  = Math.round(caminhadaKcal / (CAL_MIN_KM * fatorPeso));
+
+        // Velocidade média ~5km/h → km = min/60 * 5
+        const distKm = Math.round(caminhadaMin / 60 * 5 * 10) / 10;
+
+        // Máximo kcal a ingerir se quiser atingir défice sem caminhada extra
+        const maxKcalSemCaminhada = tdee - META_DEFICIT;
+
+        const cards = document.getElementById('result-cards');
+        const meals = document.getElementById('plan-meals');
+        const note  = document.getElementById('plan-note');
+
+        cards.innerHTML = `
+            <div class="result-card r-kcal">
+                <div class="r-icon">&#127869;</div>
+                <div class="r-label">Máx. a ingerir</div>
+                <div class="r-val">${totalRefeicoes}</div>
+                <div class="r-sub">kcal (baseado no TMB)</div>
+            </div>
+            <div class="result-card r-walk">
+                <div class="r-icon">&#127939;</div>
+                <div class="r-label">Caminhada</div>
+                <div class="r-val">${caminhadaMin}</div>
+                <div class="r-sub">minutos necessários</div>
+            </div>
+            <div class="result-card r-dist">
+                <div class="r-icon">&#128205;</div>
+                <div class="r-label">Distância aprox.</div>
+                <div class="r-val">${distKm}</div>
+                <div class="r-sub">km a ~5 km/h</div>
+            </div>
+            <div class="result-card r-deficit">
+                <div class="r-icon">&#128200;</div>
+                <div class="r-label">Défice previsto</div>
+                <div class="r-val">${META_DEFICIT}</div>
+                <div class="r-sub">kcal (~100g perda)</div>
+            </div>
+        `;
+
+        meals.innerHTML = `
+            <div class="meal-pill">
+                <div class="meal-icon">&#9728;</div>
+                <div class="meal-name">Pequeno-almoço</div>
+                <div class="meal-kcal">${pa} kcal</div>
+            </div>
+            <div class="meal-pill">
+                <div class="meal-icon">&#9749;</div>
+                <div class="meal-name">Almoço</div>
+                <div class="meal-kcal">${al} kcal</div>
+            </div>
+            <div class="meal-pill">
+                <div class="meal-icon">&#127763;</div>
+                <div class="meal-name">Jantar (até 19h)</div>
+                <div class="meal-kcal">${ja} kcal</div>
+            </div>
+        `;
+
+        const nomeAtiv = {sedentario:'sedentário',moderado:'moderado',ativo:'activo'}[tipoAtiv];
+        const tdeeTexto = deficeAtiv >= META_DEFICIT
+            ? `Com actividade ${nomeAtiv} (TDEE ${tdee} kcal), o défice natural já cobre o objectivo — a caminhada é opcional mas recomendada.`
+            : `Com actividade ${nomeAtiv} (TDEE ${tdee} kcal), o défice natural é de ${deficeAtiv} kcal. São necessários <strong>${caminhadaMin} min de caminhada</strong> (${distKm} km) para atingir os ${META_DEFICIT} kcal de défice e perder ~100g.`;
+
+        note.innerHTML = `
+            <strong>Resumo para amanhã:</strong> Ingerir ${totalRefeicoes} kcal distribuídas pelas 3 refeições.
+            ${tdeeTexto}
+            <br>Hora do jantar recomendada: <strong>19h00</strong>.
+        `;
+    }
+</script>
+</body>
+</html>

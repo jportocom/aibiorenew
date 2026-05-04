@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de App — Bio AI Renew</title>
+    <link rel="stylesheet" href="/assets/style.css">
+    <style>
+        :root{--verde:#1a6b35;--verde-hover:#22883f;--verde-light:#e6f4eb;--verde-border:#c3e0cd;--verde-muted:#f0f9f3;--branco:#fff;--fundo:#f9fbfa;--texto:#0d1f12;--texto-2:#3d5c48;--texto-3:#6b8a76;--borda:#e2ede7;}
+        *{box-sizing:border-box;margin:0;padding:0;}
+        body{font-family:'Inter',system-ui,sans-serif;background:var(--fundo);color:var(--texto);padding-top:70px;}
+        html,body{overflow-x:hidden;}
+        .wrap{max-width:960px;margin:0 auto;padding:2rem 1.5rem 4rem;}
+        .sec-title{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--verde);margin:2rem 0 1rem;}
+        .card{background:var(--branco);border:1px solid var(--borda);border-radius:14px;padding:1.5rem;margin-bottom:1rem;}
+        /* Métricas */
+        .metrics-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:1rem;}
+        .metric-item{background:var(--verde-muted);border:1px solid var(--verde-border);border-radius:10px;padding:1rem 1.25rem;}
+        .metric-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--texto-3);}
+        .metric-val{font-size:1.6rem;font-weight:700;color:var(--verde);margin:.25rem 0;line-height:1;}
+        .metric-sub{font-size:.8rem;color:var(--texto-2);}
+        .btn-recalc{margin-top:1rem;padding:.55rem 1.25rem;background:transparent;border:1px solid var(--verde);color:var(--verde);border-radius:8px;font-size:.88rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s;}
+        .btn-recalc:hover{background:var(--verde);color:#fff;}
+        /* Objectivo */
+        .obj-stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:.6rem;margin-bottom:1rem;}
+        .obj-stat{background:var(--verde-muted);border:1px solid var(--verde-border);border-radius:10px;padding:.65rem .85rem;}
+        .osl{font-size:.67rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--texto-3);margin-bottom:.15rem;}
+        .osv{font-size:1.1rem;font-weight:700;color:var(--verde);}
+        .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;}
+        .fgroup{display:flex;flex-direction:column;gap:.3rem;}
+        .fgroup label{font-size:.82rem;font-weight:600;color:var(--texto-2);}
+        .fgroup input,.fgroup select{padding:.55rem .8rem;border:1px solid var(--borda);border-radius:8px;font-size:.92rem;background:var(--fundo);color:var(--texto);font-family:inherit;}
+        .fgroup input:focus,.fgroup select:focus{outline:none;border-color:var(--verde);}
+        .btn-save{padding:.6rem 1.5rem;background:var(--verde);color:#fff;border:none;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer;font-family:inherit;transition:background .2s;margin-top:1rem;}
+        .btn-save:hover{background:var(--verde-hover);}
+        .btn-outline{padding:.55rem 1rem;background:transparent;border:1px solid var(--verde);color:var(--verde);border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s;}
+        .btn-outline:hover{background:var(--verde);color:#fff;}
+        .btn-group{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem;}
+        .msg{font-size:.85rem;margin-top:.75rem;}
+        .aviso{padding:.75rem 1rem;background:rgba(234,179,8,.07);border:1px solid rgba(234,179,8,.35);border-radius:10px;font-size:.85rem;color:#92400e;margin-top:.75rem;}
+        /* Histórico */
+        .hist-table{width:100%;border-collapse:collapse;font-size:.88rem;}
+        .hist-table th{text-align:left;padding:.6rem .75rem;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--texto-3);background:var(--verde-muted);border-bottom:1px solid var(--borda);}
+        .hist-table td{padding:.65rem .75rem;border-bottom:1px solid var(--borda);color:var(--texto-2);}
+        .hist-table tr:last-child td{border-bottom:none;}
+        .badge{display:inline-block;padding:.2rem .55rem;border-radius:20px;font-size:.72rem;font-weight:600;}
+        .badge-ativo{background:var(--verde-muted);color:var(--verde);border:1px solid var(--verde-border);}
+        .badge-inativo{background:var(--fundo);color:var(--texto-3);border:1px solid var(--borda);}
+        @media(max-width:600px){.form-grid{grid-template-columns:1fr;}}
+    </style>
+</head>
+<body>
+<nav class="nav">
+    <a href="/dev/aibiorenew/" class="nav-logo"><span class="label">Bio AI</span><span class="brand">Renew</span></a>
+    <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu"><span></span><span></span><span></span></button>
+    <ul class="nav-menu" id="navMenu">
+        <li><a href="/dev/aibiorenew/app/frontend/menuhtml/quem-somos.html">Quem Somos</a></li>
+        <li><a href="/dev/aibiorenew/app/frontend/menuhtml/missao.html">Missão</a></li>
+        <li><a href="/dev/aibiorenew/app/frontend/menuhtml/metodo.html">Método</a></li>
+        <li><a href="/dev/aibiorenew/app/frontend/menuhtml/clientes.html">Clientes</a></li>
+        <li><a href="/dev/aibiorenew/app/frontend/menuhtml/estudos.html">Ciência</a></li>
+        <li><a href="/dev/aibiorenew/app/frontend/menuhtml/contactos.html">Contactos</a></li>
+        <li class="nav-dropdown">
+            <a href="#" onclick="toggleDropdown(this);return false;">Perfil</a>
+            <ul class="nav-sub">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="perfil.html">O Meu Perfil</a></li>
+                <li><a href="medicoes.html">Medições</a></li>
+                <li><a href="gestao-app.html" class="ativo">Gestão de App</a></li>
+                <li><a href="fecho-dia.html">Fecho do Dia</a></li>
+            </ul>
+        </li>
+        <li><a href="#" class="nav-btn" onclick="logout();return false;">Sair</a></li>
+    </ul>
+</nav>
+
+<div class="wrap">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2rem;">
+        <div><h1 style="font-size:1.4rem;">Gestão de App</h1><p style="font-size:.9rem;color:var(--texto-3);margin-top:.2rem;">Métricas, objectivos e configurações do seu plano</p></div>
+        <a href="dashboard.html" style="font-size:.85rem;color:var(--texto-3);text-decoration:none;">&#8592; Dashboard</a>
+    </div>
+
+    <!-- Métricas actuais -->
+    <p class="sec-title">As Minhas Métricas</p>
+    <div class="card">
+        <div class="metrics-grid" id="metrics-area">
+            <div style="color:var(--texto-3);font-size:.9rem;">A calcular...</div>
+        </div>
+        <button class="btn-recalc" onclick="recalcularMetricas()">&#8635; Recalcular agora</button>
+        <div id="msg-calc" class="msg"></div>
+    </div>
+
+    <!-- Objectivo activo -->
+    <p class="sec-title">Objectivo Activo</p>
+    <div class="card" id="obj-activo-area">
+        <div style="color:var(--texto-3);font-size:.9rem;">A carregar...</div>
+    </div>
+
+    <!-- Criar novo objectivo -->
+    <p class="sec-title">Criar Novo Objectivo</p>
+    <div class="card">
+        <p style="font-size:.88rem;color:var(--texto-3);margin-bottom:1rem;">Criar um novo objectivo desactiva o objectivo anterior.</p>
+        <div class="btn-group">
+            <button class="btn-outline" onclick="criarObjectivo(30)">+ 30 dias</button>
+            <button class="btn-outline" onclick="criarObjectivo(90)">+ 90 dias</button>
+            <button class="btn-outline" onclick="criarObjectivo(180)">+ 180 dias</button>
+        </div>
+        <div id="msg-criar" class="msg"></div>
+    </div>
+
+    <!-- Histórico de objectivos -->
+    <p class="sec-title">Histórico de Objectivos</p>
+    <div class="card" style="padding:0;overflow:hidden;">
+        <table class="hist-table">
+            <thead><tr><th>Início</th><th>Fim</th><th>Duração</th><th>Peso Início</th><th>Peso Alvo</th><th>Estado</th></tr></thead>
+            <tbody id="hist-tbody"><tr><td colspan="6" style="padding:1.5rem;text-align:center;color:var(--texto-3);">A carregar...</td></tr></tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal editar objectivo -->
+<div id="modal-obj" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;display:none;align-items:center;justify-content:center;" onclick="fecharModalObj()">
+    <div style="background:#fff;border-radius:14px;padding:2rem;width:100%;max-width:420px;" onclick="event.stopPropagation()">
+        <h2 style="font-size:1.05rem;margin-bottom:1.25rem;">&#9998; Editar Objectivo</h2>
+        <div id="msg-modal-obj"></div>
+        <div class="form-grid">
+            <div class="fgroup"><label>Data início</label><input type="date" id="obj-inicio"></div>
+            <div class="fgroup"><label>Data fim</label><input type="date" id="obj-fim"></div>
+            <div class="fgroup"><label>Peso inicial (kg)</label><input type="number" id="obj-p-inicio" step="0.1" min="20" max="300"></div>
+            <div class="fgroup"><label>Peso alvo (kg)</label><input type="number" id="obj-p-alvo" step="0.1" min="20" max="300"></div>
+        </div>
+        <input type="hidden" id="obj-edit-id">
+        <div style="display:flex;gap:.75rem;margin-top:1.25rem;">
+            <button style="padding:.65rem 1rem;background:var(--fundo);border:1px solid var(--borda);color:var(--texto-2);border-radius:8px;font-size:.9rem;cursor:pointer;font-family:inherit;" onclick="fecharModalObj()">Cancelar</button>
+            <button style="flex:1;padding:.65rem;background:var(--verde);color:#fff;border:none;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer;font-family:inherit;" onclick="guardarObj()">Guardar</button>
+        </div>
+    </div>
+</div>
+
+<script src="js/api.js"></script>
+<script>
+    function toggleNav(){document.getElementById('navMenu').classList.toggle('aberto');}
+    function toggleDropdown(a){a.closest('.nav-dropdown').classList.toggle('dropdown-aberto');}
+    function logout(){clearToken();location.href='/dev/aibiorenew/app/frontend/area-pessoal.html';}
+    document.addEventListener('click',e=>{if(!e.target.closest('.nav-dropdown'))document.querySelectorAll('.nav-dropdown').forEach(d=>d.classList.remove('dropdown-aberto'));});
+
+    function fmtD(d){if(!d)return'—';const s=(typeof d==='string'?d:d.toISOString()).split('T')[0];const[a,m,dd]=s.split('-');return`${dd}/${m}/${a}`;}
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        if (!isLoggedIn()) { location.href = '/dev/aibiorenew/app/frontend/area-pessoal.html'; return; }
+        await Promise.all([carregarMetricas(), carregarObjectivoActivo(), carregarHistorico()]);
+    });
+
+    async function carregarMetricas() {
+        const m = await apiCall('/calc');
+        const area = document.getElementById('metrics-area');
+        if (!m || m.erro) { area.innerHTML='<span style="color:#dc2626;">Erro ao calcular métricas. Verifique o seu perfil.</span>'; return; }
+        area.innerHTML = `
+            <div class="metric-item"><div class="metric-label">IMC</div><div class="metric-val">${m.imc}</div><div class="metric-sub">${m.classificacao_imc}</div></div>
+            <div class="metric-item"><div class="metric-label">TMB</div><div class="metric-val">${m.tmb}</div><div class="metric-sub">kcal/dia</div></div>
+            <div class="metric-item"><div class="metric-label">TDEE</div><div class="metric-val">${m.tdee}</div><div class="metric-sub">kcal/dia</div></div>
+            <div class="metric-item"><div class="metric-label">Peso Saudável</div><div class="metric-val" style="font-size:1.1rem;">${m.peso_saudavel_min}–${m.peso_saudavel_max}</div><div class="metric-sub">kg</div></div>
+        `;
+    }
+
+    async function recalcularMetricas() {
+        const btn = event.target;
+        btn.disabled = true; btn.textContent = 'A calcular...';
+        await carregarMetricas();
+        document.getElementById('msg-calc').innerHTML = '<span style="color:var(--verde);">Métricas actualizadas.</span>';
+        btn.disabled = false; btn.textContent = '↻ Recalcular agora';
+        setTimeout(() => document.getElementById('msg-calc').innerHTML = '', 3000);
+    }
+
+    let objActivo = null;
+
+    async function carregarObjectivoActivo() {
+        objActivo = await apiCall('/objetivos/activo');
+        const area = document.getElementById('obj-activo-area');
+        if (!objActivo || objActivo.erro) {
+            area.innerHTML = '<p style="color:var(--texto-3);font-size:.9rem;">Nenhum objectivo activo. Crie um abaixo.</p>';
+            return;
+        }
+        const pi   = (objActivo.data_inicio||'').split('T')[0];
+        const pf   = (objActivo.data_fim||'').split('T')[0];
+        const alvo = Math.round((parseFloat(objActivo.peso_alvo_min)+parseFloat(objActivo.peso_alvo_max))/2*100)/100;
+        const hoje = new Date(); hoje.setHours(0,0,0,0);
+        const dFim = new Date(pf+'T00:00:00');
+        const diasRest = Math.max(0, Math.round((dFim-hoje)/86400000));
+        area.innerHTML = `
+            <div class="obj-stats">
+                <div class="obj-stat"><div class="osl">Início</div><div class="osv">${fmtD(pi)}</div></div>
+                <div class="obj-stat"><div class="osl">Fim</div><div class="osv">${fmtD(pf)}</div></div>
+                <div class="obj-stat"><div class="osl">Duração</div><div class="osv">${objActivo.duracao_dias} dias</div></div>
+                <div class="obj-stat"><div class="osl">Dias Restantes</div><div class="osv">${diasRest}</div></div>
+                <div class="obj-stat"><div class="osl">Peso Início</div><div class="osv">${parseFloat(objActivo.peso_inicio).toFixed(1)} kg</div></div>
+                <div class="obj-stat"><div class="osl">Peso Alvo</div><div class="osv">${alvo.toFixed(1)} kg</div></div>
+            </div>
+            ${diasRest === 0 ? '<div class="aviso">&#9888; A data de conclusão deste objectivo já passou.</div>' : ''}
+            <div class="btn-group"><button class="btn-outline" onclick="abrirModalObj()">&#9998; Editar</button></div>
+        `;
+    }
+
+    async function carregarHistorico() {
+        const lista = await apiCall('/objetivos');
+        const tbody = document.getElementById('hist-tbody');
+        if (!lista || lista.erro || !lista.length) {
+            tbody.innerHTML = '<tr><td colspan="6" style="padding:1.5rem;text-align:center;color:var(--texto-3);">Sem histórico.</td></tr>';
+            return;
+        }
+        tbody.innerHTML = lista.map(o => {
+            const alvo = Math.round((parseFloat(o.peso_alvo_min)+parseFloat(o.peso_alvo_max))/2*100)/100;
+            const badge = o.ativo ? '<span class="badge badge-ativo">Activo</span>' : '<span class="badge badge-inativo">Inactivo</span>';
+            return `<tr>
+                <td>${fmtD((o.data_inicio||'').split('T')[0])}</td>
+                <td>${fmtD((o.data_fim||'').split('T')[0])}</td>
+                <td>${o.duracao_dias} dias</td>
+                <td>${parseFloat(o.peso_inicio).toFixed(1)} kg</td>
+                <td>${alvo.toFixed(1)} kg</td>
+                <td>${badge}</td>
+            </tr>`;
+        }).join('');
+    }
+
+    async function criarObjectivo(dias) {
+        const msg = document.getElementById('msg-criar');
+        msg.innerHTML = '<span style="color:var(--texto-3);">A criar...</span>';
+        const res = await apiCall('/objetivos', 'POST', { duracao_dias: dias });
+        if (res?.id) {
+            msg.innerHTML = '<span style="color:var(--verde);">Objectivo criado.</span>';
+            await Promise.all([carregarObjectivoActivo(), carregarHistorico()]);
+        } else {
+            msg.innerHTML = `<span style="color:#dc2626;">${res?.erro || 'Erro ao criar.'}</span>`;
+        }
+    }
+
+    function abrirModalObj() {
+        if (!objActivo) return;
+        const pi = (objActivo.data_inicio||'').split('T')[0];
+        const pf = (objActivo.data_fim||'').split('T')[0];
+        const alvo = Math.round((parseFloat(objActivo.peso_alvo_min)+parseFloat(objActivo.peso_alvo_max))/2*100)/100;
+        document.getElementById('obj-edit-id').value  = objActivo.id;
+        document.getElementById('obj-inicio').value   = pi;
+        document.getElementById('obj-fim').value      = pf;
+        document.getElementById('obj-p-inicio').value = parseFloat(objActivo.peso_inicio).toFixed(1);
+        document.getElementById('obj-p-alvo').value   = alvo.toFixed(1);
+        document.getElementById('msg-modal-obj').innerHTML = '';
+        const m = document.getElementById('modal-obj');
+        m.style.display = 'flex';
+    }
+
+    function fecharModalObj() { document.getElementById('modal-obj').style.display = 'none'; }
+
+    async function guardarObj() {
+        const id          = document.getElementById('obj-edit-id').value;
+        const data_inicio = document.getElementById('obj-inicio').value;
+        const data_fim    = document.getElementById('obj-fim').value;
+        const peso_inicio = parseFloat(document.getElementById('obj-p-inicio').value);
+        const peso_alvo   = parseFloat(document.getElementById('obj-p-alvo').value);
+        const msg         = document.getElementById('msg-modal-obj');
+        if (!data_inicio || !data_fim) { msg.innerHTML='<div style="padding:.5rem;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;color:#dc2626;font-size:.85rem;margin-bottom:.75rem;">Preencha as datas.</div>'; return; }
+        if (isNaN(peso_inicio)||peso_inicio<20||peso_inicio>300) { msg.innerHTML='<div style="padding:.5rem;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;color:#dc2626;font-size:.85rem;margin-bottom:.75rem;">Peso inicial inválido.</div>'; return; }
+        if (isNaN(peso_alvo)||peso_alvo<20||peso_alvo>300) { msg.innerHTML='<div style="padding:.5rem;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;color:#dc2626;font-size:.85rem;margin-bottom:.75rem;">Peso alvo inválido.</div>'; return; }
+        if (peso_alvo >= peso_inicio) { msg.innerHTML='<div style="padding:.5rem;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;color:#dc2626;font-size:.85rem;margin-bottom:.75rem;">Peso alvo deve ser inferior ao inicial.</div>'; return; }
+        const res = await apiCall('/objetivos/' + id, 'PUT', { data_inicio, data_fim, peso_inicio, peso_alvo });
+        if (res && !res.erro) {
+            fecharModalObj();
+            await Promise.all([carregarObjectivoActivo(), carregarHistorico()]);
+        } else {
+            msg.innerHTML = `<div style="padding:.5rem;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;color:#dc2626;font-size:.85rem;margin-bottom:.75rem;">${res?.erro || 'Erro ao guardar.'}</div>`;
+        }
+    }
+</script>
+</body>
+</html>

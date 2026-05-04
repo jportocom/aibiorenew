@@ -40,4 +40,40 @@ router.post('/', auth, async (req, res) => {
   }
 });
 
+router.delete('/:id', auth, async (req, res) => {
+  try {
+    const result = await pool.query(
+      'DELETE FROM mp_atividades WHERE id=$1 AND user_id=$2 RETURNING id',
+      [req.params.id, req.user.id]
+    );
+    if (result.rowCount === 0) return res.status(404).json({ erro: 'Actividade não encontrada' });
+    res.json({ sucesso: true });
+  } catch (err) {
+    res.status(500).json({ erro: 'Erro ao eliminar actividade' });
+  }
+});
+
+router.put('/:id', auth, async (req, res) => {
+  try {
+    const { tipo, duracao_min, passos, data } = req.body;
+
+    const userRes = await pool.query('SELECT peso FROM mp_users WHERE id=$1', [req.user.id]);
+    const pesoKg = userRes.rows[0]?.peso || 70;
+    const fatorPeso = pesoKg / 70;
+    const calorias = duracao_min ? Math.round(duracao_min * CAL_POR_MIN_CAMINHADA * fatorPeso) : 0;
+
+    const result = await pool.query(
+      `UPDATE mp_atividades
+       SET tipo=$1, duracao_min=$2, passos=$3, calorias=$4, data=$5
+       WHERE id=$6 AND user_id=$7
+       RETURNING *`,
+      [tipo, duracao_min||0, passos||0, calorias, data, req.params.id, req.user.id]
+    );
+    if (result.rowCount === 0) return res.status(404).json({ erro: 'Actividade não encontrada' });
+    res.json(result.rows[0]);
+  } catch (err) {
+    res.status(500).json({ erro: 'Erro ao actualizar actividade' });
+  }
+});
+
 module.exports = router;
