@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Meu Perfil — Bio AI Renew</title>
+    <link rel="stylesheet" href="/assets/style.css">
+    <style>
+        :root {
+            --verde: #1a6b35;
+            --verde-hover: #22883f;
+            --verde-light: #e6f4eb;
+            --verde-border: #c3e0cd;
+            --verde-muted: #f0f9f3;
+            --branco: #ffffff;
+            --fundo: #f9fbfa;
+            --texto: #0d1f12;
+            --texto-2: #3d5c48;
+            --texto-3: #6b8a76;
+            --borda: #e2ede7;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--fundo);
+            color: var(--texto);
+            padding-top: 70px;
+        }
+        html, body { overflow-x: hidden; }
+        .perfil-wrap {
+            max-width: 680px; margin: 2.5rem auto; padding: 0 1.5rem 3rem;
+        }
+        .perfil-card {
+            background: var(--branco);
+            border: 1px solid var(--borda);
+            border-radius: 16px;
+            padding: 2.5rem;
+        }
+        .perfil-card h1 {
+            font-size: 1.5rem; color: var(--texto); margin-bottom: 0.5rem;
+        }
+        .perfil-card .subtitle {
+            color: var(--texto-3); font-size: 0.95rem; margin-bottom: 2rem;
+        }
+        .form-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;
+        }
+        .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+        .form-group.full { grid-column: 1 / -1; }
+        .form-group label {
+            font-size: 0.85rem; font-weight: 600; color: var(--texto-2);
+        }
+        .form-group input,
+        .form-group select {
+            padding: 0.6rem 0.9rem;
+            border: 1px solid var(--borda);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            background: var(--fundo);
+            color: var(--texto);
+            transition: border-color 0.2s;
+            font-family: inherit;
+        }
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none; border-color: var(--verde); box-shadow: 0 0 0 3px rgba(26,107,53,0.1);
+        }
+        .form-group .checkbox-row {
+            display: flex; align-items: center; gap: 0.5rem;
+            padding: 0.6rem 0;
+        }
+        .form-group .checkbox-row input[type="checkbox"] {
+            width: 18px; height: 18px; cursor: pointer; accent-color: var(--verde);
+        }
+        .form-group .checkbox-row label {
+            font-weight: 400; font-size: 0.95rem; color: var(--texto); cursor: pointer;
+        }
+        .btn-submit {
+            width: 100%; padding: 0.85rem;
+            background: var(--verde); color: #fff;
+            border: none; border-radius: 10px;
+            font-size: 1rem; font-weight: 600;
+            cursor: pointer; transition: background 0.2s;
+            margin-top: 1.75rem; font-family: inherit;
+        }
+        .btn-submit:hover { background: var(--verde-hover); }
+        #msg {
+            margin-top: 1rem; text-align: center; font-size: 0.95rem;
+            min-height: 1.4em;
+        }
+        .section-label {
+            font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.08em; color: var(--verde); margin: 1.75rem 0 0.75rem;
+            grid-column: 1 / -1;
+        }
+        @media (max-width: 520px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .perfil-card { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/dev/medepeso/" class="nav-logo">
+            <span class="label">Bio AI</span>
+            <span class="brand">Renew</span>
+        </a>
+        <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="/dev/medepeso/quem-somos.html">Quem Somos</a></li>
+            <li><a href="/dev/medepeso/missao.html">Missão</a></li>
+            <li><a href="/dev/medepeso/metodo.html">Método</a></li>
+            <li><a href="/dev/medepeso/clientes.html">Clientes</a></li>
+            <li><a href="/dev/medepeso/estudos.html">Ciência</a></li>
+            <li><a href="/dev/medepeso/contactos.html">Contactos</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="#" class="nav-btn" onclick="clearToken(); location.href='/dev/medepeso/area-pessoal.html'; return false;">Sair</a></li>
+        </ul>
+    </nav>
+
+    <div class="perfil-wrap">
+        <div class="perfil-card">
+            <h1>O Meu Perfil</h1>
+            <p class="subtitle">Preencha os seus dados para que o plano seja calculado com precisão.</p>
+
+            <form id="form-perfil">
+                <div class="form-grid">
+                    <p class="section-label">Dados Pessoais</p>
+                    <div class="form-group full">
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" placeholder="O seu nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sexo">Sexo</label>
+                        <select id="sexo">
+                            <option value="M">Masculino</option>
+                            <option value="F">Feminino</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="idade">Idade (anos)</label>
+                        <input type="number" id="idade" min="10" max="100" placeholder="ex: 42" required>
+                    </div>
+
+                    <p class="section-label">Medidas</p>
+                    <div class="form-group">
+                        <label for="altura">Altura (metros)</label>
+                        <input type="number" id="altura" min="1.0" max="2.5" step="0.01" placeholder="ex: 1.72" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="peso">Peso actual (kg)</label>
+                        <input type="number" id="peso" min="20" max="300" step="0.1" placeholder="ex: 85.5" required>
+                    </div>
+
+                    <p class="section-label">Estilo de Vida</p>
+                    <div class="form-group">
+                        <label for="atividade">Nível de Actividade</label>
+                        <select id="atividade">
+                            <option value="sedentario">Sedentário (pouco ou nenhum exercício)</option>
+                            <option value="moderado">Moderado (exercício 3-5x/semana)</option>
+                            <option value="ativo">Activo (exercício intenso diário)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="tipo_dieta">Tipo de Dieta</label>
+                        <select id="tipo_dieta">
+                            <option value="omnivoro">Omnívoro</option>
+                            <option value="vegetariano">Vegetariano</option>
+                            <option value="vegan">Vegan</option>
+                            <option value="carnivoro">Carnívoro</option>
+                        </select>
+                    </div>
+                    <div class="form-group full">
+                        <div class="checkbox-row">
+                            <input type="checkbox" id="come_ovos" checked>
+                            <label for="come_ovos">Come ovos</label>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit">Guardar e ver o meu plano</button>
+            </form>
+            <div id="msg"></div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/perfil.js"></script>
+    <script>function toggleNav(){document.getElementById('navMenu').classList.toggle('aberto');}</script>
+</body>
+</html>

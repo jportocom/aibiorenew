@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fibras — Bio AI Renew Ciência</title>
+    <link rel="stylesheet" href="/assets/style.css">
+    <style>
+        html, body { overflow-x: hidden; }
+        body { padding-top: 70px; }
+        @media (max-width: 640px) { body { padding-top: 62px; } }
+        .estudo-layout { display: grid; grid-template-columns: 1fr 260px; gap: 3rem; padding: 3rem 0; }
+        .prose h2 { font-size: 1.2rem; color: var(--verde, #1a6b35); margin: 2rem 0 0.75rem; border-left: 3px solid var(--verde, #1a6b35); padding-left: 0.75rem; }
+        .prose p, .prose li { font-size: 0.97rem; color: var(--texto-2, #3d5c48); line-height: 1.75; margin-bottom: 0.5rem; }
+        .prose ul { padding-left: 1.25rem; margin-bottom: 1rem; }
+        .prose ul li { margin-bottom: 0.3rem; }
+        .table { width: 100%; border-collapse: collapse; margin: 1.25rem 0; font-size: 0.9rem; }
+        .table th { background: var(--verde, #1a6b35); color: #fff; padding: 0.6rem 0.75rem; text-align: left; font-weight: 600; }
+        .table td { padding: 0.55rem 0.75rem; border-bottom: 1px solid var(--borda, #e2ede7); color: var(--texto-2, #3d5c48); }
+        .table tr:nth-child(even) td { background: var(--fundo, #f9fbfa); }
+        .table tr:hover td { background: var(--verde-muted, #f0f9f3); }
+        .breadcrumb { margin-bottom: 1.5rem; }
+        .breadcrumb a { color: var(--verde, #1a6b35); text-decoration: none; font-size: 0.9rem; }
+        .sidebar-nav { position: sticky; top: 80px; }
+        .sidebar-nav h4 { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--texto-3, #6b8a76); margin-bottom: 0.75rem; }
+        .sidebar-nav ul { list-style: none; padding: 0; margin: 0; }
+        .sidebar-nav ul li a { display: block; padding: 0.4rem 0.75rem; border-radius: 6px; font-size: 0.85rem; color: var(--texto-2, #3d5c48); text-decoration: none; transition: background 0.15s; margin-bottom: 0.15rem; }
+        .sidebar-nav ul li a:hover { background: var(--verde-muted, #f0f9f3); color: var(--verde, #1a6b35); }
+        .sidebar-nav ul li a.active { background: var(--verde-light, #e6f4eb); color: var(--verde, #1a6b35); font-weight: 600; }
+        @media (max-width: 800px) { .estudo-layout { grid-template-columns: 1fr; } .sidebar-nav { position: static; } }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/dev/medepeso/" class="nav-logo"><span class="label">Bio AI</span><span class="brand">Renew</span></a>
+        <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu"><span></span><span></span><span></span></button>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="/dev/medepeso/quem-somos.html">Quem Somos</a></li>
+            <li><a href="/dev/medepeso/missao.html">Missão</a></li>
+            <li><a href="/dev/medepeso/metodo.html">Método</a></li>
+            <li><a href="/dev/medepeso/clientes.html">Clientes</a></li>
+            <li><a href="/dev/medepeso/estudos.html">Ciência</a></li>
+            <li><a href="/dev/medepeso/contactos.html">Contactos</a></li>
+            <li><a href="/dev/medepeso/area-pessoal.html" class="nav-btn">Área Pessoal</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-hero">
+        <span class="eyebrow">Ciência</span><h1>Fibras</h1>
+    </div>
+
+    <div class="wrap">
+        <div class="estudo-layout">
+            <article>
+                <div class="breadcrumb"><a href="/dev/medepeso/estudos.html">&larr; Ciência</a></div>
+                <div class="prose">
+                    <p>As fibras alimentares são componentes dos alimentos de origem vegetal que o organismo não consegue digerir nem absorver. Apesar de não fornecerem energia, são essenciais para a saúde digestiva, metabólica e cardiovascular.</p>
+
+                    <h2>Benefícios das Fibras</h2>
+                    <ul>
+                        <li>Aumentam a saciedade, ajudando a reduzir a ingestão calórica total</li>
+                        <li>Diminuem a velocidade de absorção dos açúcares, estabilizando a glicemia</li>
+                        <li>Reduzem o colesterol LDL (fibras solúveis)</li>
+                        <li>Promovem a saúde do microbioma intestinal</li>
+                        <li>Reduzem o risco de cancro colorrectal</li>
+                        <li>Regulam o trânsito intestinal</li>
+                    </ul>
+
+                    <h2>Quantidade Diária Recomendada</h2>
+                    <p>As recomendações actuais apontam para <strong>25 a 38 gramas de fibra por dia</strong> para adultos. A maioria das pessoas consome apenas 15 a 18 gramas diárias — menos de metade do necessário.</p>
+
+                    <h2>Conteúdo de Fibras nos Alimentos</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Alimento</th>
+                                <th>Fibra (g/100g)</th>
+                                <th>Porção habitual</th>
+                                <th>Fibra por porção</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Farelo de trigo</td><td>43</td><td>30g</td><td>13g</td></tr>
+                            <tr><td>Sementes de linhaça</td><td>27</td><td>15g</td><td>4g</td></tr>
+                            <tr><td>Sementes de chia</td><td>34</td><td>15g</td><td>5g</td></tr>
+                            <tr><td>Amêndoas</td><td>12</td><td>30g</td><td>3,6g</td></tr>
+                            <tr><td>Nozes</td><td>6,7</td><td>30g</td><td>2g</td></tr>
+                            <tr><td>Pão integral</td><td>7</td><td>40g (1 fatia)</td><td>2,8g</td></tr>
+                            <tr><td>Flocos de aveia</td><td>10</td><td>80g</td><td>8g</td></tr>
+                            <tr><td>Arroz integral (cozido)</td><td>1,8</td><td>150g</td><td>2,7g</td></tr>
+                            <tr><td>Brócolos (cozidos)</td><td>3,3</td><td>150g</td><td>5g</td></tr>
+                            <tr><td>Cenoura (crua)</td><td>2,8</td><td>100g</td><td>2,8g</td></tr>
+                            <tr><td>Maçã (com casca)</td><td>2,4</td><td>150g</td><td>3,6g</td></tr>
+                            <tr><td>Pera (com casca)</td><td>3,1</td><td>150g</td><td>4,7g</td></tr>
+                            <tr><td>Framboesas</td><td>6,5</td><td>100g</td><td>6,5g</td></tr>
+                            <tr><td>Abacate</td><td>6,7</td><td>100g</td><td>6,7g</td></tr>
+                            <tr><td>Batata-doce (cozida)</td><td>3</td><td>150g</td><td>4,5g</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h2>Conteúdo de Fibras nas Leguminosas</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Leguminosa</th>
+                                <th>Fibra (g/100g cozido)</th>
+                                <th>Proteína (g/100g)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Feijão preto</td><td>8,7</td><td>8,9</td></tr>
+                            <tr><td>Feijão vermelho</td><td>7,4</td><td>8,7</td></tr>
+                            <tr><td>Feijão branco</td><td>6,3</td><td>9,7</td></tr>
+                            <tr><td>Lentilhas verdes</td><td>7,9</td><td>9,0</td></tr>
+                            <tr><td>Lentilhas vermelhas</td><td>6,6</td><td>9,0</td></tr>
+                            <tr><td>Grão-de-bico</td><td>7,6</td><td>8,9</td></tr>
+                            <tr><td>Ervilhas</td><td>5,5</td><td>8,3</td></tr>
+                            <tr><td>Feijão de soja</td><td>6,0</td><td>16,6</td></tr>
+                        </tbody>
+                    </table>
+
+                    <p>As leguminosas são uma das melhores fontes combinadas de fibra e proteína vegetal. Incluí-las regularmente na alimentação é uma das estratégias mais eficazes para aumentar a ingestão de fibra e controlar o peso.</p>
+                </div>
+            </article>
+
+            <aside>
+                <nav class="sidebar-nav">
+                    <h4>Capítulos</h4>
+                    <ul>
+                        <li><a href="riscos.html">01. Riscos do Excesso de Peso</a></li>
+                        <li><a href="causas.html">02. Causas do Aumento de Peso</a></li>
+                        <li><a href="beneficios.html">03. Benefícios da Perda de Peso</a></li>
+                        <li><a href="programa.html">04. Programa para Perder Peso</a></li>
+                        <li><a href="alimentacao.html">05. Alimentação</a></li>
+                        <li><a href="refeicoes.html">06. Plano de Refeições</a></li>
+                        <li><a href="diario.html">07. Diário Alimentar</a></li>
+                        <li><a href="rotulos.html">08. Ler os Rótulos</a></li>
+                        <li><a href="fibras.html" class="active">09. Fibras</a></li>
+                        <li><a href="agua.html">10. Água</a></li>
+                        <li><a href="atividade.html">11. Actividade Física</a></li>
+                    </ul>
+                </nav>
+            </aside>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="wrap">
+            <div class="footer-grid">
+                <div class="footer-brand"><span class="label">Bio AI</span><span class="name">Renew</span><p>O seu plano de saúde pessoal, calculado por ciência.</p></div>
+                <div class="footer-col"><h5>Navegação</h5><ul><li><a href="/dev/medepeso/estudos.html">Ciência</a></li><li><a href="/dev/medepeso/metodo.html">Método</a></li></ul></div>
+                <div class="footer-col"><h5>Legal</h5><ul><li><a href="/legal">Política de Privacidade</a></li><li><a href="/legal">Termos de Utilização</a></li></ul></div>
+            </div>
+            <div class="footer-bottom"><span>&copy; 2026 Bio AI Renew. Todos os direitos reservados.</span></div>
+        </div>
+    </footer>
+    <script>function toggleNav(){document.getElementById('navMenu').classList.toggle('aberto');}</script>
+</body>
+</html>

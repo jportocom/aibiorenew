@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quem Somos — Bio AI Renew</title>
+    <link rel="stylesheet" href="/assets/style.css">
+    <style>
+        html, body { overflow-x: hidden; }
+        body { padding-top: 70px; }
+        @media (max-width: 640px) { body { padding-top: 62px; } }
+        .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+        .value-card {
+            background: var(--verde-muted, #f0f9f3); border: 1px solid var(--verde-border, #c3e0cd);
+            border-radius: 14px; padding: 1.75rem;
+        }
+        .value-card .icon { font-size: 1.75rem; margin-bottom: 0.75rem; }
+        .value-card h3 { font-size: 1.05rem; color: var(--texto, #0d1f12); margin-bottom: 0.4rem; }
+        .value-card p { font-size: 0.92rem; color: var(--texto-3, #6b8a76); line-height: 1.6; }
+        .prose { max-width: 720px; }
+        .prose p { font-size: 1rem; color: var(--texto-2, #3d5c48); line-height: 1.75; margin-bottom: 1.25rem; }
+        @media (max-width: 700px) { .values-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/dev/medepeso/" class="nav-logo">
+            <span class="label">Bio AI</span>
+            <span class="brand">Renew</span>
+        </a>
+        <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="/dev/medepeso/quem-somos.html">Quem Somos</a></li>
+            <li><a href="/dev/medepeso/missao.html">Missão</a></li>
+            <li><a href="/dev/medepeso/metodo.html">Método</a></li>
+            <li><a href="/dev/medepeso/clientes.html">Clientes</a></li>
+            <li><a href="/dev/medepeso/estudos.html">Ciência</a></li>
+            <li><a href="/dev/medepeso/contactos.html">Contactos</a></li>
+            <li><a href="/dev/medepeso/area-pessoal.html" class="nav-btn">Área Pessoal</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-hero">
+        <span class="eyebrow">A nossa história</span>
+        <h1>Quem Somos</h1>
+        <p class="lead">Uma equipa de profissionais de saúde e tecnologia unidos por uma missão: tornar a perda de peso sustentável e acessível a todos.</p>
+    </div>
+
+    <section class="wrap" style="padding-top: 3rem; padding-bottom: 3rem;">
+        <div class="prose">
+            <p>O Bio AI Renew nasceu da convicção de que perder peso não deve ser um acto de força de vontade solitária, mas um processo estruturado, baseado em ciência e apoiado por tecnologia.</p>
+            <p>Somos uma equipa de profissionais de saúde e tecnologia que acredita que cada pessoa tem um metabolismo único — e que o plano alimentar e de actividade física deve reflectir essa unicidade.</p>
+            <p>Durante anos observámos o mesmo padrão: pessoas que tentavam dietas da moda, que fracassavam não por falta de empenho, mas por falta de informação personalizada e acompanhamento contínuo.</p>
+            <p>A nossa resposta foi construir um sistema que calcula, sugere, monitoriza e recalcula — adaptando-se continuamente à evolução de cada utilizador.</p>
+        </div>
+
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="icon">&#128202;</div>
+                <h3>Baseado em Ciência</h3>
+                <p>TMB, IMC, TDEE e plano calórico calculados pelas fórmulas clínicas mais utilizadas e validadas em estudos.</p>
+            </div>
+            <div class="value-card">
+                <div class="icon">&#127775;</div>
+                <h3>Personalizado</h3>
+                <p>Cada plano é único. Adaptado ao metabolismo, estilo de vida, preferências alimentares e objectivos de cada utilizador.</p>
+            </div>
+            <div class="value-card">
+                <div class="icon">&#128340;</div>
+                <h3>Contínuo</h3>
+                <p>O sistema recalcula semanalmente com base na evolução do peso, ajustando as calorias e as metas automaticamente.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="wrap">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <span class="label">Bio AI</span>
+                    <span class="name">Renew</span>
+                    <p>O seu plano de saúde pessoal, calculado por ciência.</p>
+                </div>
+                <div class="footer-col">
+                    <h5>Navegação</h5>
+                    <ul>
+                        <li><a href="/dev/medepeso/quem-somos.html">Quem Somos</a></li>
+                        <li><a href="/dev/medepeso/missao.html">Missão</a></li>
+                        <li><a href="/dev/medepeso/metodo.html">Método</a></li>
+                        <li><a href="/dev/medepeso/clientes.html">Clientes</a></li>
+                        <li><a href="/dev/medepeso/estudos.html">Ciência</a></li>
+                        <li><a href="/dev/medepeso/contactos.html">Contactos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Legal</h5>
+                    <ul>
+                        <li><a href="/legal">Política de Privacidade</a></li>
+                        <li><a href="/legal">Termos de Utilização</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 Bio AI Renew. Todos os direitos reservados.</span>
+            </div>
+        </div>
+    </footer>
+    <script>function toggleNav(){document.getElementById('navMenu').classList.toggle('aberto');}</script>
+</body>
+</html>

@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard — Bio AI Renew</title>
+    <link rel="stylesheet" href="/assets/style.css">
+    <style>
+        :root {
+            --verde: #1a6b35;
+            --verde-hover: #22883f;
+            --verde-light: #e6f4eb;
+            --verde-border: #c3e0cd;
+            --verde-muted: #f0f9f3;
+            --branco: #ffffff;
+            --fundo: #f9fbfa;
+            --texto: #0d1f12;
+            --texto-2: #3d5c48;
+            --texto-3: #6b8a76;
+            --borda: #e2ede7;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--fundo);
+            color: var(--texto);
+            padding-top: 70px;
+        }
+        html, body { overflow-x: hidden; }
+        /* Layout */
+        .dash-wrap { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+        .dash-header { margin-bottom: 2rem; }
+        .dash-header h1 { font-size: 1.5rem; color: var(--texto); }
+        .dash-header p { color: var(--texto-3); font-size: 0.95rem; margin-top: 0.25rem; }
+        /* Secções */
+        .section-title {
+            font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.08em; color: var(--verde); margin: 2rem 0 1rem;
+        }
+        /* Stat cards */
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+        .stat-card {
+            background: var(--branco); border: 1px solid var(--borda); border-radius: 14px;
+            padding: 1.25rem 1.5rem;
+        }
+        .stat-card .label { font-size: 0.78rem; color: var(--texto-3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+        .stat-card .value { font-size: 2rem; font-weight: 700; color: var(--verde); margin: 0.3rem 0; line-height: 1; }
+        .stat-card .sub { font-size: 0.82rem; color: var(--texto-3); }
+        .stat-card a { font-size: 0.82rem; color: var(--verde); text-decoration: none; display: inline-block; margin-top: 0.5rem; }
+        /* Plano do dia */
+        .plano-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+        .plano-card {
+            background: var(--verde-muted); border: 1px solid var(--verde-border); border-radius: 14px;
+            padding: 1.25rem; text-align: center;
+        }
+        .plano-card .icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .plano-card .meal { font-size: 0.78rem; color: var(--texto-2); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+        .plano-card .cals { font-size: 1.4rem; font-weight: 700; color: var(--verde); margin-top: 0.25rem; }
+        /* Gráfico */
+        .chart-container {
+            background: var(--branco); border: 1px solid var(--borda); border-radius: 14px;
+            padding: 1.5rem;
+        }
+        .chart-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; }
+        .chart-radios { display: flex; gap: 1.25rem; flex-wrap: wrap; align-items: center; }
+        .chart-radio-label { display: flex; align-items: center; gap: 0.35rem; font-size: 0.87rem; color: var(--texto-2); cursor: pointer; }
+        .chart-radio-label input[type="radio"] { accent-color: var(--verde); cursor: pointer; width: 15px; height: 15px; }
+        .btn-fullscreen {
+            padding: 0.4rem 0.85rem; font-size: 0.82rem; background: var(--fundo);
+            border: 1px solid var(--borda); color: var(--texto-2); border-radius: 6px;
+            cursor: pointer; font-family: inherit; transition: all 0.2s; white-space: nowrap;
+        }
+        .btn-fullscreen:hover { border-color: var(--verde); color: var(--verde); }
+        #chart-principal { max-height: 300px; }
+        /* Modal ecrã inteiro */
+        .chart-modal {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.82); z-index: 1000;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .chart-modal-inner {
+            background: #fff; border-radius: 14px; padding: 1.25rem 1.5rem 1rem;
+            width: 96vw; height: 92vh;
+            display: flex; flex-direction: column; gap: 0.75rem;
+        }
+        .chart-modal-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; flex-shrink: 0; }
+        .btn-fechar-modal {
+            padding: 0.4rem 1rem; background: var(--verde); color: #fff; border: none;
+            border-radius: 6px; cursor: pointer; font-size: 0.85rem; font-family: inherit;
+        }
+        /* canvas fullscreen: dimensões definidas via JS antes de criar o chart */
+        .chart-fs-wrap { flex: 1; min-height: 0; overflow: hidden; }
+        #chart-fullscreen { display: block; }
+        /* Registos */
+        .registos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+        .registo-card {
+            background: var(--branco); border: 1px solid var(--borda); border-radius: 14px; padding: 1.25rem;
+        }
+        .registo-card h4 { font-size: 0.9rem; color: var(--texto); margin-bottom: 0.75rem; }
+        .input-row { display: flex; gap: 0.5rem; align-items: center; }
+        .input-row input {
+            flex: 1; padding: 0.5rem 0.75rem;
+            border: 1px solid var(--borda); border-radius: 8px;
+            font-size: 0.9rem; background: var(--fundo); color: var(--texto);
+            font-family: inherit;
+        }
+        .input-row input:focus { outline: none; border-color: var(--verde); }
+        .btn-reg {
+            padding: 0.5rem 0.9rem; background: var(--verde); color: #fff;
+            border: none; border-radius: 8px; font-size: 0.85rem; cursor: pointer;
+            font-family: inherit; white-space: nowrap; transition: background 0.2s;
+        }
+        .btn-reg:hover { background: var(--verde-hover); }
+        .refeicoes-list { display: flex; flex-direction: column; gap: 0.5rem; }
+        .ref-row { display: flex; align-items: center; gap: 0.5rem; }
+        .ref-row label { font-size: 0.8rem; color: var(--texto-3); width: 80px; flex-shrink: 0; }
+        /* Avaliação */
+        .aval-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+        .aval-card {
+            background: var(--branco); border: 1px solid var(--borda); border-radius: 14px; padding: 1.25rem;
+        }
+        .aval-card .alabel { font-size: 0.75rem; color: var(--texto-3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+        .aval-card .aval { font-size: 1.4rem; font-weight: 700; color: var(--texto); margin-top: 0.25rem; }
+        .aval-card.full { grid-column: 1 / -1; }
+        .aval-card .amsg { font-size: 0.95rem; color: var(--texto-2); margin-top: 0.25rem; }
+        /* Objectivo */
+        .obj-card { background: var(--branco); border: 1px solid var(--borda); border-radius: 14px; padding: 1.5rem; }
+        .obj-stat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px,1fr)); gap: 0.6rem; margin-bottom: 0.75rem; }
+        .obj-stat { background: var(--verde-muted); border: 1px solid var(--verde-border); border-radius: 10px; padding: 0.65rem 0.85rem; }
+        .osl { font-size: 0.67rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--texto-3); margin-bottom: 0.15rem; }
+        .osv { font-size: 1.2rem; font-weight: 700; color: var(--verde); line-height: 1.1; }
+        .osu { font-size: 0.74rem; color: var(--texto-2); margin-top: 0.1rem; }
+        .obj-aviso { margin-top: 0.75rem; background: rgba(234,179,8,.07); border: 1px solid rgba(234,179,8,.35); border-radius: 10px; padding: 0.75rem 1rem; }
+        .obj-aviso-titulo { font-size: 0.82rem; font-weight: 700; color: #92400e; margin-bottom: 0.3rem; }
+        .obj-aviso-corpo { font-size: 0.79rem; color: var(--texto-2); line-height: 1.6; margin-bottom: 0.5rem; }
+        .obj-btns-ajuste { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+        .btn-ajuste { font-size: 0.76rem; font-weight: 600; padding: 0.3rem 0.65rem; border-radius: 6px; cursor: pointer; font-family: inherit; background: transparent; transition: all .15s; }
+        .btn-ajuste-verde { border: 1px solid var(--verde-border); color: var(--verde); }
+        .btn-ajuste-azul  { border: 1px solid rgba(37,99,235,.3); color: #2563eb; }
+        .btn-ajuste-verde:hover { background: var(--verde); color: #fff; border-color: var(--verde); }
+        .btn-ajuste-azul:hover  { background: #2563eb; color: #fff; border-color: #2563eb; }
+        .obj-nota { font-size: 0.85rem; color: var(--texto-2); margin-top: 0.5rem; }
+        .obj-aviso-erro { margin-top: 0.5rem; padding: 0.5rem 0.75rem; background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; font-size: 0.85rem; color: #dc2626; }
+        .obj-btns { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; }
+        .btn-obj { padding: 0.5rem 1rem; border: 1px solid var(--verde); color: var(--verde); background: transparent; border-radius: 8px; font-size: 0.85rem; cursor: pointer; font-family: inherit; transition: all 0.2s; }
+        .btn-obj:hover { background: var(--verde); color: #fff; }
+        /* Modal editar objectivo */
+        .modal-obj-inner { background: #fff; border-radius: 14px; padding: 2rem; width: 100%; max-width: 420px; }
+        .modal-obj-inner h2 { font-size: 1.1rem; margin-bottom: 1.25rem; color: var(--texto); }
+        .mform-group { display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 0.9rem; }
+        .mform-group label { font-size: 0.82rem; font-weight: 600; color: var(--texto-2); }
+        .mform-group input { padding: 0.55rem 0.8rem; border: 1px solid var(--borda); border-radius: 8px; font-size: 0.92rem; background: var(--fundo); color: var(--texto); font-family: inherit; }
+        .mform-group input:focus { outline: none; border-color: var(--verde); }
+        .mmodal-btns { display: flex; gap: 0.75rem; margin-top: 1.25rem; }
+        .mbtn-save { flex: 1; padding: 0.65rem; background: var(--verde); color: #fff; border: none; border-radius: 8px; font-size: 0.9rem; font-weight: 600; cursor: pointer; font-family: inherit; }
+        .mbtn-save:hover { background: var(--verde-hover); }
+        .mbtn-cancel { padding: 0.65rem 1.1rem; background: var(--fundo); border: 1px solid var(--borda); color: var(--texto-2); border-radius: 8px; font-size: 0.9rem; cursor: pointer; font-family: inherit; }
+        .mmsg-erro { padding: 0.55rem 0.8rem; background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; color: #dc2626; font-size: 0.85rem; margin-bottom: 0.75rem; }
+        /* Cardápios */
+        .cardapios-card {
+            background: var(--branco); border: 1px solid var(--borda); border-radius: 14px; padding: 1.5rem;
+        }
+        .cardapios-card h4 { font-size: 0.9rem; margin-bottom: 1rem; }
+        #lista-cardapios { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 0.75rem; margin-top: 1rem; }
+        .cardapio-item {
+            background: var(--verde-muted); border: 1px solid var(--verde-border); border-radius: 10px; padding: 1rem;
+        }
+        .cardapio-item strong { display: block; font-size: 0.88rem; color: var(--texto); margin-bottom: 0.3rem; }
+        .cardapio-item span { font-size: 0.8rem; color: var(--texto-3); }
+        .btn-secondary {
+            padding: 0.5rem 1rem; border: 1px solid var(--borda); background: var(--fundo); color: var(--texto-2);
+            border-radius: 8px; font-size: 0.85rem; cursor: pointer; font-family: inherit; transition: all 0.2s;
+        }
+        .btn-secondary:hover { border-color: var(--verde); color: var(--verde); }
+        @media (max-width: 900px) {
+            .stats-grid, .plano-grid, .aval-grid { grid-template-columns: repeat(2, 1fr); }
+            .registos-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 600px) {
+            .stats-grid, .plano-grid { grid-template-columns: repeat(2, 1fr); }
+            .aval-grid { grid-template-columns: 1fr 1fr; }
+            .obj-info { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/dev/medepeso/" class="nav-logo">
+            <span class="label">Bio AI</span>
+            <span class="brand">Renew</span>
+        </a>
+        <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="/dev/medepeso/quem-somos.html">Quem Somos</a></li>
+            <li><a href="/dev/medepeso/missao.html">Missão</a></li>
+            <li><a href="/dev/medepeso/metodo.html">Método</a></li>
+            <li><a href="/dev/medepeso/clientes.html">Clientes</a></li>
+            <li><a href="/dev/medepeso/estudos.html">Ciência</a></li>
+            <li><a href="/dev/medepeso/contactos.html">Contactos</a></li>
+            <li><a href="perfil.html">Perfil</a></li>
+            <li><a href="#" class="nav-btn" onclick="logout(); return false;">Sair</a></li>
+        </ul>
+    </nav>
+
+    <div class="dash-wrap">
+        <div class="dash-header">
+            <h1>O Meu Dashboard</h1>
+            <p>Acompanhe a sua evolução e o plano do dia de hoje.</p>
+        </div>
+
+        <!-- Métricas -->
+        <p class="section-title">As Minhas Métricas</p>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="label">IMC</div>
+                <div class="value" id="val-imc">—</div>
+                <div class="sub" id="cls-imc">A calcular...</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">TMB</div>
+                <div class="value" id="val-tmb">—</div>
+                <div class="sub">Metabolismo basal</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">TDEE</div>
+                <div class="value" id="val-tdee">—</div>
+                <div class="sub">Gasto total diário</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Perfil</div>
+                <div class="value" style="font-size:1rem;margin-top:0.5rem;">Actualizado</div>
+                <div class="sub"><a href="perfil.html">Editar Perfil &rarr;</a></div>
+            </div>
+        </div>
+
+        <!-- Plano do dia -->
+        <p class="section-title">Plano de Hoje</p>
+        <div class="plano-grid">
+            <div class="plano-card">
+                <div class="icon">&#9728;</div>
+                <div class="meal">Pequeno-almoço</div>
+                <div class="cals" id="plano-pa">—</div>
+            </div>
+            <div class="plano-card">
+                <div class="icon">&#9749;</div>
+                <div class="meal">Almoço</div>
+                <div class="cals" id="plano-al">—</div>
+            </div>
+            <div class="plano-card">
+                <div class="icon">&#127763;</div>
+                <div class="meal">Jantar (19h)</div>
+                <div class="cals" id="plano-ja">—</div>
+            </div>
+            <div class="plano-card">
+                <div class="icon">&#127939;</div>
+                <div class="meal">Caminhadas</div>
+                <div class="cals" id="plano-cam">—</div>
+            </div>
+        </div>
+
+        <!-- Gráfico -->
+        <p class="section-title">Evolução do Peso</p>
+        <div class="chart-container">
+            <div class="chart-header">
+                <div class="chart-radios">
+                    <label class="chart-radio-label">
+                        <input type="radio" name="vistaGrafico" value="1" checked onchange="mostrarGrafico(1)">
+                        Evolução do Peso
+                    </label>
+                    <label class="chart-radio-label">
+                        <input type="radio" name="vistaGrafico" value="2" onchange="mostrarGrafico(2)">
+                        Ev. Peso e Objectivo
+                    </label>
+                    <label class="chart-radio-label">
+                        <input type="radio" name="vistaGrafico" value="3" onchange="mostrarGrafico(3)">
+                        Objectivo
+                    </label>
+                </div>
+                <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+                    <button class="btn-fullscreen" onclick="abrirFullscreen()">&#9974; Ecrã inteiro</button>
+                    <a class="btn-fullscreen" href="registos.html" style="text-decoration:none;">&#9776; Todos os registos</a>
+                </div>
+            </div>
+            <canvas id="chart-principal"></canvas>
+        </div>
+
+        <!-- Modal ecrã inteiro -->
+        <div id="modal-grafico" class="chart-modal" style="display:none;" onclick="fecharFullscreen()">
+            <div class="chart-modal-inner" onclick="event.stopPropagation()">
+                <div class="chart-modal-header">
+                    <div class="chart-radios">
+                        <label class="chart-radio-label">
+                            <input type="radio" name="vistaModal" value="1" checked onchange="mudarVistaModal(1)">
+                            Evolução do Peso
+                        </label>
+                        <label class="chart-radio-label">
+                            <input type="radio" name="vistaModal" value="2" onchange="mudarVistaModal(2)">
+                            Ev. Peso e Objectivo
+                        </label>
+                        <label class="chart-radio-label">
+                            <input type="radio" name="vistaModal" value="3" onchange="mudarVistaModal(3)">
+                            Objectivo
+                        </label>
+                    </div>
+                    <button class="btn-fechar-modal" onclick="fecharFullscreen()">✕ Fechar</button>
+                </div>
+                <div class="chart-fs-wrap">
+                    <canvas id="chart-fullscreen"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Registos -->
+        <p class="section-title">Registar</p>
+        <div class="registos-grid">
+            <div class="registo-card">
+                <h4>&#9878; Peso</h4>
+                <div class="input-row">
+                    <input type="number" id="novo-peso" placeholder="kg (ex: 84.5)" step="0.1" min="20" max="300">
+                    <button class="btn-reg" onclick="registarPeso()">Registar</button>
+                </div>
+            </div>
+            <div class="registo-card">
+                <h4>&#127939; Caminhada</h4>
+                <div class="input-row">
+                    <input type="number" id="min-caminhada" placeholder="Minutos" min="1" max="600">
+                    <button class="btn-reg" onclick="registarCaminhada()">Registar</button>
+                </div>
+            </div>
+            <div class="registo-card">
+                <h4>&#127869; Refeições (kcal)</h4>
+                <div class="refeicoes-list">
+                    <div class="ref-row">
+                        <label>Peq. almoço</label>
+                        <input type="number" id="cal-pequeno_almoco" placeholder="kcal" min="0">
+                        <button class="btn-reg" onclick="registarRefeicao('pequeno_almoco')">+</button>
+                    </div>
+                    <div class="ref-row">
+                        <label>Almoço</label>
+                        <input type="number" id="cal-almoco" placeholder="kcal" min="0">
+                        <button class="btn-reg" onclick="registarRefeicao('almoco')">+</button>
+                    </div>
+                    <div class="ref-row">
+                        <label>Jantar</label>
+                        <input type="number" id="cal-jantar" placeholder="kcal" min="0">
+                        <button class="btn-reg" onclick="registarRefeicao('jantar')">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Avaliação do dia -->
+        <p class="section-title">Avaliação do Dia</p>
+        <div class="aval-grid">
+            <div class="aval-card">
+                <div class="alabel">Estado</div>
+                <div class="aval" id="aval-estado">—</div>
+            </div>
+            <div class="aval-card">
+                <div class="alabel">Saldo Calórico</div>
+                <div class="aval" id="aval-saldo">—</div>
+            </div>
+            <div class="aval-card">
+                <div class="alabel">Perda Est.</div>
+                <div class="aval" id="aval-perda">—</div>
+            </div>
+            <div class="aval-card full">
+                <div class="alabel">Mensagem</div>
+                <div class="amsg" id="aval-msg">A carregar avaliação...</div>
+            </div>
+        </div>
+
+        <!-- Objectivo -->
+        <p class="section-title">Objectivo Activo</p>
+        <div id="obj-area" class="obj-card">
+            <div style="color:var(--texto-3);font-size:0.9rem;">A carregar...</div>
+        </div>
+
+        <!-- Modal editar objectivo -->
+        <div id="modal-objetivo" class="chart-modal" style="display:none;" onclick="fecharEdicaoObjetivo()">
+            <div class="modal-obj-inner" onclick="event.stopPropagation()">
+                <h2>&#9998; Editar Objectivo</h2>
+                <div id="msg-objetivo-modal"></div>
+                <div class="mform-group">
+                    <label for="obj-edit-inicio">Data início</label>
+                    <input type="date" id="obj-edit-inicio">
+                </div>
+                <div class="mform-group">
+                    <label for="obj-edit-fim">Data fim</label>
+                    <input type="date" id="obj-edit-fim">
+                </div>
+                <div class="mform-group">
+                    <label for="obj-edit-peso-inicio">Peso inicial (kg)</label>
+                    <input type="number" id="obj-edit-peso-inicio" step="0.1" min="20" max="300" placeholder="ex: 87.5">
+                </div>
+                <div class="mform-group">
+                    <label for="obj-edit-peso-alvo">Peso alvo (kg)</label>
+                    <input type="number" id="obj-edit-peso-alvo" step="0.1" min="20" max="300" placeholder="ex: 75.0">
+                </div>
+                <input type="hidden" id="obj-edit-id">
+                <div class="mmodal-btns">
+                    <button class="mbtn-cancel" onclick="fecharEdicaoObjetivo()">Cancelar</button>
+                    <button class="mbtn-save" onclick="guardarEdicaoObjetivo()">Guardar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cardápios -->
+        <p class="section-title">Sugestões de Refeições</p>
+        <div class="cardapios-card">
+            <h4>Cardápios sugeridos com base no seu perfil</h4>
+            <div>
+                <button class="btn-secondary" onclick="verCardapios('pequeno_almoco')">Pequeno-almoço</button>
+                &nbsp;
+                <button class="btn-secondary" onclick="verCardapios('almoco')">Almoço</button>
+                &nbsp;
+                <button class="btn-secondary" onclick="verCardapios('jantar')">Jantar</button>
+            </div>
+            <div id="lista-cardapios"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script>
+        function toggleNav(){document.getElementById('navMenu').classList.toggle('aberto');}
+
+        async function verCardapios(tipo) {
+            const lista = document.getElementById('lista-cardapios');
+            lista.innerHTML = '<p style="color:var(--texto-3);font-size:0.9rem;">A carregar...</p>';
+            const cards = await apiCall('/cardapios?tipo=' + tipo);
+            if (!cards || !cards.length) {
+                lista.innerHTML = '<p style="color:var(--texto-3);font-size:0.9rem;">Sem sugestões disponíveis.</p>';
+                return;
+            }
+            lista.innerHTML = cards.map(c => `
+                <div class="cardapio-item">
+                    <strong>${c.nome}</strong>
+                    <span>${c.calorias} kcal &bull; P: ${c.proteina}g &bull; H: ${c.hidratos}g &bull; G: ${c.gordura}g</span>
+                    <br><span style="font-size:0.75rem;color:var(--texto-3);margin-top:0.25rem;display:block;">${c.ingredientes || ''}</span>
+                </div>
+            `).join('');
+        }
+    </script>
+</body>
+</html>

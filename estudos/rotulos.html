@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprender a Ler os Rótulos — Bio AI Renew Ciência</title>
+    <link rel="stylesheet" href="/assets/style.css">
+    <style>
+        html, body { overflow-x: hidden; }
+        body { padding-top: 70px; }
+        @media (max-width: 640px) { body { padding-top: 62px; } }
+        .estudo-layout { display: grid; grid-template-columns: 1fr 260px; gap: 3rem; padding: 3rem 0; }
+        .prose h2 { font-size: 1.2rem; color: var(--verde, #1a6b35); margin: 2rem 0 0.75rem; border-left: 3px solid var(--verde, #1a6b35); padding-left: 0.75rem; }
+        .prose h3 { font-size: 1rem; color: var(--texto, #0d1f12); margin: 1.25rem 0 0.5rem; }
+        .prose p, .prose li { font-size: 0.97rem; color: var(--texto-2, #3d5c48); line-height: 1.75; margin-bottom: 0.5rem; }
+        .prose ul { padding-left: 1.25rem; margin-bottom: 1rem; }
+        .prose ul li { margin-bottom: 0.3rem; }
+        .alerta-box { background: #fef2f2; border: 1px solid #fecaca; border-radius: 10px; padding: 1rem 1.25rem; margin: 1rem 0; }
+        .alerta-box p { color: #991b1b; font-size: 0.9rem; margin: 0; }
+        .breadcrumb { margin-bottom: 1.5rem; }
+        .breadcrumb a { color: var(--verde, #1a6b35); text-decoration: none; font-size: 0.9rem; }
+        .sidebar-nav { position: sticky; top: 80px; }
+        .sidebar-nav h4 { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--texto-3, #6b8a76); margin-bottom: 0.75rem; }
+        .sidebar-nav ul { list-style: none; padding: 0; margin: 0; }
+        .sidebar-nav ul li a { display: block; padding: 0.4rem 0.75rem; border-radius: 6px; font-size: 0.85rem; color: var(--texto-2, #3d5c48); text-decoration: none; transition: background 0.15s; margin-bottom: 0.15rem; }
+        .sidebar-nav ul li a:hover { background: var(--verde-muted, #f0f9f3); color: var(--verde, #1a6b35); }
+        .sidebar-nav ul li a.active { background: var(--verde-light, #e6f4eb); color: var(--verde, #1a6b35); font-weight: 600; }
+        @media (max-width: 800px) { .estudo-layout { grid-template-columns: 1fr; } .sidebar-nav { position: static; } }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/dev/medepeso/" class="nav-logo"><span class="label">Bio AI</span><span class="brand">Renew</span></a>
+        <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu"><span></span><span></span><span></span></button>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="/dev/medepeso/quem-somos.html">Quem Somos</a></li>
+            <li><a href="/dev/medepeso/missao.html">Missão</a></li>
+            <li><a href="/dev/medepeso/metodo.html">Método</a></li>
+            <li><a href="/dev/medepeso/clientes.html">Clientes</a></li>
+            <li><a href="/dev/medepeso/estudos.html">Ciência</a></li>
+            <li><a href="/dev/medepeso/contactos.html">Contactos</a></li>
+            <li><a href="/dev/medepeso/area-pessoal.html" class="nav-btn">Área Pessoal</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-hero">
+        <span class="eyebrow">Ciência</span><h1>Aprender a Ler os Rótulos</h1>
+    </div>
+
+    <div class="wrap">
+        <div class="estudo-layout">
+            <article>
+                <div class="breadcrumb"><a href="/dev/medepeso/estudos.html">&larr; Ciência</a></div>
+                <div class="prose">
+                    <p>A informação nutricional presente nos rótulos dos alimentos é uma ferramenta essencial para fazer escolhas informadas. Saber interpretá-la é o primeiro passo para controlar o que se ingere.</p>
+
+                    <h2>O Que Olhar Primeiro</h2>
+                    <ul>
+                        <li><strong>Porção de referência:</strong> todos os valores são indicados "por 100g" e/ou "por porção". Verifique sempre se a porção corresponde ao que realmente come.</li>
+                        <li><strong>Calorias (Valor Energético):</strong> o número mais importante para controlo de peso.</li>
+                        <li><strong>Gordura total e gordura saturada:</strong> prefira produtos com menos gordura saturada.</li>
+                        <li><strong>Açúcares:</strong> a linha "dos quais açúcares" indica a quantidade de açúcar total. Abaixo de 5g/100g é bom; acima de 15g/100g é elevado.</li>
+                        <li><strong>Sal:</strong> valores elevados de sódio contribuem para hipertensão. Menos de 1,5g de sal por 100g é aceitável.</li>
+                        <li><strong>Fibra:</strong> quanto mais melhor. Acima de 6g/100g é uma boa fonte de fibra.</li>
+                        <li><strong>Proteína:</strong> importante para saciedade e preservação de massa muscular.</li>
+                    </ul>
+
+                    <h2>Aditivos a Evitar</h2>
+                    <div class="alerta-box">
+                        <p>A presença de aditivos com os códigos abaixo deve ser um sinal de alerta. Quanto mais longa for a lista de ingredientes, mais processado é o alimento.</p>
+                    </div>
+                    <ul>
+                        <li><strong>Corantes artificiais (E100–E199):</strong> associados a hiperactividade em crianças e reacções alérgicas.</li>
+                        <li><strong>Conservantes (E200–E299):</strong> alguns como os nitratos (E249–E252) em carnes processadas estão associados a cancro colorrectal.</li>
+                        <li><strong>Antioxidantes sintéticos BHA (E320) e BHT (E321):</strong> suspeitos de serem cancerígenos em doses elevadas.</li>
+                        <li><strong>Glutamato monossódico (E621):</strong> potenciador de sabor que pode mascarar a qualidade real do alimento.</li>
+                        <li><strong>Aspartame (E951) e outros adoçantes artificiais:</strong> embora sem calorias, alguns estudos associam ao aumento do apetite.</li>
+                        <li><strong>Xarope de milho com elevado teor de frutose (HFCS):</strong> fortemente associado à obesidade e síndrome metabólica.</li>
+                    </ul>
+
+                    <h2>Gorduras Prejudiciais nos Rótulos</h2>
+                    <ul>
+                        <li><strong>Gorduras trans / parcialmente hidrogenadas:</strong> as mais prejudiciais. Procure "gordura vegetal parcialmente hidrogenada" na lista de ingredientes — evite este produto.</li>
+                        <li><strong>Óleo de palma:</strong> rico em gorduras saturadas. Presente em muitos produtos de pastelaria, chocolates e snacks.</li>
+                        <li><strong>Óleo de coco:</strong> muito rico em gordura saturada, apesar de ser frequentemente apresentado como "saudável".</li>
+                    </ul>
+
+                    <h2>Gorduras Saudáveis nos Rótulos</h2>
+                    <ul>
+                        <li>Azeite virgem extra</li>
+                        <li>Óleo de linhaça, óleo de nozes</li>
+                        <li>Presença de ómega-3 (DHA, EPA)</li>
+                    </ul>
+
+                    <h2>Regra Prática</h2>
+                    <p>Se um alimento tem mais de 5 ingredientes que não reconhece como alimentos reais, ou se a lista de ingredientes é mais longa do que 10 itens com nomes químicos, é provavelmente ultra-processado e deve ser evitado ou consumido raramente.</p>
+                </div>
+            </article>
+
+            <aside>
+                <nav class="sidebar-nav">
+                    <h4>Capítulos</h4>
+                    <ul>
+                        <li><a href="riscos.html">01. Riscos do Excesso de Peso</a></li>
+                        <li><a href="causas.html">02. Causas do Aumento de Peso</a></li>
+                        <li><a href="beneficios.html">03. Benefícios da Perda de Peso</a></li>
+                        <li><a href="programa.html">04. Programa para Perder Peso</a></li>
+                        <li><a href="alimentacao.html">05. Alimentação</a></li>
+                        <li><a href="refeicoes.html">06. Plano de Refeições</a></li>
+                        <li><a href="diario.html">07. Diário Alimentar</a></li>
+                        <li><a href="rotulos.html" class="active">08. Ler os Rótulos</a></li>
+                        <li><a href="fibras.html">09. Fibras</a></li>
+                        <li><a href="agua.html">10. Água</a></li>
+                        <li><a href="atividade.html">11. Actividade Física</a></li>
+                    </ul>
+                </nav>
+            </aside>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="wrap">
+            <div class="footer-grid">
+                <div class="footer-brand"><span class="label">Bio AI</span><span class="name">Renew</span><p>O seu plano de saúde pessoal, calculado por ciência.</p></div>
+                <div class="footer-col"><h5>Navegação</h5><ul><li><a href="/dev/medepeso/estudos.html">Ciência</a></li><li><a href="/dev/medepeso/metodo.html">Método</a></li></ul></div>
+                <div class="footer-col"><h5>Legal</h5><ul><li><a href="/legal">Política de Privacidade</a></li><li><a href="/legal">Termos de Utilização</a></li></ul></div>
+            </div>
+            <div class="footer-bottom"><span>&copy; 2026 Bio AI Renew. Todos os direitos reservados.</span></div>
+        </div>
+    </footer>
+    <script>function toggleNav(){document.getElementById('navMenu').classList.toggle('aberto');}</script>
+</body>
+</html>

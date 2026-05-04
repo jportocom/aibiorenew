@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contactos — Bio AI Renew</title>
+    <link rel="stylesheet" href="/assets/style.css">
+    <style>
+        html, body { overflow-x: hidden; }
+        body { padding-top: 70px; }
+        @media (max-width: 640px) { body { padding-top: 62px; } }
+        .contactos-layout { display: grid; grid-template-columns: 1fr 360px; gap: 3rem; padding: 3rem 0; max-width: 960px; }
+        .form-card {
+            background: var(--branco, #fff); border: 1px solid var(--borda, #e2ede7);
+            border-radius: 16px; padding: 2.5rem;
+        }
+        .form-card h2 { font-size: 1.2rem; margin-bottom: 1.5rem; color: var(--texto, #0d1f12); }
+        .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.25rem; }
+        .form-group label { font-size: 0.85rem; font-weight: 600; color: var(--texto-2, #3d5c48); }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 0.6rem 0.9rem;
+            border: 1px solid var(--borda, #e2ede7);
+            border-radius: 8px; font-size: 0.95rem;
+            background: var(--fundo, #f9fbfa); color: var(--texto, #0d1f12);
+            font-family: inherit; transition: border-color 0.2s;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus { outline: none; border-color: var(--verde, #1a6b35); }
+        .form-group textarea { min-height: 120px; resize: vertical; }
+        .btn-submit {
+            width: 100%; padding: 0.85rem;
+            background: var(--verde, #1a6b35); color: #fff;
+            border: none; border-radius: 10px;
+            font-size: 1rem; font-weight: 600; cursor: pointer;
+            font-family: inherit; transition: background 0.2s;
+        }
+        .btn-submit:hover { background: var(--verde-hover, #22883f); }
+        #msg-contacto {
+            margin-top: 1rem; padding: 1rem; border-radius: 8px;
+            background: var(--verde-muted, #f0f9f3); border: 1px solid var(--verde-border, #c3e0cd);
+            color: var(--verde, #1a6b35); font-size: 0.95rem; display: none;
+        }
+        .info-card {
+            background: var(--verde-muted, #f0f9f3); border: 1px solid var(--verde-border, #c3e0cd);
+            border-radius: 16px; padding: 2rem;
+        }
+        .info-card h3 { font-size: 1rem; color: var(--texto, #0d1f12); margin-bottom: 1rem; }
+        .info-item { display: flex; gap: 0.75rem; align-items: flex-start; margin-bottom: 1.25rem; }
+        .info-item .icon { font-size: 1.25rem; flex-shrink: 0; margin-top: 0.1rem; }
+        .info-item .text .label { font-size: 0.78rem; color: var(--texto-3, #6b8a76); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+        .info-item .text .val { font-size: 0.95rem; color: var(--texto-2, #3d5c48); margin-top: 0.15rem; }
+        @media (max-width: 760px) { .contactos-layout { grid-template-columns: 1fr; gap: 1.5rem; } }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/dev/medepeso/" class="nav-logo">
+            <span class="label">Bio AI</span>
+            <span class="brand">Renew</span>
+        </a>
+        <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="/dev/medepeso/quem-somos.html">Quem Somos</a></li>
+            <li><a href="/dev/medepeso/missao.html">Missão</a></li>
+            <li><a href="/dev/medepeso/metodo.html">Método</a></li>
+            <li><a href="/dev/medepeso/clientes.html">Clientes</a></li>
+            <li><a href="/dev/medepeso/estudos.html">Ciência</a></li>
+            <li><a href="/dev/medepeso/contactos.html">Contactos</a></li>
+            <li><a href="/dev/medepeso/area-pessoal.html" class="nav-btn">Área Pessoal</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-hero">
+        <span class="eyebrow">Fale connosco</span>
+        <h1>Contactos</h1>
+        <p class="lead">Tem uma questão ou sugestão? Estamos disponíveis para ajudar.</p>
+    </div>
+
+    <div class="wrap">
+        <div class="contactos-layout">
+            <div class="form-card">
+                <h2>Enviar mensagem</h2>
+                <form id="form-contacto" onsubmit="enviarContacto(event)">
+                    <div class="form-group">
+                        <label for="ct-nome">Nome</label>
+                        <input type="text" id="ct-nome" placeholder="O seu nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ct-email">Email</label>
+                        <input type="email" id="ct-email" placeholder="email@exemplo.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ct-assunto">Assunto</label>
+                        <select id="ct-assunto">
+                            <option value="info">Informações gerais</option>
+                            <option value="suporte">Suporte técnico</option>
+                            <option value="conta">Questão de conta</option>
+                            <option value="outro">Outro assunto</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ct-msg">Mensagem</label>
+                        <textarea id="ct-msg" placeholder="Descreva a sua questão..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Enviar mensagem</button>
+                </form>
+                <div id="msg-contacto">
+                    Mensagem enviada com sucesso! Responderemos em 24 horas úteis.
+                </div>
+            </div>
+
+            <div>
+                <div class="info-card">
+                    <h3>Informações de contacto</h3>
+                    <div class="info-item">
+                        <div class="icon">&#9993;</div>
+                        <div class="text">
+                            <div class="label">Email</div>
+                            <div class="val">info@medepeso.pt</div>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="icon">&#128205;</div>
+                        <div class="text">
+                            <div class="label">Localização</div>
+                            <div class="val">Portugal</div>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="icon">&#128336;</div>
+                        <div class="text">
+                            <div class="label">Tempo de resposta</div>
+                            <div class="val">24 horas úteis</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="wrap">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <span class="label">Bio AI</span>
+                    <span class="name">Renew</span>
+                    <p>O seu plano de saúde pessoal, calculado por ciência.</p>
+                </div>
+                <div class="footer-col">
+                    <h5>Navegação</h5>
+                    <ul>
+                        <li><a href="/dev/medepeso/quem-somos.html">Quem Somos</a></li>
+                        <li><a href="/dev/medepeso/missao.html">Missão</a></li>
+                        <li><a href="/dev/medepeso/metodo.html">Método</a></li>
+                        <li><a href="/dev/medepeso/clientes.html">Clientes</a></li>
+                        <li><a href="/dev/medepeso/estudos.html">Ciência</a></li>
+                        <li><a href="/dev/medepeso/contactos.html">Contactos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Legal</h5>
+                    <ul>
+                        <li><a href="/legal">Política de Privacidade</a></li>
+                        <li><a href="/legal">Termos de Utilização</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 Bio AI Renew. Todos os direitos reservados.</span>
+            </div>
+        </div>
+    </footer>
+    <script>
+        function toggleNav(){document.getElementById('navMenu').classList.toggle('aberto');}
+        function enviarContacto(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('.btn-submit');
+            btn.textContent = 'A enviar...';
+            btn.disabled = true;
+            setTimeout(() => {
+                document.getElementById('form-contacto').style.display = 'none';
+                document.getElementById('msg-contacto').style.display = 'block';
+            }, 800);
+        }
+    </script>
+</body>
+</html>

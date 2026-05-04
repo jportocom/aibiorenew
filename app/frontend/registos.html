@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registos de Peso — Bio AI Renew</title>
+    <link rel="stylesheet" href="/assets/style.css">
+    <style>
+        :root {
+            --verde: #1a6b35; --verde-hover: #22883f; --verde-light: #e6f4eb;
+            --verde-border: #c3e0cd; --verde-muted: #f0f9f3;
+            --branco: #ffffff; --fundo: #f9fbfa; --texto: #0d1f12;
+            --texto-2: #3d5c48; --texto-3: #6b8a76; --borda: #e2ede7;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--fundo); color: var(--texto); padding-top: 70px; }
+        html, body { overflow-x: hidden; }
+        .page-wrap { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+        .page-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; }
+        .page-header h1 { font-size: 1.4rem; color: var(--texto); }
+        .page-header p { font-size: 0.9rem; color: var(--texto-3); margin-top: 0.2rem; }
+        /* Tabela */
+        .tabela-wrap { background: var(--branco); border: 1px solid var(--borda); border-radius: 14px; overflow: hidden; }
+        .tabela-medicoes { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+        .tabela-medicoes thead th {
+            text-align: left; padding: 0.75rem 1rem; font-size: 0.72rem; font-weight: 700;
+            letter-spacing: 0.08em; text-transform: uppercase; color: var(--verde);
+            border-bottom: 2px solid var(--verde-border); background: var(--verde-muted);
+        }
+        .tabela-medicoes tbody tr { border-bottom: 1px solid var(--borda); transition: background 0.15s; }
+        .tabela-medicoes tbody tr:last-child { border-bottom: none; }
+        .tabela-medicoes tbody tr:hover { background: var(--verde-muted); }
+        .tabela-medicoes tbody td { padding: 0.7rem 1rem; color: var(--texto); vertical-align: middle; }
+        .td-peso { font-weight: 700; color: var(--verde); font-size: 1rem; }
+        .td-id { color: var(--texto-3); font-size: 0.8rem; }
+        .td-acoes { text-align: right; white-space: nowrap; }
+        .btn-editar { font-size: 0.82rem; color: var(--verde); text-decoration: none; border: 1px solid var(--verde-border); padding: 0.3rem 0.75rem; border-radius: 6px; cursor: pointer; background: transparent; font-family: inherit; transition: all 0.15s; }
+        .btn-editar:hover { background: var(--verde); color: #fff; border-color: var(--verde); }
+        .btn-apagar { font-size: 0.82rem; color: #dc2626; border: 1px solid #fecaca; padding: 0.3rem 0.75rem; border-radius: 6px; cursor: pointer; background: transparent; font-family: inherit; transition: all 0.15s; margin-left: 0.4rem; }
+        .btn-apagar:hover { background: #dc2626; color: #fff; border-color: #dc2626; }
+        /* Botão inserir */
+        .btn-novo { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.6rem 1.25rem; background: var(--verde); color: #fff; border: none; border-radius: 10px; font-size: 0.9rem; font-weight: 600; cursor: pointer; text-decoration: none; font-family: inherit; transition: background 0.2s; }
+        .btn-novo:hover { background: var(--verde-hover); }
+        /* Modal edição */
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 500; display: flex; align-items: center; justify-content: center; }
+        .modal-card { background: #fff; border-radius: 14px; padding: 2rem; width: 100%; max-width: 400px; position: relative; }
+        .modal-card h2 { font-size: 1.1rem; margin-bottom: 1.25rem; color: var(--texto); }
+        .form-group { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1rem; }
+        .form-group label { font-size: 0.83rem; font-weight: 600; color: var(--texto-2); }
+        .form-group input {
+            padding: 0.6rem 0.85rem; border: 1px solid var(--borda); border-radius: 8px;
+            font-size: 0.95rem; background: var(--fundo); color: var(--texto); font-family: inherit;
+        }
+        .form-group input:focus { outline: none; border-color: var(--verde); }
+        .modal-btns { display: flex; gap: 0.75rem; margin-top: 1.25rem; }
+        .btn-save { flex: 1; padding: 0.7rem; background: var(--verde); color: #fff; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer; font-family: inherit; }
+        .btn-save:hover { background: var(--verde-hover); }
+        .btn-cancel { padding: 0.7rem 1.25rem; background: var(--fundo); border: 1px solid var(--borda); color: var(--texto-2); border-radius: 8px; font-size: 0.95rem; cursor: pointer; font-family: inherit; }
+        .msg-erro { padding: 0.65rem 0.9rem; background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; color: #dc2626; font-size: 0.87rem; margin-bottom: 0.75rem; }
+        .vazio { text-align: center; padding: 3rem 1rem; color: var(--texto-3); }
+        /* Form novo registo */
+        .novo-card { background: var(--branco); border: 1px solid var(--borda); border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; }
+        .novo-card h3 { font-size: 0.95rem; margin-bottom: 1rem; color: var(--texto); }
+        .novo-row { display: flex; gap: 0.75rem; align-items: flex-end; flex-wrap: wrap; }
+        .novo-row .form-group { margin-bottom: 0; flex: 1; min-width: 120px; }
+        @media (max-width: 600px) {
+            .td-id { display: none; }
+            .tabela-medicoes thead th:first-child { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/dev/medepeso/" class="nav-logo">
+            <span class="label">Bio AI</span>
+            <span class="brand">Renew</span>
+        </a>
+        <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="/dev/medepeso/quem-somos.html">Quem Somos</a></li>
+            <li><a href="/dev/medepeso/missao.html">Missão</a></li>
+            <li><a href="/dev/medepeso/metodo.html">Método</a></li>
+            <li><a href="/dev/medepeso/clientes.html">Clientes</a></li>
+            <li><a href="/dev/medepeso/estudos.html">Ciência</a></li>
+            <li><a href="/dev/medepeso/contactos.html">Contactos</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="#" class="nav-btn" onclick="clearToken(); location.href='/dev/medepeso/area-pessoal.html'; return false;">Sair</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-wrap">
+        <div class="page-header">
+            <div>
+                <h1>Registos de Peso</h1>
+                <p>Histórico completo das suas medições</p>
+            </div>
+            <a href="dashboard.html" class="btn-novo" style="background:var(--fundo);border:1px solid var(--borda);color:var(--texto-2);">&#8592; Dashboard</a>
+        </div>
+
+        <!-- Novo registo -->
+        <div class="novo-card">
+            <h3>&#9878; Adicionar Medição</h3>
+            <div class="novo-row">
+                <div class="form-group">
+                    <label for="novo-data">Data</label>
+                    <input type="date" id="novo-data">
+                </div>
+                <div class="form-group">
+                    <label for="novo-peso">Peso (kg)</label>
+                    <input type="number" id="novo-peso" placeholder="ex: 84.5" step="0.1" min="20" max="300">
+                </div>
+                <button class="btn-novo" onclick="adicionarRegisto()">+ Registar</button>
+            </div>
+            <div id="msg-novo" style="margin-top:0.75rem;font-size:0.88rem;min-height:1.2em;"></div>
+        </div>
+
+        <!-- Tabela -->
+        <div class="tabela-wrap" id="tabela-wrap">
+            <div class="vazio">A carregar…</div>
+        </div>
+    </div>
+
+    <!-- Modal edição -->
+    <div id="modal-edicao" class="modal-overlay" style="display:none;" onclick="fecharModal()">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <h2>&#9998; Editar Medição</h2>
+            <div id="msg-modal"></div>
+            <div class="form-group">
+                <label for="edit-data">Data</label>
+                <input type="date" id="edit-data">
+            </div>
+            <div class="form-group">
+                <label for="edit-peso">Peso (kg)</label>
+                <input type="number" id="edit-peso" step="0.1" min="20" max="300">
+            </div>
+            <input type="hidden" id="edit-id">
+            <div class="modal-btns">
+                <button class="btn-cancel" onclick="fecharModal()">Cancelar</button>
+                <button class="btn-save" onclick="guardarEdicao()">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script>
+    function toggleNav() { document.getElementById('navMenu').classList.toggle('aberto'); }
+
+    let registos = [];
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        if (!isLoggedIn()) { location.href = '/dev/medepeso/area-pessoal.html'; return; }
+        // Data padrão: hoje
+        document.getElementById('novo-data').value = new Date().toISOString().split('T')[0];
+        await carregarRegistos();
+    });
+
+    async function carregarRegistos() {
+        const wrap = document.getElementById('tabela-wrap');
+        const dados = await apiCall('/peso');
+        if (!dados || dados.erro) {
+            wrap.innerHTML = '<div class="vazio">Erro ao carregar registos: ' + (dados?.erro || 'Tente novamente') + '</div>';
+            return;
+        }
+        registos = [...dados].reverse(); // mais recente primeiro
+        renderTabela();
+    }
+
+    function renderTabela() {
+        const wrap = document.getElementById('tabela-wrap');
+        if (!registos.length) {
+            wrap.innerHTML = '<div class="vazio">Ainda não há medições registadas.</div>';
+            return;
+        }
+        let html = `<table class="tabela-medicoes">
+            <thead><tr>
+                <th>#</th><th>Data</th><th>Peso</th><th style="text-align:right;">Acções</th>
+            </tr></thead><tbody>`;
+
+        registos.forEach((r, i) => {
+            const data  = new Date(r.data).toLocaleDateString('pt-PT');
+            const diff  = i < registos.length - 1
+                ? (r.peso - registos[i+1].peso).toFixed(1)
+                : null;
+            const difStr = diff !== null
+                ? `<span style="font-size:0.78rem;color:${diff > 0 ? '#dc2626' : '#1a6b35'};margin-left:0.4rem;">${diff > 0 ? '+' : ''}${diff} kg</span>`
+                : '';
+            html += `<tr>
+                <td class="td-id">${r.id}</td>
+                <td>${data}</td>
+                <td class="td-peso">${parseFloat(r.peso).toFixed(1)} kg${difStr}</td>
+                <td class="td-acoes">
+                    <button class="btn-editar" onclick="abrirEdicao(${r.id}, '${r.data.split('T')[0]}', ${r.peso})">Editar</button>
+                    <button class="btn-apagar" onclick="apagarRegisto(${r.id})">Apagar</button>
+                </td>
+            </tr>`;
+        });
+
+        html += '</tbody></table>';
+        wrap.innerHTML = html;
+    }
+
+    async function adicionarRegisto() {
+        const peso = parseFloat(document.getElementById('novo-peso').value);
+        const data = document.getElementById('novo-data').value;
+        const msg  = document.getElementById('msg-novo');
+        if (!peso || peso < 20 || peso > 300) { mostrarMsg(msg, 'Introduza um peso válido (20–300 kg)', true); return; }
+        const res = await apiCall('/peso', 'POST', { peso, data: data || undefined });
+        if (res?.id) {
+            document.getElementById('novo-peso').value = '';
+            mostrarMsg(msg, 'Medição adicionada com sucesso!', false);
+            await carregarRegistos();
+        } else {
+            mostrarMsg(msg, 'Erro: ' + (res?.erro || 'Tente novamente'), true);
+        }
+    }
+
+    function abrirEdicao(id, data, peso) {
+        document.getElementById('edit-id').value   = id;
+        document.getElementById('edit-data').value = data;
+        document.getElementById('edit-peso').value = peso;
+        document.getElementById('msg-modal').innerHTML = '';
+        document.getElementById('modal-edicao').style.display = 'flex';
+    }
+
+    function fecharModal() {
+        document.getElementById('modal-edicao').style.display = 'none';
+    }
+
+    async function guardarEdicao() {
+        const id   = parseInt(document.getElementById('edit-id').value);
+        const peso = parseFloat(document.getElementById('edit-peso').value);
+        const data = document.getElementById('edit-data').value;
+        const msg  = document.getElementById('msg-modal');
+        if (!peso || peso < 20 || peso > 300) { mostrarMsg(msg, 'Peso inválido (20–300 kg)', true); return; }
+        const res = await apiCall('/peso/' + id, 'PUT', { peso, data });
+        if (res && !res.erro) {
+            fecharModal();
+            await carregarRegistos();
+        } else {
+            mostrarMsg(msg, 'Erro: ' + (res?.erro || 'Tente novamente'), true);
+        }
+    }
+
+    async function apagarRegisto(id) {
+        if (!confirm('Tem a certeza que quer apagar esta medição?')) return;
+        const res = await apiCall('/peso/' + id, 'DELETE');
+        if (res?.sucesso) {
+            await carregarRegistos();
+        } else {
+            alert('Erro ao apagar: ' + (res?.erro || 'Tente novamente'));
+        }
+    }
+
+    function mostrarMsg(el, texto, erro) {
+        el.innerHTML = erro
+            ? `<div class="msg-erro">${texto}</div>`
+            : `<div style="color:var(--verde);font-weight:600;">${texto}</div>`;
+        setTimeout(() => { el.innerHTML = ''; }, 4000);
+    }
+    </script>
+</body>
+</html>

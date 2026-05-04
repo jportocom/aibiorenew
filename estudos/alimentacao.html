@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alimentação — Bio AI Renew Ciência</title>
+    <link rel="stylesheet" href="/assets/style.css">
+    <style>
+        html, body { overflow-x: hidden; }
+        body { padding-top: 70px; }
+        @media (max-width: 640px) { body { padding-top: 62px; } }
+        .estudo-layout { display: grid; grid-template-columns: 1fr 260px; gap: 3rem; padding: 3rem 0; }
+        .prose h2 { font-size: 1.2rem; color: var(--verde, #1a6b35); margin: 2rem 0 0.75rem; border-left: 3px solid var(--verde, #1a6b35); padding-left: 0.75rem; }
+        .prose h3 { font-size: 1rem; color: var(--texto, #0d1f12); margin: 1.5rem 0 0.5rem; }
+        .prose p, .prose li { font-size: 0.97rem; color: var(--texto-2, #3d5c48); line-height: 1.75; margin-bottom: 0.5rem; }
+        .prose ul { padding-left: 1.25rem; margin-bottom: 1rem; }
+        .prose ul li { margin-bottom: 0.3rem; }
+        .macro-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1rem 0; }
+        .macro-card { background: var(--verde-muted, #f0f9f3); border: 1px solid var(--verde-border, #c3e0cd); border-radius: 10px; padding: 1rem; text-align: center; }
+        .macro-card .macroname { font-size: 0.8rem; color: var(--texto-3, #6b8a76); font-weight: 600; text-transform: uppercase; }
+        .macro-card .macroval { font-size: 1.5rem; font-weight: 700; color: var(--verde, #1a6b35); }
+        .macro-card .macronote { font-size: 0.8rem; color: var(--texto-3, #6b8a76); margin-top: 0.2rem; }
+        .breadcrumb { margin-bottom: 1.5rem; }
+        .breadcrumb a { color: var(--verde, #1a6b35); text-decoration: none; font-size: 0.9rem; }
+        .sidebar-nav { position: sticky; top: 80px; }
+        .sidebar-nav h4 { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--texto-3, #6b8a76); margin-bottom: 0.75rem; }
+        .sidebar-nav ul { list-style: none; padding: 0; margin: 0; }
+        .sidebar-nav ul li a { display: block; padding: 0.4rem 0.75rem; border-radius: 6px; font-size: 0.85rem; color: var(--texto-2, #3d5c48); text-decoration: none; transition: background 0.15s; margin-bottom: 0.15rem; }
+        .sidebar-nav ul li a:hover { background: var(--verde-muted, #f0f9f3); color: var(--verde, #1a6b35); }
+        .sidebar-nav ul li a.active { background: var(--verde-light, #e6f4eb); color: var(--verde, #1a6b35); font-weight: 600; }
+        @media (max-width: 800px) { .estudo-layout { grid-template-columns: 1fr; } .macro-grid { grid-template-columns: 1fr; } .sidebar-nav { position: static; } }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/dev/medepeso/" class="nav-logo"><span class="label">Bio AI</span><span class="brand">Renew</span></a>
+        <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu"><span></span><span></span><span></span></button>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="/dev/medepeso/quem-somos.html">Quem Somos</a></li>
+            <li><a href="/dev/medepeso/missao.html">Missão</a></li>
+            <li><a href="/dev/medepeso/metodo.html">Método</a></li>
+            <li><a href="/dev/medepeso/clientes.html">Clientes</a></li>
+            <li><a href="/dev/medepeso/estudos.html">Ciência</a></li>
+            <li><a href="/dev/medepeso/contactos.html">Contactos</a></li>
+            <li><a href="/dev/medepeso/area-pessoal.html" class="nav-btn">Área Pessoal</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-hero">
+        <span class="eyebrow">Ciência</span><h1>Alimentação</h1>
+    </div>
+
+    <div class="wrap">
+        <div class="estudo-layout">
+            <article>
+                <div class="breadcrumb"><a href="/dev/medepeso/estudos.html">&larr; Ciência</a></div>
+                <div class="prose">
+
+                    <h2>Recomendações Gerais</h2>
+                    <ul>
+                        <li>Evitar açúcares simples: mel, açúcar branco, açúcar mascavado, xarope de milho, glucose, frutose, etc.</li>
+                        <li>Evitar gorduras saturadas: manteiga, banha de porco, óleo de palma, óleo de coco.</li>
+                        <li>Limitar carne vermelha: máximo 2 vezes por semana; preferir frango e peixe.</li>
+                        <li>Evitar enchidos e fumados.</li>
+                        <li>Evitar alimentos processados e ultra-processados.</li>
+                        <li>Evitar bebidas açucaradas: sumos de fruta industriais, refrigerantes, ice-teas.</li>
+                        <li>Limitar o consumo de álcool.</li>
+                        <li>Ingerir 5 a 7 porções de fruta e legumes por dia.</li>
+                        <li>Preferir cereais integrais: pão integral, arroz integral, aveia, quinoa.</li>
+                        <li>Incluir leguminosas regularmente: feijão, lentilhas, grão-de-bico, ervilhas.</li>
+                        <li>Usar azeite virgem extra como gordura principal.</li>
+                        <li>Comer devagar, mastigar bem, e parar antes de se sentir completamente cheio.</li>
+                        <li>Não saltar o pequeno-almoço — é a refeição mais importante do dia.</li>
+                        <li>Reduzir o tamanho das porções progressivamente.</li>
+                        <li>Evitar comer fora de horas e petiscar entre refeições.</li>
+                    </ul>
+
+                    <h2>Componentes Alimentares Promotores de Doença</h2>
+                    <h3>Gorduras Prejudiciais</h3>
+                    <ul>
+                        <li><strong>Gorduras saturadas:</strong> encontradas em carne vermelha, manteiga, queijo, leite gordo, óleo de palma, óleo de coco. Aumentam o colesterol LDL e o risco cardiovascular.</li>
+                        <li><strong>Gorduras trans:</strong> presentes em margarinas, fast-food, produtos de pastelaria industrial, alimentos fritos. São as mais prejudiciais para a saúde cardiovascular.</li>
+                    </ul>
+                    <h3>Açúcares e Hidratos Refinados</h3>
+                    <ul>
+                        <li>Açúcar branco, açúcar mascavado, mel, xarope de milho com elevado teor de frutose.</li>
+                        <li>Pão branco, arroz branco, massas brancas, cereais de pequeno-almoço açucarados.</li>
+                        <li>Refrigerantes, sumos de fruta industriais, bebidas energéticas.</li>
+                    </ul>
+
+                    <h2>Componentes Alimentares Protectores</h2>
+                    <h3>Gorduras Saudáveis</h3>
+                    <ul>
+                        <li><strong>Gorduras monoinsaturadas:</strong> azeite virgem extra, abacate, amêndoas, avelãs.</li>
+                        <li><strong>Gorduras polinsaturadas omega-3:</strong> peixe gordo (salmão, sardinha, cavala, atum), nozes, sementes de linhaça, sementes de chia.</li>
+                    </ul>
+                    <h3>Fibras e Antioxidantes</h3>
+                    <ul>
+                        <li>Frutos vermelhos, mirtilos, morangos — ricos em antioxidantes e fibra.</li>
+                        <li>Legumes de folha verde escura: espinafres, brócolos, couve, alface.</li>
+                        <li>Leguminosas: feijão, lentilhas, grão-de-bico — proteína vegetal e fibra.</li>
+                        <li>Nozes e sementes — magnésio, vitamina E, ómega-3.</li>
+                    </ul>
+
+                    <h2>Calorias Contidas nos Macronutrientes</h2>
+                    <div class="macro-grid">
+                        <div class="macro-card">
+                            <div class="macroname">Hidratos de Carbono</div>
+                            <div class="macroval">4 kcal/g</div>
+                            <div class="macronote">Fonte de energia primária</div>
+                        </div>
+                        <div class="macro-card">
+                            <div class="macroname">Proteínas</div>
+                            <div class="macroval">4 kcal/g</div>
+                            <div class="macronote">Construção e reparação</div>
+                        </div>
+                        <div class="macro-card">
+                            <div class="macroname">Gorduras</div>
+                            <div class="macroval">9 kcal/g</div>
+                            <div class="macronote">Mais do dobro dos outros</div>
+                        </div>
+                    </div>
+                    <p>O álcool fornece 7 kcal por grama — quase tanto como a gordura — sem qualquer valor nutricional. É uma das fontes de calorias mais frequentemente subestimadas.</p>
+                </div>
+            </article>
+
+            <aside>
+                <nav class="sidebar-nav">
+                    <h4>Capítulos</h4>
+                    <ul>
+                        <li><a href="riscos.html">01. Riscos do Excesso de Peso</a></li>
+                        <li><a href="causas.html">02. Causas do Aumento de Peso</a></li>
+                        <li><a href="beneficios.html">03. Benefícios da Perda de Peso</a></li>
+                        <li><a href="programa.html">04. Programa para Perder Peso</a></li>
+                        <li><a href="alimentacao.html" class="active">05. Alimentação</a></li>
+                        <li><a href="refeicoes.html">06. Plano de Refeições</a></li>
+                        <li><a href="diario.html">07. Diário Alimentar</a></li>
+                        <li><a href="rotulos.html">08. Ler os Rótulos</a></li>
+                        <li><a href="fibras.html">09. Fibras</a></li>
+                        <li><a href="agua.html">10. Água</a></li>
+                        <li><a href="atividade.html">11. Actividade Física</a></li>
+                    </ul>
+                </nav>
+            </aside>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="wrap">
+            <div class="footer-grid">
+                <div class="footer-brand"><span class="label">Bio AI</span><span class="name">Renew</span><p>O seu plano de saúde pessoal, calculado por ciência.</p></div>
+                <div class="footer-col"><h5>Navegação</h5><ul><li><a href="/dev/medepeso/estudos.html">Ciência</a></li><li><a href="/dev/medepeso/metodo.html">Método</a></li></ul></div>
+                <div class="footer-col"><h5>Legal</h5><ul><li><a href="/legal">Política de Privacidade</a></li><li><a href="/legal">Termos de Utilização</a></li></ul></div>
+            </div>
+            <div class="footer-bottom"><span>&copy; 2026 Bio AI Renew. Todos os direitos reservados.</span></div>
+        </div>
+    </footer>
+    <script>function toggleNav(){document.getElementById('navMenu').classList.toggle('aberto');}</script>
+</body>
+</html>

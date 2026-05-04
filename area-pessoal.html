@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área Pessoal — Bio AI Renew</title>
+    <link rel="stylesheet" href="/assets/style.css">
+    <style>
+        html, body { overflow-x: hidden; }
+        body { padding-top: 70px; background: var(--fundo, #f9fbfa); }
+        .auth-wrap {
+            max-width: 420px; margin: 3rem auto; padding: 0 1.5rem 4rem;
+        }
+        .auth-card {
+            background: #fff; border: 1px solid var(--borda, #e2ede7);
+            border-radius: 18px; padding: 2.5rem;
+        }
+        .auth-card h2 { font-size: 1.3rem; color: var(--texto, #0d1f12); margin-bottom: 0.4rem; }
+        .auth-card .subtitle { font-size: 0.9rem; color: var(--texto-3, #6b8a76); margin-bottom: 2rem; }
+        .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+        .form-group label { font-size: 0.85rem; font-weight: 600; color: var(--texto-2, #3d5c48); }
+        .form-group input {
+            padding: 0.65rem 0.9rem; border: 1px solid var(--borda, #e2ede7);
+            border-radius: 8px; font-size: 0.95rem; font-family: inherit;
+            background: var(--fundo, #f9fbfa); color: var(--texto, #0d1f12);
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus { outline: none; border-color: var(--verde, #1a6b35); box-shadow: 0 0 0 3px rgba(26,107,53,0.08); }
+        .btn-auth {
+            width: 100%; padding: 0.85rem; margin-top: 0.5rem;
+            background: var(--verde, #1a6b35); color: #fff; border: none;
+            border-radius: 10px; font-size: 1rem; font-weight: 600;
+            cursor: pointer; font-family: inherit; transition: background 0.2s;
+        }
+        .btn-auth:hover { background: var(--verde-hover, #22883f); }
+        .btn-auth:disabled { opacity: 0.6; cursor: not-allowed; }
+        .auth-switch {
+            text-align: center; margin-top: 1.25rem; font-size: 0.88rem; color: var(--texto-3, #6b8a76);
+        }
+        .auth-switch a { color: var(--verde, #1a6b35); text-decoration: none; font-weight: 600; cursor: pointer; }
+        .auth-switch a:hover { text-decoration: underline; }
+        #auth-erro {
+            padding: 0.75rem 1rem; background: #fef2f2; border: 1px solid #fecaca;
+            border-radius: 8px; color: #dc2626; font-size: 0.88rem;
+            margin-bottom: 1rem; display: none;
+        }
+        #register-form { display: none; }
+        .logo-area { text-align: center; margin-bottom: 1.75rem; }
+        .logo-area .logo-text { font-size: 1.75rem; font-weight: 700; color: var(--verde, #1a6b35); }
+        .logo-area .logo-text span { font-weight: 400; opacity: 0.6; }
+        .logo-area p { font-size: 0.85rem; color: var(--texto-3, #6b8a76); margin-top: 0.25rem; }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/dev/medepeso/" class="nav-logo">
+            <span class="label">Bio AI</span>
+            <span class="brand">Renew</span>
+        </a>
+        <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="/dev/medepeso/quem-somos.html">Quem Somos</a></li>
+            <li><a href="/dev/medepeso/missao.html">Missão</a></li>
+            <li><a href="/dev/medepeso/metodo.html">Método</a></li>
+            <li><a href="/dev/medepeso/clientes.html">Clientes</a></li>
+            <li><a href="/dev/medepeso/estudos.html">Ciência</a></li>
+            <li><a href="/dev/medepeso/contactos.html">Contactos</a></li>
+            <li><a href="/dev/medepeso/area-pessoal.html" class="nav-btn">Área Pessoal</a></li>
+        </ul>
+    </nav>
+
+    <div class="auth-wrap">
+        <div class="logo-area">
+            <div class="logo-text">Bio AI Renew</div>
+            <p>A sua área pessoal de saúde</p>
+        </div>
+
+        <div class="auth-card">
+            <div id="auth-erro"></div>
+
+            <!-- Login -->
+            <div id="login-form">
+                <h2>Acesso à Área Pessoal</h2>
+                <p class="subtitle">Entre com as suas credenciais para aceder ao seu plano.</p>
+                <form onsubmit="fazerLogin(event)">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" placeholder="email@exemplo.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-pass">Password</label>
+                        <input type="password" id="login-pass" placeholder="A sua password" required>
+                    </div>
+                    <button type="submit" class="btn-auth" id="btn-login">Entrar</button>
+                </form>
+                <div class="auth-switch">
+                    Não tem conta? <a onclick="mostrarRegisto()">Registar</a>
+                </div>
+            </div>
+
+            <!-- Registo -->
+            <div id="register-form">
+                <h2>Criar conta</h2>
+                <p class="subtitle">Crie a sua conta gratuita para começar o seu plano.</p>
+                <form onsubmit="fazerRegisto(event)">
+                    <div class="form-group">
+                        <label for="reg-email">Email</label>
+                        <input type="email" id="reg-email" placeholder="email@exemplo.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-pass">Password</label>
+                        <input type="password" id="reg-pass" placeholder="Mínimo 6 caracteres" required minlength="6">
+                    </div>
+                    <button type="submit" class="btn-auth" id="btn-registo">Criar conta</button>
+                </form>
+                <div class="auth-switch">
+                    Já tem conta? <a onclick="mostrarLogin()">Entrar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = window.API_BASE || 'http://ai.jporto.com';
+
+        function toggleNav(){document.getElementById('navMenu').classList.toggle('aberto');}
+
+        function mostrarErro(msg) {
+            const el = document.getElementById('auth-erro');
+            el.textContent = msg;
+            el.style.display = 'block';
+        }
+        function limparErro() {
+            document.getElementById('auth-erro').style.display = 'none';
+        }
+        function mostrarRegisto() {
+            limparErro();
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('register-form').style.display = 'block';
+        }
+        function mostrarLogin() {
+            limparErro();
+            document.getElementById('register-form').style.display = 'none';
+            document.getElementById('login-form').style.display = 'block';
+        }
+
+        async function fazerLogin(e) {
+            e.preventDefault();
+            limparErro();
+            const btn = document.getElementById('btn-login');
+            btn.disabled = true; btn.textContent = 'A entrar...';
+
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-pass').value;
+
+            try {
+                const res = await fetch(API_BASE + '/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                const data = await res.json();
+
+                if (!res.ok) {
+                    mostrarErro(data.erro || 'Erro ao entrar. Verifique as suas credenciais.');
+                    btn.disabled = false; btn.textContent = 'Entrar';
+                    return;
+                }
+
+                localStorage.setItem('mp_token', data.token);
+
+                // Verificar se tem perfil completo
+                if (data.perfil_completo) {
+                    location.href = 'app/frontend/dashboard.html';
+                } else {
+                    location.href = 'app/frontend/perfil.html';
+                }
+            } catch (err) {
+                mostrarErro('Não foi possível ligar ao servidor. Tente mais tarde.');
+                btn.disabled = false; btn.textContent = 'Entrar';
+            }
+        }
+
+        async function fazerRegisto(e) {
+            e.preventDefault();
+            limparErro();
+            const btn = document.getElementById('btn-registo');
+            btn.disabled = true; btn.textContent = 'A criar conta...';
+
+            const email = document.getElementById('reg-email').value;
+            const password = document.getElementById('reg-pass').value;
+
+            try {
+                const res = await fetch(API_BASE + '/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                const data = await res.json();
+
+                if (!res.ok) {
+                    mostrarErro(data.erro || 'Erro ao criar conta.');
+                    btn.disabled = false; btn.textContent = 'Criar conta';
+                    return;
+                }
+
+                localStorage.setItem('mp_token', data.token);
+                location.href = 'app/frontend/perfil.html';
+            } catch (err) {
+                mostrarErro('Não foi possível ligar ao servidor. Tente mais tarde.');
+                btn.disabled = false; btn.textContent = 'Criar conta';
+            }
+        }
+
+        // Se já tiver sessão, redirigir
+        if (localStorage.getItem('mp_token')) {
+            location.href = 'app/frontend/dashboard.html';
+        }
+    </script>
+</body>
+</html>

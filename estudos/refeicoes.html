@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plano de Refeições Diárias — Bio AI Renew Ciência</title>
+    <link rel="stylesheet" href="/assets/style.css">
+    <style>
+        html, body { overflow-x: hidden; }
+        body { padding-top: 70px; }
+        @media (max-width: 640px) { body { padding-top: 62px; } }
+        .estudo-layout { display: grid; grid-template-columns: 1fr 260px; gap: 3rem; padding: 3rem 0; }
+        .prose h2 { font-size: 1.2rem; color: var(--verde, #1a6b35); margin: 2rem 0 0.75rem; border-left: 3px solid var(--verde, #1a6b35); padding-left: 0.75rem; }
+        .prose h3 { font-size: 1rem; color: var(--texto, #0d1f12); margin: 1.25rem 0 0.5rem; }
+        .prose p, .prose li { font-size: 0.97rem; color: var(--texto-2, #3d5c48); line-height: 1.75; margin-bottom: 0.5rem; }
+        .prose ul { padding-left: 1.25rem; margin-bottom: 1rem; }
+        .prose ul li { margin-bottom: 0.3rem; }
+        .refeicao-card {
+            background: var(--verde-muted, #f0f9f3); border: 1px solid var(--verde-border, #c3e0cd);
+            border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0;
+        }
+        .refeicao-card .pct { font-size: 1.75rem; font-weight: 700; color: var(--verde, #1a6b35); }
+        .refeicao-card .meal-name { font-size: 1rem; font-weight: 600; color: var(--texto, #0d1f12); margin-bottom: 0.75rem; }
+        .breadcrumb { margin-bottom: 1.5rem; }
+        .breadcrumb a { color: var(--verde, #1a6b35); text-decoration: none; font-size: 0.9rem; }
+        .sidebar-nav { position: sticky; top: 80px; }
+        .sidebar-nav h4 { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--texto-3, #6b8a76); margin-bottom: 0.75rem; }
+        .sidebar-nav ul { list-style: none; padding: 0; margin: 0; }
+        .sidebar-nav ul li a { display: block; padding: 0.4rem 0.75rem; border-radius: 6px; font-size: 0.85rem; color: var(--texto-2, #3d5c48); text-decoration: none; transition: background 0.15s; margin-bottom: 0.15rem; }
+        .sidebar-nav ul li a:hover { background: var(--verde-muted, #f0f9f3); color: var(--verde, #1a6b35); }
+        .sidebar-nav ul li a.active { background: var(--verde-light, #e6f4eb); color: var(--verde, #1a6b35); font-weight: 600; }
+        @media (max-width: 800px) { .estudo-layout { grid-template-columns: 1fr; } .sidebar-nav { position: static; } }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/dev/medepeso/" class="nav-logo"><span class="label">Bio AI</span><span class="brand">Renew</span></a>
+        <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu"><span></span><span></span><span></span></button>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="/dev/medepeso/quem-somos.html">Quem Somos</a></li>
+            <li><a href="/dev/medepeso/missao.html">Missão</a></li>
+            <li><a href="/dev/medepeso/metodo.html">Método</a></li>
+            <li><a href="/dev/medepeso/clientes.html">Clientes</a></li>
+            <li><a href="/dev/medepeso/estudos.html">Ciência</a></li>
+            <li><a href="/dev/medepeso/contactos.html">Contactos</a></li>
+            <li><a href="/dev/medepeso/area-pessoal.html" class="nav-btn">Área Pessoal</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-hero">
+        <span class="eyebrow">Ciência</span><h1>Plano de Refeições Diárias</h1>
+    </div>
+
+    <div class="wrap">
+        <div class="estudo-layout">
+            <article>
+                <div class="breadcrumb"><a href="/dev/medepeso/estudos.html">&larr; Ciência</a></div>
+                <div class="prose">
+                    <p>O plano de refeições do Bio AI Renew é baseado num princípio simples: as calorias diárias devem corresponder exactamente à Taxa de Metabolismo Basal (TMB). O défice calórico é criado pela actividade física, não pela restrição alimentar severa.</p>
+
+                    <h2>Pequeno-Almoço — 45% das Calorias</h2>
+                    <div class="refeicao-card">
+                        <div class="pct">45%</div>
+                        <div class="meal-name">da ingestão calórica diária</div>
+                        <p>O pequeno-almoço é a refeição mais importante do dia. Deve ser rico e nutritivo. Boas opções incluem:</p>
+                        <ul>
+                            <li>Batido de proteína de soja ou whey com abacate e fruta</li>
+                            <li>Aveia com leite vegetal, frutos secos e banana</li>
+                            <li>Iogurte grego natural com fruta fresca e granola sem açúcar</li>
+                            <li>Ovos estrelados ou mexidos com pão integral e fruta</li>
+                            <li>Torradas integrais com manteiga de amendoim e banana</li>
+                        </ul>
+                    </div>
+
+                    <h2>Almoço — 35% das Calorias</h2>
+                    <div class="refeicao-card">
+                        <div class="pct">35%</div>
+                        <div class="meal-name">da ingestão calórica diária</div>
+                        <p>O almoço deve ser equilibrado, com proteína, hidratos complexos e legumes:</p>
+                        <ul>
+                            <li>Sopa de legumes com leguminosas (feijão, grão, lentilhas)</li>
+                            <li>Frango ou peixe grelhado com arroz integral e salada</li>
+                            <li>Salada mediterrânea com tofu ou atum</li>
+                            <li>Massa integral com molho de tomate e legumes</li>
+                            <li>Quinoa com legumes salteados e proteína magra</li>
+                        </ul>
+                    </div>
+
+                    <h2>Jantar — Máximo 400 kcal (às 19h00)</h2>
+                    <div class="refeicao-card">
+                        <div class="pct">máx. 400</div>
+                        <div class="meal-name">kcal — idealmente às 19h00</div>
+                        <p>O jantar deve ser leve e tomado cedo. A refeição de eleição é um batido nutritivo:</p>
+                        <ul>
+                            <li>Batido de proteína de soja isolada com abacate e leite vegetal</li>
+                            <li>Iogurte vegetal com fruta e amêndoas</li>
+                            <li>Sopa de legumes leve sem adição de batata ou pão</li>
+                        </ul>
+                        <p>Jantar cedo (19h00) permite um jejum nocturno mais longo, o que favorece a queima de gordura durante o sono.</p>
+                    </div>
+
+                    <h2>Dicas para Comer Fora</h2>
+                    <ul>
+                        <li>Evitar entradas — pão, manteigas e petiscos antes da refeição.</li>
+                        <li>Pedir a carne ou peixe grelhados, não fritos ou panados.</li>
+                        <li>Pedir molhos e vinagrete à parte.</li>
+                        <li>Substituir batatas fritas por salada ou legumes cozidos.</li>
+                        <li>Evitar sobremesas açucaradas — optar por fruta.</li>
+                        <li>Beber água em vez de refrigerantes ou sumos.</li>
+                        <li>Comer devagar e parar quando sentir saciedade, não quando o prato estiver vazio.</li>
+                        <li>Evitar buffets sempre que possível — a variedade aumenta a ingestão.</li>
+                    </ul>
+                </div>
+            </article>
+
+            <aside>
+                <nav class="sidebar-nav">
+                    <h4>Capítulos</h4>
+                    <ul>
+                        <li><a href="riscos.html">01. Riscos do Excesso de Peso</a></li>
+                        <li><a href="causas.html">02. Causas do Aumento de Peso</a></li>
+                        <li><a href="beneficios.html">03. Benefícios da Perda de Peso</a></li>
+                        <li><a href="programa.html">04. Programa para Perder Peso</a></li>
+                        <li><a href="alimentacao.html">05. Alimentação</a></li>
+                        <li><a href="refeicoes.html" class="active">06. Plano de Refeições</a></li>
+                        <li><a href="diario.html">07. Diário Alimentar</a></li>
+                        <li><a href="rotulos.html">08. Ler os Rótulos</a></li>
+                        <li><a href="fibras.html">09. Fibras</a></li>
+                        <li><a href="agua.html">10. Água</a></li>
+                        <li><a href="atividade.html">11. Actividade Física</a></li>
+                    </ul>
+                </nav>
+            </aside>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="wrap">
+            <div class="footer-grid">
+                <div class="footer-brand"><span class="label">Bio AI</span><span class="name">Renew</span><p>O seu plano de saúde pessoal, calculado por ciência.</p></div>
+                <div class="footer-col"><h5>Navegação</h5><ul><li><a href="/dev/medepeso/estudos.html">Ciência</a></li><li><a href="/dev/medepeso/metodo.html">Método</a></li></ul></div>
+                <div class="footer-col"><h5>Legal</h5><ul><li><a href="/legal">Política de Privacidade</a></li><li><a href="/legal">Termos de Utilização</a></li></ul></div>
+            </div>
+            <div class="footer-bottom"><span>&copy; 2026 Bio AI Renew. Todos os direitos reservados.</span></div>
+        </div>
+    </footer>
+    <script>function toggleNav(){document.getElementById('navMenu').classList.toggle('aberto');}</script>
+</body>
+</html>

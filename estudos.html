@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ciência &amp; Estudos — Bio AI Renew</title>
+    <link rel="stylesheet" href="/assets/style.css">
+    <style>
+        html, body { overflow-x: hidden; }
+        body { padding-top: 70px; }
+        @media (max-width: 640px) { body { padding-top: 62px; } }
+        .intro-text { max-width: 760px; }
+        .intro-text p { font-size: 0.97rem; color: var(--texto-2, #3d5c48); line-height: 1.75; margin-bottom: 1.1rem; }
+        .estudos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 2.5rem; }
+        .estudo-card {
+            background: var(--branco, #fff); border: 1px solid var(--borda, #e2ede7);
+            border-radius: 14px; padding: 1.5rem;
+            text-decoration: none; color: inherit;
+            transition: box-shadow 0.2s, border-color 0.2s;
+            display: block;
+        }
+        .estudo-card:hover {
+            border-color: var(--verde, #1a6b35); box-shadow: 0 4px 16px rgba(26,107,53,0.1);
+        }
+        .estudo-card .num {
+            font-size: 0.75rem; font-weight: 700; color: var(--verde, #1a6b35);
+            text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.5rem;
+        }
+        .estudo-card h3 { font-size: 1rem; color: var(--texto, #0d1f12); margin-bottom: 0.4rem; }
+        .estudo-card .arrow { color: var(--verde, #1a6b35); font-size: 0.9rem; margin-top: 0.75rem; display: block; }
+        @media (max-width: 900px) { .estudos-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .estudos-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/dev/medepeso/" class="nav-logo">
+            <span class="label">Bio AI</span>
+            <span class="brand">Renew</span>
+        </a>
+        <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="/dev/medepeso/quem-somos.html">Quem Somos</a></li>
+            <li><a href="/dev/medepeso/missao.html">Missão</a></li>
+            <li><a href="/dev/medepeso/metodo.html">Método</a></li>
+            <li><a href="/dev/medepeso/clientes.html">Clientes</a></li>
+            <li><a href="/dev/medepeso/estudos.html">Ciência</a></li>
+            <li><a href="/dev/medepeso/contactos.html">Contactos</a></li>
+            <li><a href="/dev/medepeso/area-pessoal.html" class="nav-btn">Área Pessoal</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-hero">
+        <span class="eyebrow">Evidência científica</span>
+        <h1>Ciência &amp; Estudos</h1>
+        <p class="lead">A base científica por detrás do método Bio AI Renew. Leia os artigos e fundamente as suas escolhas.</p>
+    </div>
+
+    <section class="wrap" style="padding-top: 3rem; padding-bottom: 3rem;">
+        <div class="intro-text">
+            <p>O excesso de peso e a obesidade são agora considerados a nova epidemia em termos de saúde global. Nos países industrializados 50% dos adultos têm excesso de peso ou obesidade. Portugal conta com 59% e cerca de 80% dos idosos são obesos ou têm excesso de peso. A faixa etária mais atingida situa-se entre os 55 e os 74 anos de idade.</p>
+            <p>A obesidade é um factor de risco major para doenças cardiovasculares, diabetes tipo 2, vários tipos de cancro e outras condições crónicas. A perda de peso, mesmo que modesta (5 a 10% do peso corporal), tem benefícios significativos e mensuráveis na saúde metabólica, cardiovascular e na qualidade de vida.</p>
+            <p>Os artigos que se seguem sintetizam a evidência científica mais relevante sobre os riscos do excesso de peso, as causas do aumento ponderal, os benefícios da perda de peso e as estratégias mais eficazes para a alcançar de forma sustentável.</p>
+        </div>
+
+        <div class="estudos-grid">
+            <a href="/dev/medepeso/estudos/riscos.html" class="estudo-card">
+                <div class="num">01</div>
+                <h3>Riscos do Excesso de Peso</h3>
+                <p style="font-size:0.88rem;color:var(--texto-3,#6b8a76);line-height:1.5;">Cardiovasculares, metabólicos, respiratórios e oncológicos.</p>
+                <span class="arrow">Ler artigo &rarr;</span>
+            </a>
+            <a href="/dev/medepeso/estudos/causas.html" class="estudo-card">
+                <div class="num">02</div>
+                <h3>Causas do Aumento de Peso</h3>
+                <p style="font-size:0.88rem;color:var(--texto-3,#6b8a76);line-height:1.5;">Estilo de vida, inactividade física e factores alimentares.</p>
+                <span class="arrow">Ler artigo &rarr;</span>
+            </a>
+            <a href="/dev/medepeso/estudos/beneficios.html" class="estudo-card">
+                <div class="num">03</div>
+                <h3>Benefícios da Perda de Peso</h3>
+                <p style="font-size:0.88rem;color:var(--texto-3,#6b8a76);line-height:1.5;">O que muda no organismo quando se perde peso.</p>
+                <span class="arrow">Ler artigo &rarr;</span>
+            </a>
+            <a href="/dev/medepeso/estudos/programa.html" class="estudo-card">
+                <div class="num">04</div>
+                <h3>Programa para Perder Peso</h3>
+                <p style="font-size:0.88rem;color:var(--texto-3,#6b8a76);line-height:1.5;">Como estruturar um programa eficaz e sustentável.</p>
+                <span class="arrow">Ler artigo &rarr;</span>
+            </a>
+            <a href="/dev/medepeso/estudos/alimentacao.html" class="estudo-card">
+                <div class="num">05</div>
+                <h3>Alimentação</h3>
+                <p style="font-size:0.88rem;color:var(--texto-3,#6b8a76);line-height:1.5;">Recomendações, componentes promotores e protectores.</p>
+                <span class="arrow">Ler artigo &rarr;</span>
+            </a>
+            <a href="/dev/medepeso/estudos/refeicoes.html" class="estudo-card">
+                <div class="num">06</div>
+                <h3>Plano de Refeições Diárias</h3>
+                <p style="font-size:0.88rem;color:var(--texto-3,#6b8a76);line-height:1.5;">Pequeno-almoço, almoço, jantar e dicas para comer fora.</p>
+                <span class="arrow">Ler artigo &rarr;</span>
+            </a>
+            <a href="/dev/medepeso/estudos/diario.html" class="estudo-card">
+                <div class="num">07</div>
+                <h3>Diário Alimentar</h3>
+                <p style="font-size:0.88rem;color:var(--texto-3,#6b8a76);line-height:1.5;">A ferramenta mais eficaz para controlar o que come.</p>
+                <span class="arrow">Ler artigo &rarr;</span>
+            </a>
+            <a href="/dev/medepeso/estudos/rotulos.html" class="estudo-card">
+                <div class="num">08</div>
+                <h3>Aprender a Ler os Rótulos</h3>
+                <p style="font-size:0.88rem;color:var(--texto-3,#6b8a76);line-height:1.5;">Aditivos, gorduras e como interpretar a informação nutricional.</p>
+                <span class="arrow">Ler artigo &rarr;</span>
+            </a>
+            <a href="/dev/medepeso/estudos/fibras.html" class="estudo-card">
+                <div class="num">09</div>
+                <h3>Fibras</h3>
+                <p style="font-size:0.88rem;color:var(--texto-3,#6b8a76);line-height:1.5;">Importância e tabelas de conteúdo de fibras nos alimentos.</p>
+                <span class="arrow">Ler artigo &rarr;</span>
+            </a>
+            <a href="/dev/medepeso/estudos/agua.html" class="estudo-card">
+                <div class="num">10</div>
+                <h3>Água</h3>
+                <p style="font-size:0.88rem;color:var(--texto-3,#6b8a76);line-height:1.5;">Hidratação e nutrientes essenciais para a saúde.</p>
+                <span class="arrow">Ler artigo &rarr;</span>
+            </a>
+            <a href="/dev/medepeso/estudos/atividade.html" class="estudo-card">
+                <div class="num">11</div>
+                <h3>Actividade Física</h3>
+                <p style="font-size:0.88rem;color:var(--texto-3,#6b8a76);line-height:1.5;">Plano de iniciação e recomendações baseadas em evidência.</p>
+                <span class="arrow">Ler artigo &rarr;</span>
+            </a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="wrap">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <span class="label">Bio AI</span>
+                    <span class="name">Renew</span>
+                    <p>O seu plano de saúde pessoal, calculado por ciência.</p>
+                </div>
+                <div class="footer-col">
+                    <h5>Navegação</h5>
+                    <ul>
+                        <li><a href="/dev/medepeso/quem-somos.html">Quem Somos</a></li>
+                        <li><a href="/dev/medepeso/missao.html">Missão</a></li>
+                        <li><a href="/dev/medepeso/metodo.html">Método</a></li>
+                        <li><a href="/dev/medepeso/clientes.html">Clientes</a></li>
+                        <li><a href="/dev/medepeso/estudos.html">Ciência</a></li>
+                        <li><a href="/dev/medepeso/contactos.html">Contactos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Legal</h5>
+                    <ul>
+                        <li><a href="/legal">Política de Privacidade</a></li>
+                        <li><a href="/legal">Termos de Utilização</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 Bio AI Renew. Todos os direitos reservados.</span>
+            </div>
+        </div>
+    </footer>
+    <script>function toggleNav(){document.getElementById('navMenu').classList.toggle('aberto');}</script>
+</body>
+</html>

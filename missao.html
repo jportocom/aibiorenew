@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missão — Bio AI Renew</title>
+    <link rel="stylesheet" href="/assets/style.css">
+    <style>
+        html, body { overflow-x: hidden; }
+        body { padding-top: 70px; }
+        @media (max-width: 640px) { body { padding-top: 62px; } }
+        .prose { max-width: 720px; }
+        .prose p { font-size: 1rem; color: var(--texto-2, #3d5c48); line-height: 1.75; margin-bottom: 1.25rem; }
+        .valores-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 2.5rem; }
+        .valor-card {
+            display: flex; gap: 1rem; align-items: flex-start;
+            background: var(--verde-muted, #f0f9f3); border: 1px solid var(--verde-border, #c3e0cd);
+            border-radius: 14px; padding: 1.5rem;
+        }
+        .valor-icon { font-size: 1.75rem; flex-shrink: 0; }
+        .valor-card h3 { font-size: 1rem; color: var(--texto, #0d1f12); margin-bottom: 0.3rem; }
+        .valor-card p { font-size: 0.9rem; color: var(--texto-3, #6b8a76); line-height: 1.6; }
+        .frase-destaque {
+            background: var(--verde, #1a6b35); color: #fff;
+            border-radius: 16px; padding: 2.5rem;
+            font-size: 1.3rem; font-style: italic; line-height: 1.5;
+            margin: 2.5rem 0; max-width: 720px;
+        }
+        @media (max-width: 700px) { .valores-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/dev/medepeso/" class="nav-logo">
+            <span class="label">Bio AI</span>
+            <span class="brand">Renew</span>
+        </a>
+        <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="/dev/medepeso/quem-somos.html">Quem Somos</a></li>
+            <li><a href="/dev/medepeso/missao.html">Missão</a></li>
+            <li><a href="/dev/medepeso/metodo.html">Método</a></li>
+            <li><a href="/dev/medepeso/clientes.html">Clientes</a></li>
+            <li><a href="/dev/medepeso/estudos.html">Ciência</a></li>
+            <li><a href="/dev/medepeso/contactos.html">Contactos</a></li>
+            <li><a href="/dev/medepeso/area-pessoal.html" class="nav-btn">Área Pessoal</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-hero">
+        <span class="eyebrow">O nosso propósito</span>
+        <h1>Missão</h1>
+        <p class="lead">Democratizar o acesso a um acompanhamento nutricional personalizado, rigoroso e contínuo.</p>
+    </div>
+
+    <section class="wrap" style="padding-top: 3rem; padding-bottom: 3rem;">
+        <div class="prose">
+            <p>A nossa missão é democratizar o acesso a um acompanhamento nutricional e de actividade física personalizado, rigoroso e contínuo.</p>
+            <p>Queremos que cada pessoa possa ter, na palma da mão, o equivalente a um nutricionista e personal trainer que conhece o seu metabolismo, acompanha a sua evolução diária e ajusta o plano sempre que necessário.</p>
+            <p>Acreditamos que a perda de peso saudável resulta de um défice calórico equilibrado — não de dietas radicais — e que esse défice deve vir exclusivamente da actividade física, enquanto a alimentação cobre exactamente as necessidades basais do organismo.</p>
+        </div>
+
+        <div class="frase-destaque">
+            "Comer para viver, mover-se para perder."
+        </div>
+
+        <div class="valores-grid">
+            <div class="valor-card">
+                <div class="valor-icon">&#128270;</div>
+                <div>
+                    <h3>Rigor Científico</h3>
+                    <p>Utilizamos as fórmulas e metodologias mais validadas clinicamente. Nenhuma promessa sem fundamento científico.</p>
+                </div>
+            </div>
+            <div class="valor-card">
+                <div class="valor-icon">&#129504;</div>
+                <div>
+                    <h3>Personalização</h3>
+                    <p>Cada utilizador tem o seu próprio metabolismo. O plano é calculado individualmente, não copiado de um template genérico.</p>
+                </div>
+            </div>
+            <div class="valor-card">
+                <div class="valor-icon">&#127807;</div>
+                <div>
+                    <h3>Sustentabilidade</h3>
+                    <p>Perder peso de forma gradual e sustentável. 50 a 150 gramas por dia — não quilos de água em dietas choque.</p>
+                </div>
+            </div>
+            <div class="valor-card">
+                <div class="valor-icon">&#128161;</div>
+                <div>
+                    <h3>Clareza</h3>
+                    <p>Informação simples e transparente. O utilizador sabe sempre porque come o que come e o que precisa de fazer.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="wrap">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <span class="label">Bio AI</span>
+                    <span class="name">Renew</span>
+                    <p>O seu plano de saúde pessoal, calculado por ciência.</p>
+                </div>
+                <div class="footer-col">
+                    <h5>Navegação</h5>
+                    <ul>
+                        <li><a href="/dev/medepeso/quem-somos.html">Quem Somos</a></li>
+                        <li><a href="/dev/medepeso/missao.html">Missão</a></li>
+                        <li><a href="/dev/medepeso/metodo.html">Método</a></li>
+                        <li><a href="/dev/medepeso/clientes.html">Clientes</a></li>
+                        <li><a href="/dev/medepeso/estudos.html">Ciência</a></li>
+                        <li><a href="/dev/medepeso/contactos.html">Contactos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Legal</h5>
+                    <ul>
+                        <li><a href="/legal">Política de Privacidade</a></li>
+                        <li><a href="/legal">Termos de Utilização</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 Bio AI Renew. Todos os direitos reservados.</span>
+            </div>
+        </div>
+    </footer>
+    <script>function toggleNav(){document.getElementById('navMenu').classList.toggle('aberto');}</script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Água — Bio AI Renew Ciência</title>
+    <link rel="stylesheet" href="/assets/style.css">
+    <style>
+        html, body { overflow-x: hidden; }
+        body { padding-top: 70px; }
+        @media (max-width: 640px) { body { padding-top: 62px; } }
+        .estudo-layout { display: grid; grid-template-columns: 1fr 260px; gap: 3rem; padding: 3rem 0; }
+        .prose h2 { font-size: 1.2rem; color: var(--verde, #1a6b35); margin: 2rem 0 0.75rem; border-left: 3px solid var(--verde, #1a6b35); padding-left: 0.75rem; }
+        .prose h3 { font-size: 1rem; color: var(--texto, #0d1f12); margin: 1.25rem 0 0.5rem; }
+        .prose p, .prose li { font-size: 0.97rem; color: var(--texto-2, #3d5c48); line-height: 1.75; margin-bottom: 0.5rem; }
+        .prose ul { padding-left: 1.25rem; margin-bottom: 1rem; }
+        .prose ul li { margin-bottom: 0.3rem; }
+        .agua-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.25rem 0; }
+        .agua-card { background: var(--verde-muted, #f0f9f3); border: 1px solid var(--verde-border, #c3e0cd); border-radius: 10px; padding: 1rem; text-align: center; }
+        .agua-card .icon { font-size: 1.5rem; margin-bottom: 0.4rem; }
+        .agua-card .val { font-size: 1.3rem; font-weight: 700; color: var(--verde, #1a6b35); }
+        .agua-card .label { font-size: 0.8rem; color: var(--texto-3, #6b8a76); margin-top: 0.2rem; }
+        .breadcrumb { margin-bottom: 1.5rem; }
+        .breadcrumb a { color: var(--verde, #1a6b35); text-decoration: none; font-size: 0.9rem; }
+        .sidebar-nav { position: sticky; top: 80px; }
+        .sidebar-nav h4 { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--texto-3, #6b8a76); margin-bottom: 0.75rem; }
+        .sidebar-nav ul { list-style: none; padding: 0; margin: 0; }
+        .sidebar-nav ul li a { display: block; padding: 0.4rem 0.75rem; border-radius: 6px; font-size: 0.85rem; color: var(--texto-2, #3d5c48); text-decoration: none; transition: background 0.15s; margin-bottom: 0.15rem; }
+        .sidebar-nav ul li a:hover { background: var(--verde-muted, #f0f9f3); color: var(--verde, #1a6b35); }
+        .sidebar-nav ul li a.active { background: var(--verde-light, #e6f4eb); color: var(--verde, #1a6b35); font-weight: 600; }
+        @media (max-width: 800px) { .estudo-layout { grid-template-columns: 1fr; } .agua-grid { grid-template-columns: 1fr; } .sidebar-nav { position: static; } }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/dev/medepeso/" class="nav-logo"><span class="label">Bio AI</span><span class="brand">Renew</span></a>
+        <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu"><span></span><span></span><span></span></button>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="/dev/medepeso/quem-somos.html">Quem Somos</a></li>
+            <li><a href="/dev/medepeso/missao.html">Missão</a></li>
+            <li><a href="/dev/medepeso/metodo.html">Método</a></li>
+            <li><a href="/dev/medepeso/clientes.html">Clientes</a></li>
+            <li><a href="/dev/medepeso/estudos.html">Ciência</a></li>
+            <li><a href="/dev/medepeso/contactos.html">Contactos</a></li>
+            <li><a href="/dev/medepeso/area-pessoal.html" class="nav-btn">Área Pessoal</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-hero">
+        <span class="eyebrow">Ciência</span><h1>Água</h1>
+    </div>
+
+    <div class="wrap">
+        <div class="estudo-layout">
+            <article>
+                <div class="breadcrumb"><a href="/dev/medepeso/estudos.html">&larr; Ciência</a></div>
+                <div class="prose">
+                    <p>A água é o nutriente mais essencial do organismo. O corpo humano é composto por cerca de 60% de água, e praticamente todos os processos metabólicos dependem de uma hidratação adequada.</p>
+
+                    <h2>Água e Perda de Peso</h2>
+                    <p>Beber água tem um papel activo na perda de peso:</p>
+                    <ul>
+                        <li>Beber 500ml de água antes das refeições reduz a ingestão calórica em cerca de 13%.</li>
+                        <li>A água aumenta temporariamente o metabolismo em 24 a 30% durante 60 a 90 minutos.</li>
+                        <li>A desidratação é frequentemente confundida com fome — beber água pode reduzir o apetite.</li>
+                        <li>A água substitui bebidas calóricas (sumos, refrigerantes, álcool) sem adicionar calorias.</li>
+                    </ul>
+
+                    <h2>Quantidade Diária Recomendada</h2>
+                    <div class="agua-grid">
+                        <div class="agua-card">
+                            <div class="icon">&#128167;</div>
+                            <div class="val">2,5 L</div>
+                            <div class="label">Homem adulto / dia</div>
+                        </div>
+                        <div class="agua-card">
+                            <div class="icon">&#128167;</div>
+                            <div class="val">2,0 L</div>
+                            <div class="label">Mulher adulta / dia</div>
+                        </div>
+                        <div class="agua-card">
+                            <div class="icon">&#9749;</div>
+                            <div class="val">+0,5 L</div>
+                            <div class="label">Por hora de exercício</div>
+                        </div>
+                    </div>
+                    <p>Estas são referências gerais. Em dias quentes, com actividade física intensa ou com febre, as necessidades aumentam significativamente.</p>
+
+                    <h2>Nutrientes Essenciais para a Saúde</h2>
+                    <h3>Electrólitos</h3>
+                    <ul>
+                        <li><strong>Sódio:</strong> regulação do fluído extracelular. Fontes: sal marinho (com moderação), algas marinhas.</li>
+                        <li><strong>Potássio:</strong> contracção muscular e pressão arterial. Fontes: banana, batata, espinafres, abacate.</li>
+                        <li><strong>Magnésio:</strong> mais de 300 reacções enzimáticas. Fontes: nozes, sementes, leguminosas, brócolos.</li>
+                        <li><strong>Cálcio:</strong> saúde óssea e muscular. Fontes: leite, iogurte, tofu, brócolos, sardinha (com espinha).</li>
+                    </ul>
+
+                    <h3>Vitaminas Essenciais</h3>
+                    <ul>
+                        <li><strong>Vitamina D:</strong> saúde óssea, imunidade, humor. Produzida na pele com exposição solar. Fontes alimentares: peixe gordo, ovos, leite enriquecido.</li>
+                        <li><strong>Vitamina B12:</strong> sistema nervoso e formação de glóbulos vermelhos. Fontes: carnes, ovos, lacticínios. Suplementação essencial em dietas vegan.</li>
+                        <li><strong>Vitamina C:</strong> antioxidante, síntese de colagénio, imunidade. Fontes: citrinos, kiwi, pimentos, brócolos.</li>
+                        <li><strong>Ácido fólico (B9):</strong> divisão celular. Fontes: legumes de folha verde, leguminosas, abacate.</li>
+                        <li><strong>Ferro:</strong> transporte de oxigénio. Fontes: carne vermelha (heme), leguminosas e espinafres (não-heme, melhor absorvidos com vitamina C).</li>
+                        <li><strong>Zinco:</strong> imunidade, cicatrização, saúde da pele. Fontes: carnes, sementes de abóbora, leguminosas.</li>
+                    </ul>
+
+                    <h2>Dicas de Hidratação</h2>
+                    <ul>
+                        <li>Beba um copo de água logo ao acordar</li>
+                        <li>Beba 1 copo de água 20 minutos antes de cada refeição</li>
+                        <li>Leve sempre uma garrafa de água consigo</li>
+                        <li>Adicione rodelas de limão, pepino ou hortelã para tornar a água mais apelativa</li>
+                        <li>Chás de ervas sem açúcar contam para a hidratação diária</li>
+                        <li>Urina cor palha clara = bem hidratado; urina escura = beba mais água</li>
+                    </ul>
+                </div>
+            </article>
+
+            <aside>
+                <nav class="sidebar-nav">
+                    <h4>Capítulos</h4>
+                    <ul>
+                        <li><a href="riscos.html">01. Riscos do Excesso de Peso</a></li>
+                        <li><a href="causas.html">02. Causas do Aumento de Peso</a></li>
+                        <li><a href="beneficios.html">03. Benefícios da Perda de Peso</a></li>
+                        <li><a href="programa.html">04. Programa para Perder Peso</a></li>
+                        <li><a href="alimentacao.html">05. Alimentação</a></li>
+                        <li><a href="refeicoes.html">06. Plano de Refeições</a></li>
+                        <li><a href="diario.html">07. Diário Alimentar</a></li>
+                        <li><a href="rotulos.html">08. Ler os Rótulos</a></li>
+                        <li><a href="fibras.html">09. Fibras</a></li>
+                        <li><a href="agua.html" class="active">10. Água</a></li>
+                        <li><a href="atividade.html">11. Actividade Física</a></li>
+                    </ul>
+                </nav>
+            </aside>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="wrap">
+            <div class="footer-grid">
+                <div class="footer-brand"><span class="label">Bio AI</span><span class="name">Renew</span><p>O seu plano de saúde pessoal, calculado por ciência.</p></div>
+                <div class="footer-col"><h5>Navegação</h5><ul><li><a href="/dev/medepeso/estudos.html">Ciência</a></li><li><a href="/dev/medepeso/metodo.html">Método</a></li></ul></div>
+                <div class="footer-col"><h5>Legal</h5><ul><li><a href="/legal">Política de Privacidade</a></li><li><a href="/legal">Termos de Utilização</a></li></ul></div>
+            </div>
+            <div class="footer-bottom"><span>&copy; 2026 Bio AI Renew. Todos os direitos reservados.</span></div>
+        </div>
+    </footer>
+    <script>function toggleNav(){document.getElementById('navMenu').classList.toggle('aberto');}</script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividade Física — Bio AI Renew Ciência</title>
+    <link rel="stylesheet" href="/assets/style.css">
+    <style>
+        html, body { overflow-x: hidden; }
+        body { padding-top: 70px; }
+        @media (max-width: 640px) { body { padding-top: 62px; } }
+        .estudo-layout { display: grid; grid-template-columns: 1fr 260px; gap: 3rem; padding: 3rem 0; }
+        .prose h2 { font-size: 1.2rem; color: var(--verde, #1a6b35); margin: 2rem 0 0.75rem; border-left: 3px solid var(--verde, #1a6b35); padding-left: 0.75rem; }
+        .prose h3 { font-size: 1rem; color: var(--texto, #0d1f12); margin: 1.25rem 0 0.5rem; }
+        .prose p, .prose li { font-size: 0.97rem; color: var(--texto-2, #3d5c48); line-height: 1.75; margin-bottom: 0.5rem; }
+        .prose ul { padding-left: 1.25rem; margin-bottom: 1rem; }
+        .prose ul li { margin-bottom: 0.3rem; }
+        .table { width: 100%; border-collapse: collapse; margin: 1.25rem 0; font-size: 0.88rem; }
+        .table th { background: var(--verde, #1a6b35); color: #fff; padding: 0.6rem 0.75rem; text-align: left; font-weight: 600; }
+        .table td { padding: 0.55rem 0.75rem; border-bottom: 1px solid var(--borda, #e2ede7); color: var(--texto-2, #3d5c48); }
+        .table tr:nth-child(even) td { background: var(--fundo, #f9fbfa); }
+        .table tr:hover td { background: var(--verde-muted, #f0f9f3); }
+        .breadcrumb { margin-bottom: 1.5rem; }
+        .breadcrumb a { color: var(--verde, #1a6b35); text-decoration: none; font-size: 0.9rem; }
+        .sidebar-nav { position: sticky; top: 80px; }
+        .sidebar-nav h4 { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--texto-3, #6b8a76); margin-bottom: 0.75rem; }
+        .sidebar-nav ul { list-style: none; padding: 0; margin: 0; }
+        .sidebar-nav ul li a { display: block; padding: 0.4rem 0.75rem; border-radius: 6px; font-size: 0.85rem; color: var(--texto-2, #3d5c48); text-decoration: none; transition: background 0.15s; margin-bottom: 0.15rem; }
+        .sidebar-nav ul li a:hover { background: var(--verde-muted, #f0f9f3); color: var(--verde, #1a6b35); }
+        .sidebar-nav ul li a.active { background: var(--verde-light, #e6f4eb); color: var(--verde, #1a6b35); font-weight: 600; }
+        @media (max-width: 800px) { .estudo-layout { grid-template-columns: 1fr; } .sidebar-nav { position: static; } }
+        @media (max-width: 600px) { .table { font-size: 0.78rem; } }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/dev/medepeso/" class="nav-logo"><span class="label">Bio AI</span><span class="brand">Renew</span></a>
+        <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu"><span></span><span></span><span></span></button>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="/dev/medepeso/quem-somos.html">Quem Somos</a></li>
+            <li><a href="/dev/medepeso/missao.html">Missão</a></li>
+            <li><a href="/dev/medepeso/metodo.html">Método</a></li>
+            <li><a href="/dev/medepeso/clientes.html">Clientes</a></li>
+            <li><a href="/dev/medepeso/estudos.html">Ciência</a></li>
+            <li><a href="/dev/medepeso/contactos.html">Contactos</a></li>
+            <li><a href="/dev/medepeso/area-pessoal.html" class="nav-btn">Área Pessoal</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-hero">
+        <span class="eyebrow">Ciência</span><h1>Actividade Física</h1>
+    </div>
+
+    <div class="wrap">
+        <div class="estudo-layout">
+            <article>
+                <div class="breadcrumb"><a href="/dev/medepeso/estudos.html">&larr; Ciência</a></div>
+                <div class="prose">
+                    <p>A actividade física é o pilar central do método Bio AI Renew para criar o défice calórico. Em vez de reduzir a ingestão alimentar abaixo das necessidades basais, incentivamos o aumento do gasto calórico através do movimento.</p>
+
+                    <h2>Porquê a Caminhada</h2>
+                    <p>A caminhada é a forma de exercício mais sustentável, acessível e com menos risco de lesão. Não requer equipamento, pode ser feita em qualquer lugar e pode ser incorporada na rotina diária sem disrução.</p>
+                    <ul>
+                        <li>Uma caminhada de 15 minutos a ritmo moderado queima aproximadamente 60 a 90 kcal (dependendo do peso corporal)</li>
+                        <li>Duas caminhadas diárias (antes e depois do jantar) criam um défice de 120 a 180 kcal por dia</li>
+                        <li>Em 30 dias: 3600 a 5400 kcal de défice — equivalente a 450 a 700g de gordura</li>
+                        <li>Caminhar após as refeições reduz significativamente os picos de glicemia pós-prandial</li>
+                    </ul>
+
+                    <h2>Plano de Iniciação ao Exercício</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Semana</th>
+                                <th>Caminhada Manhã</th>
+                                <th>Caminhada Tarde</th>
+                                <th>Total Diário</th>
+                                <th>Kcal Est. (70kg)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1-2</td><td>10 min</td><td>10 min</td><td>20 min</td><td>~90 kcal</td></tr>
+                            <tr><td>3-4</td><td>15 min</td><td>15 min</td><td>30 min</td><td>~135 kcal</td></tr>
+                            <tr><td>5-6</td><td>20 min</td><td>15 min</td><td>35 min</td><td>~158 kcal</td></tr>
+                            <tr><td>7-8</td><td>25 min</td><td>20 min</td><td>45 min</td><td>~203 kcal</td></tr>
+                            <tr><td>9-12</td><td>30 min</td><td>25 min</td><td>55 min</td><td>~248 kcal</td></tr>
+                            <tr><td>13+</td><td>30 min</td><td>30 min</td><td>60 min</td><td>~270 kcal</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h2>Recomendações de Actividade Física</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Organização</th>
+                                <th>Recomendação Mínima</th>
+                                <th>Para Perda de Peso</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>OMS (Adultos 18-64)</td><td>150-300 min/sem actividade moderada</td><td>300+ min/sem</td></tr>
+                            <tr><td>American Heart Association</td><td>150 min/sem moderada OU 75 min/sem intensa</td><td>200-300 min/sem</td></tr>
+                            <tr><td>ACSM</td><td>150 min/sem actividade aeróbica moderada</td><td>250-300 min/sem</td></tr>
+                            <tr><td>Bio AI Renew (base)</td><td>2x caminhadas 15 min/dia = 210 min/sem</td><td>Aumentar progressivamente</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h2>Outros Tipos de Actividade</h2>
+                    <p>Para além da caminhada, qualquer actividade física contribui para o défice calórico:</p>
+                    <ul>
+                        <li><strong>Natação:</strong> excelente para pessoas com problemas articulares. ~400-600 kcal/hora.</li>
+                        <li><strong>Ciclismo:</strong> baixo impacto, pode ser incorporado no transporte. ~300-600 kcal/hora.</li>
+                        <li><strong>Musculação:</strong> aumenta a massa muscular, que por sua vez aumenta o metabolismo basal.</li>
+                        <li><strong>Yoga / Pilates:</strong> baixo gasto calórico mas excelentes para flexibilidade e bem-estar mental.</li>
+                        <li><strong>Actividades domésticas:</strong> limpeza intensa, jardinagem — contribuem para o TDEE diário.</li>
+                        <li><strong>Subir escadas:</strong> em vez do elevador — pequenos hábitos com grande impacto acumulado.</li>
+                    </ul>
+
+                    <h2>A Regra dos 10.000 Passos</h2>
+                    <p>O objectivo popular de 10.000 passos por dia corresponde a aproximadamente 7 km de caminhada e a um gasto de cerca de 300-400 kcal (dependendo do peso e do ritmo). Estudos recentes sugerem que mesmo 7.000 a 8.000 passos diários já têm benefícios significativos para a saúde e longevidade.</p>
+                    <p>No Bio AI Renew pode registar os seus passos diários no dashboard para acompanhar o cumprimento deste objectivo.</p>
+                </div>
+            </article>
+
+            <aside>
+                <nav class="sidebar-nav">
+                    <h4>Capítulos</h4>
+                    <ul>
+                        <li><a href="riscos.html">01. Riscos do Excesso de Peso</a></li>
+                        <li><a href="causas.html">02. Causas do Aumento de Peso</a></li>
+                        <li><a href="beneficios.html">03. Benefícios da Perda de Peso</a></li>
+                        <li><a href="programa.html">04. Programa para Perder Peso</a></li>
+                        <li><a href="alimentacao.html">05. Alimentação</a></li>
+                        <li><a href="refeicoes.html">06. Plano de Refeições</a></li>
+                        <li><a href="diario.html">07. Diário Alimentar</a></li>
+                        <li><a href="rotulos.html">08. Ler os Rótulos</a></li>
+                        <li><a href="fibras.html">09. Fibras</a></li>
+                        <li><a href="agua.html">10. Água</a></li>
+                        <li><a href="atividade.html" class="active">11. Actividade Física</a></li>
+                    </ul>
+                </nav>
+            </aside>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="wrap">
+            <div class="footer-grid">
+                <div class="footer-brand"><span class="label">Bio AI</span><span class="name">Renew</span><p>O seu plano de saúde pessoal, calculado por ciência.</p></div>
+                <div class="footer-col"><h5>Navegação</h5><ul><li><a href="/dev/medepeso/estudos.html">Ciência</a></li><li><a href="/dev/medepeso/metodo.html">Método</a></li></ul></div>
+                <div class="footer-col"><h5>Legal</h5><ul><li><a href="/legal">Política de Privacidade</a></li><li><a href="/legal">Termos de Utilização</a></li></ul></div>
+            </div>
+            <div class="footer-bottom"><span>&copy; 2026 Bio AI Renew. Todos os direitos reservados.</span></div>
+        </div>
+    </footer>
+    <script>function toggleNav(){document.getElementById('navMenu').classList.toggle('aberto');}</script>
+</body>
+</html>

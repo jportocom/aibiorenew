@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes — Bio AI Renew</title>
+    <link rel="stylesheet" href="/assets/style.css">
+    <style>
+        html, body { overflow-x: hidden; }
+        body { padding-top: 70px; }
+        @media (max-width: 640px) { body { padding-top: 62px; } }
+        .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin: 2rem 0; }
+        .testimonial {
+            background: var(--branco, #fff); border: 1px solid var(--borda, #e2ede7);
+            border-radius: 16px; padding: 2rem;
+        }
+        .testimonial .quote {
+            font-size: 2rem; color: var(--verde, #1a6b35); line-height: 1; margin-bottom: 0.75rem;
+        }
+        .testimonial p {
+            font-size: 0.97rem; color: var(--texto-2, #3d5c48); line-height: 1.7;
+            font-style: italic; margin-bottom: 1.25rem;
+        }
+        .testimonial .author { font-weight: 700; color: var(--texto, #0d1f12); font-size: 0.9rem; }
+        .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin: 3rem 0; }
+        .stat-box {
+            background: var(--verde, #1a6b35); color: #fff;
+            border-radius: 14px; padding: 2rem; text-align: center;
+        }
+        .stat-box .num { font-size: 2.5rem; font-weight: 700; }
+        .stat-box .label { font-size: 0.9rem; opacity: 0.8; margin-top: 0.25rem; }
+        @media (max-width: 800px) {
+            .testimonials-grid, .stats-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/dev/medepeso/" class="nav-logo">
+            <span class="label">Bio AI</span>
+            <span class="brand">Renew</span>
+        </a>
+        <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="/dev/medepeso/quem-somos.html">Quem Somos</a></li>
+            <li><a href="/dev/medepeso/missao.html">Missão</a></li>
+            <li><a href="/dev/medepeso/metodo.html">Método</a></li>
+            <li><a href="/dev/medepeso/clientes.html">Clientes</a></li>
+            <li><a href="/dev/medepeso/estudos.html">Ciência</a></li>
+            <li><a href="/dev/medepeso/contactos.html">Contactos</a></li>
+            <li><a href="/dev/medepeso/area-pessoal.html" class="nav-btn">Área Pessoal</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-hero">
+        <span class="eyebrow">Resultados reais</span>
+        <h1>Os nossos clientes</h1>
+        <p class="lead">Histórias de pessoas reais que transformaram a sua saúde com o Bio AI Renew.</p>
+    </div>
+
+    <section class="wrap" style="padding-top: 3rem; padding-bottom: 3rem;">
+
+        <div class="stats-row">
+            <div class="stat-box">
+                <div class="num">500+</div>
+                <div class="label">Utilizadores activos</div>
+            </div>
+            <div class="stat-box">
+                <div class="num">3 kg</div>
+                <div class="label">Média de perda ao 1.º mês</div>
+            </div>
+            <div class="stat-box">
+                <div class="num">95%</div>
+                <div class="label">Taxa de satisfação</div>
+            </div>
+        </div>
+<p></p>
+    <!--   <h2 style="font-size:1.4rem;margin-bottom:0.5rem;">O que dizem os nossos utilizadores</h2>
+        <p style="color:var(--texto-3,#6b8a76);margin-bottom:1.5rem;">Experiências partilhadas por pessoas que seguiram o método.</p>
+
+        <div class="testimonials-grid">
+            <div class="testimonial">
+                <div class="quote">"</div>
+                <p>Perdi 8 kg em 3 meses sem passar fome. O sistema calculou o meu plano e eu apenas segui as sugestões diárias. Nunca pensei que podia ser tão simples quando assente em ciência.</p>
+                <div class="author">Maria, 52 anos — Lisboa</div>
+            </div>
+            <div class="testimonial">
+                <div class="quote">"</div>
+                <p>O dashboard de gráficos motivou-me a não desistir. Via a linha de projecção e queria sempre atingi-la. É completamente diferente de outras aplicações que experimentei.</p>
+                <div class="author">João, 45 anos — Porto</div>
+            </div>
+            <div class="testimonial">
+                <div class="quote">"</div>
+                <p>Pela primeira vez percebi o que é o meu metabolismo. O plano faz sentido porque é calculado para mim, não uma dieta genérica. Em 6 meses perdi 16 kg de forma gradual e sustentável.</p>
+                <div class="author">Ana, 38 anos — Coimbra</div>
+            </div>
+        </div>
+    -->
+        <div style="text-align:center;margin-top:3rem;">
+            <p style="font-size:1.05rem;color:var(--texto-2,#3d5c48);margin-bottom:1.5rem;">Pronto para escrever a sua própria história?</p>
+            <a href="/dev/medepeso/area-pessoal.html" style="display:inline-block;padding:0.85rem 2rem;background:var(--verde,#1a6b35);color:#fff;border-radius:10px;text-decoration:none;font-weight:600;font-size:1rem;">Começar agora</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="wrap">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <span class="label">Bio AI</span>
+                    <span class="name">Renew</span>
+                    <p>O seu plano de saúde pessoal, calculado por ciência.</p>
+                </div>
+                <div class="footer-col">
+                    <h5>Navegação</h5>
+                    <ul>
+                        <li><a href="/dev/medepeso/quem-somos.html">Quem Somos</a></li>
+                        <li><a href="/dev/medepeso/missao.html">Missão</a></li>
+                        <li><a href="/dev/medepeso/metodo.html">Método</a></li>
+                        <li><a href="/dev/medepeso/clientes.html">Clientes</a></li>
+                        <li><a href="/dev/medepeso/estudos.html">Ciência</a></li>
+                        <li><a href="/dev/medepeso/contactos.html">Contactos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Legal</h5>
+                    <ul>
+                        <li><a href="/legal">Política de Privacidade</a></li>
+                        <li><a href="/legal">Termos de Utilização</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 Bio AI Renew. Todos os direitos reservados.</span>
+            </div>
+        </div>
+    </footer>
+    <script>function toggleNav(){document.getElementById('navMenu').classList.toggle('aberto');}</script>
+</body>
+</html>

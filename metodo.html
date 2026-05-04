@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Método — Bio AI Renew</title>
+    <link rel="stylesheet" href="/assets/style.css">
+    <style>
+        html, body { overflow-x: hidden; }
+        body { padding-top: 70px; }
+        @media (max-width: 640px) { body { padding-top: 62px; } }
+        .metodo-section { padding: 3rem 0; }
+        .metodo-block { max-width: 760px; margin: 0 auto 3rem; }
+        .metodo-block h2 {
+            font-size: 1.3rem; color: var(--verde, #1a6b35);
+            border-left: 4px solid var(--verde, #1a6b35);
+            padding-left: 1rem; margin-bottom: 1rem;
+        }
+        .metodo-block p { font-size: 0.97rem; color: var(--texto-2, #3d5c48); line-height: 1.75; margin-bottom: 0.75rem; }
+        .formula-box {
+            background: var(--verde-muted, #f0f9f3); border: 1px solid var(--verde-border, #c3e0cd);
+            border-radius: 12px; padding: 1.25rem 1.5rem; font-family: monospace;
+            font-size: 0.95rem; color: var(--texto, #0d1f12); margin: 1rem 0;
+        }
+        .dist-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem; }
+        .dist-card {
+            background: var(--branco, #fff); border: 1px solid var(--borda, #e2ede7);
+            border-radius: 12px; padding: 1.25rem; text-align: center;
+        }
+        .dist-card .meal { font-size: 0.78rem; color: var(--texto-3, #6b8a76); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+        .dist-card .pct { font-size: 2rem; font-weight: 700; color: var(--verde, #1a6b35); }
+        .dist-card .note { font-size: 0.82rem; color: var(--texto-3, #6b8a76); margin-top: 0.25rem; }
+        .obj-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem; }
+        .obj-card {
+            background: var(--verde, #1a6b35); color: #fff; border-radius: 12px; padding: 1.5rem; text-align: center;
+        }
+        .obj-card .dias { font-size: 2rem; font-weight: 700; }
+        .obj-card .label { font-size: 0.8rem; opacity: 0.75; margin-top: 0.25rem; }
+        .obj-card .kg { font-size: 1.1rem; font-weight: 600; margin-top: 0.5rem; opacity: 0.9; }
+        @media (max-width: 700px) {
+            .dist-grid, .obj-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/dev/medepeso/" class="nav-logo">
+            <span class="label">Bio AI</span>
+            <span class="brand">Renew</span>
+        </a>
+        <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="/dev/medepeso/quem-somos.html">Quem Somos</a></li>
+            <li><a href="/dev/medepeso/missao.html">Missão</a></li>
+            <li><a href="/dev/medepeso/metodo.html">Método</a></li>
+            <li><a href="/dev/medepeso/clientes.html">Clientes</a></li>
+            <li><a href="/dev/medepeso/estudos.html">Ciência</a></li>
+            <li><a href="/dev/medepeso/contactos.html">Contactos</a></li>
+            <li><a href="/dev/medepeso/area-pessoal.html" class="nav-btn">Área Pessoal</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-hero">
+        <span class="eyebrow">Como funciona</span>
+        <h1>O Método</h1>
+        <p class="lead">Ciência aplicada à perda de peso. Calculamos, planeamos e acompanhamos.</p>
+    </div>
+
+    <section class="metodo-section">
+        <div class="wrap">
+
+            <div class="metodo-block">
+                <h2>TMB — Taxa de Metabolismo Basal</h2>
+                <p>A TMB é a energia que o seu corpo necessita para as funções vitais em repouso: coração, pulmões, cérebro, temperatura corporal. É calculada pela fórmula de Mifflin-St Jeor, considerando o seu peso, altura, idade e sexo.</p>
+                <div class="formula-box">
+                    Homem: TMB = (10 × peso kg) + (6,25 × altura cm) − (5 × idade) + 5<br>
+                    Mulher: TMB = (10 × peso kg) + (6,25 × altura cm) − (5 × idade) − 161
+                </div>
+                <p>A fórmula de Mifflin-St Jeor é considerada a mais precisa para a estimativa do metabolismo basal em adultos.</p>
+            </div>
+
+            <div class="metodo-block">
+                <h2>IMC — Índice de Massa Corporal</h2>
+                <p>O IMC é calculado dividindo o peso em kg pela altura em metros ao quadrado. Permite classificar o estado ponderal e avaliar o risco associado ao excesso de peso.</p>
+                <div class="formula-box">
+                    IMC = peso (kg) ÷ altura² (m)
+                </div>
+                <p>Classificação: Abaixo do peso (&lt;18,5) | Peso normal (18,5–24,9) | Excesso de peso (25–29,9) | Obesidade grau I (30–34,9) | Obesidade grau II (35–39,9) | Obesidade grau III (≥40)</p>
+            </div>
+
+            <div class="metodo-block">
+                <h2>TDEE — Total Daily Energy Expenditure</h2>
+                <p>O TDEE corresponde à energia total gasta num dia, incluindo a actividade física. É calculado multiplicando a TMB pelo factor de actividade.</p>
+                <div class="formula-box">
+                    Sedentário: TDEE = TMB × 1,2<br>
+                    Moderado:   TDEE = TMB × 1,55<br>
+                    Activo:     TDEE = TMB × 1,9
+                </div>
+            </div>
+
+            <div class="metodo-block">
+                <h2>O Princípio do Plano</h2>
+                <p>O utilizador come exactamente o equivalente à sua TMB — nem mais, nem menos. Toda a actividade física gera um défice calórico real. Duas caminhadas diárias de 15 minutos (antes e depois de uma refeição) são o ponto de partida.</p>
+                <p>O défice calórico vem do movimento, não da fome. A alimentação garante energia para as funções vitais; o exercício cria o défice necessário para queimar gordura acumulada.</p>
+            </div>
+
+            <div class="metodo-block">
+                <h2>Distribuição de Refeições</h2>
+                <p>O plano alimentar distribui as calorias diárias (equivalentes à TMB) pelas três refeições principais:</p>
+                <div class="dist-grid">
+                    <div class="dist-card">
+                        <div class="meal">Pequeno-almoço</div>
+                        <div class="pct">45%</div>
+                        <div class="note">A refeição mais importante do dia</div>
+                    </div>
+                    <div class="dist-card">
+                        <div class="meal">Almoço</div>
+                        <div class="pct">35%</div>
+                        <div class="note">Refeição de meio-dia</div>
+                    </div>
+                    <div class="dist-card">
+                        <div class="meal">Jantar</div>
+                        <div class="pct">máx. 400 kcal</div>
+                        <div class="note">Às 19h00 — batido nutritivo</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="metodo-block">
+                <h2>Objectivos de Perda de Peso</h2>
+                <p>Perda sustentável: 50 a 150 gramas por dia, com média de 100g/dia. Os objectivos disponíveis são:</p>
+                <div class="obj-grid">
+                    <div class="obj-card">
+                        <div class="dias">30</div>
+                        <div class="label">dias</div>
+                        <div class="kg">~3 kg</div>
+                    </div>
+                    <div class="obj-card">
+                        <div class="dias">90</div>
+                        <div class="label">dias</div>
+                        <div class="kg">~9 kg</div>
+                    </div>
+                    <div class="obj-card">
+                        <div class="dias">180</div>
+                        <div class="label">dias</div>
+                        <div class="kg">~18 kg</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="wrap">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <span class="label">Bio AI</span>
+                    <span class="name">Renew</span>
+                    <p>O seu plano de saúde pessoal, calculado por ciência.</p>
+                </div>
+                <div class="footer-col">
+                    <h5>Navegação</h5>
+                    <ul>
+                        <li><a href="/dev/medepeso/quem-somos.html">Quem Somos</a></li>
+                        <li><a href="/dev/medepeso/missao.html">Missão</a></li>
+                        <li><a href="/dev/medepeso/metodo.html">Método</a></li>
+                        <li><a href="/dev/medepeso/clientes.html">Clientes</a></li>
+                        <li><a href="/dev/medepeso/estudos.html">Ciência</a></li>
+                        <li><a href="/dev/medepeso/contactos.html">Contactos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Legal</h5>
+                    <ul>
+                        <li><a href="/legal">Política de Privacidade</a></li>
+                        <li><a href="/legal">Termos de Utilização</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 Bio AI Renew. Todos os direitos reservados.</span>
+            </div>
+        </div>
+    </footer>
+    <script>function toggleNav(){document.getElementById('navMenu').classList.toggle('aberto');}</script>
+</body>
+</html>
