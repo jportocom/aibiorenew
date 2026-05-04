@@ -53,7 +53,7 @@
 </head>
 <body>
     <nav class="nav">
-        <a href="/dev/medepeso/" class="nav-logo">
+        <a href="/dev/aibiorenew/" class="nav-logo">
             <span class="label">Bio AI</span>
             <span class="brand">Renew</span>
         </a>
@@ -61,13 +61,13 @@
             <span></span><span></span><span></span>
         </button>
         <ul class="nav-menu" id="navMenu">
-            <li><a href="/dev/medepeso/quem-somos.html">Quem Somos</a></li>
-            <li><a href="/dev/medepeso/missao.html">Missão</a></li>
-            <li><a href="/dev/medepeso/metodo.html">Método</a></li>
-            <li><a href="/dev/medepeso/clientes.html">Clientes</a></li>
-            <li><a href="/dev/medepeso/estudos.html">Ciência</a></li>
-            <li><a href="/dev/medepeso/contactos.html">Contactos</a></li>
-            <li><a href="/dev/medepeso/area-pessoal.html" class="nav-btn">Área Pessoal</a></li>
+            <li><a href="/dev/aibiorenew/app/frontend/menuhtml/quem-somos.html">Quem Somos</a></li>
+            <li><a href="/dev/aibiorenew/app/frontend/menuhtml/missao.html">Missão</a></li>
+            <li><a href="/dev/aibiorenew/app/frontend/menuhtml/metodo.html">Método</a></li>
+            <li><a href="/dev/aibiorenew/app/frontend/menuhtml/clientes.html">Clientes</a></li>
+            <li><a href="/dev/aibiorenew/app/frontend/menuhtml/estudos.html">Ciência</a></li>
+            <li><a href="/dev/aibiorenew/app/frontend/menuhtml/contactos.html">Contactos</a></li>
+            <li><a href="/dev/aibiorenew/app/frontend/area-pessoal.html" class="nav-btn">Área Pessoal</a></li>
         </ul>
     </nav>
 
@@ -123,7 +123,7 @@
     </div>
 
     <script>
-        const API_BASE = window.API_BASE || 'http://ai.jporto.com';
+        const API_BASE = window.API_BASE || '/dev/aibiorenew/api.php';
 
         function toggleNav(){document.getElementById('navMenu').classList.toggle('aberto');}
 
@@ -173,9 +173,9 @@
 
                 // Verificar se tem perfil completo
                 if (data.perfil_completo) {
-                    location.href = 'app/frontend/dashboard.html';
+                    location.href = '/dev/aibiorenew/app/frontend/dashboard.html';
                 } else {
-                    location.href = 'app/frontend/perfil.html';
+                    location.href = '/dev/aibiorenew/app/frontend/perfil.html';
                 }
             } catch (err) {
                 mostrarErro('Não foi possível ligar ao servidor. Tente mais tarde.');
@@ -207,7 +207,7 @@
                 }
 
                 localStorage.setItem('mp_token', data.token);
-                location.href = 'app/frontend/perfil.html';
+                location.href = '/dev/aibiorenew/app/frontend/perfil.html';
             } catch (err) {
                 mostrarErro('Não foi possível ligar ao servidor. Tente mais tarde.');
                 btn.disabled = false; btn.textContent = 'Criar conta';
@@ -216,7 +216,7 @@
 
         // Se já tiver sessão, redirigir
         if (localStorage.getItem('mp_token')) {
-            location.href = 'app/frontend/dashboard.html';
+            location.href = '/dev/aibiorenew/app/frontend/dashboard.html';
         }
     </script>
 </body>

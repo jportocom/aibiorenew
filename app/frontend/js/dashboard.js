@@ -5,7 +5,7 @@ let obj_cache = null;
 let currentVista = 1;
 
 document.addEventListener('DOMContentLoaded', async () => {
-  if (!isLoggedIn()) { location.href = '/dev/medepeso/area-pessoal.html'; return; }
+  if (!isLoggedIn()) { location.href = '/dev/aibiorenew/app/frontend/area-pessoal.html'; return; }
   await carregarDashboard();
 });
 
@@ -481,5 +481,5 @@ async function ajustarObjetivo(id, data_inicio, data_fim, peso_inicio, peso_alvo
 
 function logout() {
   clearToken();
-  location.href = '/dev/medepeso/area-pessoal.html';
+  location.href = '/dev/aibiorenew/app/frontend/area-pessoal.html';
 }

@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', async () => {
-  if (!isLoggedIn()) { location.href = '/dev/medepeso/area-pessoal.html'; return; }
+  if (!isLoggedIn()) { location.href = '/dev/aibiorenew/app/frontend/area-pessoal.html'; return; }
 
   // Carregar dados actuais
   const perfil = await apiCall('/user/profile');

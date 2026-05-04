@@ -1,4 +1,4 @@
-const API_BASE = window.API_BASE || 'http://ai.jporto.com';
+const API_BASE = window.API_BASE || '/dev/aibiorenew/api.php';
 
 async function apiCall(path, method = 'GET', body = null) {
   try {
@@ -13,7 +13,7 @@ async function apiCall(path, method = 'GET', body = null) {
     const res = await fetch(API_BASE + path, opts);
     if (res.status === 401) {
       localStorage.removeItem('mp_token');
-      location.href = '/dev/medepeso/area-pessoal.html';
+      location.href = '/dev/aibiorenew/app/frontend/area-pessoal.html';
       return null;
     }
     return await res.json();
